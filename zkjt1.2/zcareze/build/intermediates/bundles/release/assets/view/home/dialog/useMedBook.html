@@ -1,0 +1,30 @@
+<div class="date-box item_data_box">
+	<div class="flex1 content">
+		<div class="list flex-rw default_padding med_alert_content">
+			<div class="flex-r flex-cc spd_autot">
+				<div class="flex-r">
+					<div class="ion-information-circled med_book_ionic spd_auto" data-pack="default" data-tags="help, more, tooltip"></div>
+					<span class="mid_fz">按实际情况勾选已勾选的药品,如有不适请记录,必要时联系医生!</span> </div>
+			</div>
+
+            <div class="con_pr" style="max-height: 500px;min-height: 350px;">
+            	<ion-content>
+		            <div class="spd_autot flex-r flex-cc use_med_book_alert" ng-repeat="data in useMedbookData.rsdtMedicateList">
+						<div class="flex-r flex1 flex-cc inputs item" ng-click="medbookChecked(data)">
+							<span class="flex-07 m_fz line-clamp-2">{{data.taskTopic}}{{data.perCount}}{{data.unit}}</span>
+							<small class="flex-03 gray">{{data.planPoint}}</small>
+							<ion-checkbox ng-checked="data.useMedicate"></ion-checkbox>
+						</div>
+						<input type="text" placeholder="请输入相关症状" ng-show="data.useMedicate"  name="" id="" class="flex-04 s_fz bd_blue" ng-model="data.reactions"/>
+					</div>
+	            </ion-content>
+            </div>
+            
+			
+		</div>
+		<div class="button-bar">
+			<a class="button" ng-click="closeItemChangeModel('closeUseMedBook')">取消</a>
+			<a class="button main-btn" ng-click="saveRsdtMedicateList(useMedbookData, 'closeUseMedBook')">确定</a>
+		</div>
+	</div>
+</div>

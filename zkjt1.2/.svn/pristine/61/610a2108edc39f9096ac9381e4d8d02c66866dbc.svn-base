@@ -1,0 +1,324 @@
+<ion-view view-title="众康云">
+	<ion-header-bar align-title="center" class="bar-positive" >
+		<div class="buttons">
+		    <button class="button button-icon ion-ios-arrow-back" ng-click="modelView.back()"></button>
+		</div>
+		<div class="title">健康档案信息</div>
+		<div class="buttons">
+		    <button class="button button-icon ion-android-close" ng-click="modelView.close()"></button>
+		</div>
+	</ion-header-bar>
+    <ion-content>
+		<div class="resident-box">
+            <div id="record-base-info" class="item-content resident-item active">
+                <!--  个人基本情况 -->
+                <div class="list row flex-c">
+                	<div class="flex-r z-item number">
+                		<span>档案编号：</span>
+                         <span>{{accoutdetail.one.archiveNo}}</span>
+                	</div>
+                	<div class="z-item flex-r">
+                        <div class="flex-r flex-04">
+	                		<span>姓名：</span><span>{{accoutdetail.one.name}}</span>
+	                	</div>
+                        <div class="flex-r flex-06">
+	                		<span>户籍：</span><span>{{accoutdetail.one.stayKind == 1 ? '户籍' : accoutdetail.one.stayKind == 2 ? '非户籍' : '未知'}}</span>
+	                	</div>
+                	</div>
+                	<div class="z-item flex-r">
+                        <div class="flex-r flex-04">
+                        	
+	                		<span>性别：</span>
+	                			<span>
+                                        <wbs ng-model="accoutdetail.one.gender" as="code" dictionary="gender"></wbs>
+                                    </span>
+	                		
+	                	</div>
+                        <div class="flex-r flex-06">
+	                		<span>出生日期：</span><span>{{accoutdetail.one.birthday|date:'YYYY-MM-DD'}}</span>
+	                	</div>
+                	</div>
+                	<div class="z-item flex-r">
+                        <div class="flex-r flex-04">
+	                		<span>民族：</span>
+	                		<span>
+	                			<wbs ng-model="accoutdetail.one.minority" as="code" dictionary="minority"></wbs>
+	                		</span>
+	                	</div>
+                        <div class="flex-r flex-06">
+	                		<span>身份证号：</span><span>{{accoutdetail.one.idCardNo}}</span>
+	                	</div>
+                	</div>
+                	<div class="z-item flex-r">
+                        <div class="flex-r flex-04">
+	                		<span>婚姻：</span>
+	                		<span>
+                               <wbs ng-model="accoutdetail.one.maritalStatus" as="code" dictionary="maritalStatus"></wbs>
+                             </span>
+	                	</div>
+                        <div class="flex-r flex-06">
+	                		<span>本人电话：</span><span>{{accoutdetail.one.phone}}</span>
+	                	</div>
+                	</div>
+                	<div class="z-item flex-r">
+                        <div class="flex-r flex-04">
+	                		<span>学历：</span>
+	                		 <span>
+                               <wbs ng-model="accoutdetail.one.education" as="code" dictionary="education"></wbs>
+                            </span>
+	                	</div>
+                        <div class="flex-r flex-06">
+	                		<span>联系人姓名：</span><span>{{accoutdetail.one.linkman}}</span>
+	                	</div>
+                	</div>
+                	<div class="z-item flex-r">
+                        <div class="flex-r flex-04">
+	                		<span>职业：</span>
+	                		<span class="line-clamp-2">
+	                	       <wbs ng-model="accoutdetail.one.occupation" as="code" dictionary="occupation"></wbs>   
+	                		</span>
+	                	</div>
+                        <div class="flex-r flex-06">
+	                		<span>联系人电话：</span><span>{{accoutdetail.one.linkPhone}}</span>
+	                	</div>
+                	</div>
+                	<div class="z-item flex-r">
+                        <div class="flex-r flex-04">
+	                		<span>血型：</span>
+	                		<span>
+                                <wbs ng-model="accoutdetail.one.aboBlood" as="code" dictionary="aboBlood"></wbs>
+                            </span>
+	                	</div>
+                        <div class="flex-r flex-06">
+	                		<span>RH阴性：</span><span>不详</span>
+	                	</div>
+                	</div>
+                	<div class="z-item flex-r">
+	                	<span>医疗付款方式：</span>
+	                	<span>
+	                		 <wbs class="line-clamp-2" ng-model="accoutdetail.one.payModes" split=";" where="or" join="，" placeholder="未添加付款方式" as="code" dictionary="payMode"></wbs>
+	                	</span>
+                	</div>
+                </div>
+                <div class="list row flex-c">
+                	<div class="z-item flex-r">
+                        <span>工作单位：</span><span>{{accoutdetail.one.workUnit}}</span>
+                	</div>
+                	<div class="z-item flex-r">
+                        <span>户籍地址：</span><span>{{accoutdetail.one.archiveAddress}}</span>
+                	</div>
+                	<div class="z-item flex-r">
+                        <span>居 委 会：</span><span>{{accoutdetail.familyListDomain.townName}}</span>
+                	</div>
+                	<div class="z-item flex-r">
+                        <span>家庭地址：</span><span>{{accoutdetail.familyListDomain.address}}</span>
+                	</div>
+                </div>
+                
+          <div class="knowledge-content rident_box" style="background: #fff;">
+          	<div class="z-item family-title" style="min-height: 40px;font-size: 18px;">
+	                    家庭成员：
+	                </div>
+			<div class="sign_detail_upbox oh flex-r list_title">
+				<div class="sign_box sign_inner" style="width:12%;overflow: hidden;">
+					关系
+					
+				</div>
+				
+				<div class="sign_box sign_inner" style="width: 14%;overflow: hidden;">
+					
+					姓名
+				</div>
+				
+				<div class="sign_box sign_inner" style="width: 8%;overflow: hidden;">
+					性别
+					
+				</div>
+				
+				<div class="sign_box sign_inner" style="width:22.8%;">
+					
+					出生日期
+				</div>
+				
+				<div class="sign_box sign_inner"style="width:43.2%;">
+					
+					身份证号
+				</div>
+			</div>
+			
+			<div class="sign_detail_upbox oh flex-r list_con" ng-repeat="member in accoutdetail.lists">
+				<div class="sign_box sign_inner" style="width:12%;overflow: hidden;">
+					<wbs class="line-clamp-2" ng-model="member.relationship" as="code" placeholder="户主" dictionary="relationship" class="text"></wbs>
+					
+				</div>
+				
+				<div class="sign_box sign_inner" style="width: 14%;overflow: hidden;">
+					
+					<span class="ng-binding">{{member.name}}</span>
+				</div>
+				
+				<div class="sign_box sign_inner" style="width:8%;overflow: hidden;">
+					<wbs class="text ng-binding ng-not-empty ng-valid" ng-model="member.gender" as="code" dictionary="gender"></wbs>
+					
+				</div>
+				
+				<div class="sign_box sign_inner" style="width:22.8%;">
+					
+					<span class="ng-binding">{{member.birthday | date:'YYYY-MM-DD'}}</span>
+				</div>
+				
+				<div class="sign_box sign_inner" style="width:43.2%;">
+					
+				 <span class="ng-binding">{{member.idCardNo}}</span>
+				</div>
+			</div>
+			
+			
+		</div>
+		
+		
+		
+		<div class="knowledge-content rident_box" style="background: #fff;">
+          	<div class="z-item family-title" style="min-height: 40px;font-size: 18px;">
+	                    既往史：
+	                </div>
+			<div class="sign_detail_upbox oh flex-r list_title">
+				<div class="sign_box sign_inner" style="width:12%;overflow: hidden;">
+					
+					
+				</div>
+				
+				<div class="sign_box sign_inner" style="width: 23%;overflow: hidden;">
+					
+					日期
+				</div>
+				
+				<div class="sign_box sign_inner" style="width: 23%;overflow: hidden;">
+					名称
+					
+				</div>
+				
+				<div class="sign_box sign_inner" style="width:42%;">
+					
+					说明
+				</div>
+				
+			</div>
+			
+			<div class="sign_detail_upbox oh flex-r list_con" ng-repeat="residentPmh in accoutdetail.residentPmhDomains">
+				<div class="sign_box sign_inner" style="width:12%;overflow: hidden;">
+					
+                   <span>{{residentPmh.kindName}}</span>
+                   
+				</div>
+				
+				<div class="sign_box sign_inner" style="width: 23%;overflow: hidden;">
+				  <span class="ng-binding">{{residentPmh.occurDate | date:'YYYY-MM-DD'}}</span>
+				</div>
+				
+				<div class="sign_box sign_inner" style="width:23%;overflow: hidden;">
+					{{residentPmh.recordName}}
+					
+				</div>
+				
+				<div class="sign_box sign_inner" style="width:42%;">
+					<span class="ng-binding">{{residentPmh.recordName}}</span>
+				</div>
+				
+				
+			</div>
+
+		</div>
+		<div class="knowledge-content rident_box" style="background: #fff;">
+          	<div class="z-item family-title" style="min-height: 40px;font-size: 18px;">
+	                    家族史：
+	                </div>
+			<div class="sign_detail_upbox oh flex-r list_title">
+				<div class="sign_box sign_inner" style="width:12%;overflow: hidden;">
+					
+					
+				</div>
+				
+				<div class="sign_box sign_inner" style="width: 42%;overflow: hidden;">
+					
+					疾病名称
+				</div>
+				
+				<div class="sign_box sign_inner" style="width:46%;">
+					
+					说明
+				</div>
+				
+			</div>
+			
+			<div class="sign_detail_upbox oh flex-r list_con" ng-repeat="member in accoutdetail.familyHistorys">
+				<div class="sign_box sign_inner" style="width:12%;overflow: hidden;">
+					
+					<span>{{member.kindAdscript}}</span>
+					
+				</div>
+				
+				<div class="sign_box sign_inner" style="width: 42%;overflow: hidden;">
+					
+					<span class="ng-binding">{{member.recordName}}</span>
+				</div>
+			
+				<div class="sign_box sign_inner" style="width:46%;">
+					
+					<span class="ng-binding">{{member.adscript}}</span>
+				</div>
+				
+				
+			</div>
+			
+			
+		</div>
+                
+ 
+                
+                
+
+                
+                
+                
+                <div class="list row flex-c">
+                        <div class="input-label title-name resident-title">
+                            遗传病史：
+                        </div>
+                        <div class="item-content resident-events">
+                            <span ng-if="accoutdetail.geneticDiseases.length">
+                                <span ng-if="accoutdetail.geneticDiseases[0].recordName==''">
+                                    无
+                                </span>
+                                <span ng-if="accoutdetail.geneticDiseases[0].recordName!=''">
+                                    {{accoutdetail.geneticDiseases[0].recordName}}
+                                </span>
+                            </span>
+                            
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="list row flex-c">
+                        <div class="input-label title-name resident-title">
+                            残疾情况：
+                        </div>
+                        <div class="item-content resident-events">
+                            <span ng-repeat="disability in accoutdetail.disabilitys">
+                                {{disability.recordName}}<span ng-if="!$last">、</span>
+                            </span>
+                            <span ng-if="!accoutdetail.disabilitys.length">无</span>
+                        </div>
+                        <!-- #end -->
+                    </div>
+                
+                
+                
+            </div>
+            <!--家庭成员-->
+            <div id="record-family-member" class="item-content resident-list-to">
+                
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

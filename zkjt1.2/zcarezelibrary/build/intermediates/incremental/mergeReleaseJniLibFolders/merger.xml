@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="G:\zkjt1.2\zcarezelibrary\src\main\jniLibs"><file name="libxwalkcore.so" path="G:\zkjt1.2\zcarezelibrary\src\main\jniLibs\libxwalkcore.so"/><file name="libxwalkdummy.so" path="G:\zkjt1.2\zcarezelibrary\src\main\jniLibs\libxwalkdummy.so"/></source></dataSet><dataSet config="release"><source path="G:\zkjt1.2\zcarezelibrary\src\release\jniLibs"/></dataSet></merger>

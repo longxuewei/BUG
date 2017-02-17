@@ -1,0 +1,21 @@
+<ion-view view-title="众康云">
+	<ion-header-bar align-title="center" class="bar-positive" >
+		<div class="buttons">
+		    <button class="button button-icon ion-ios-arrow-back" ng-click="modelView.back()"></button>
+		</div>
+		<div class="title">我的二维码</div>
+		<div class="buttons">
+		    <button class="button button-icon ion-android-close" ng-click="modelView.close()"></button>
+		</div>
+	</ion-header-bar>
+    <ion-content>
+       <div class="flex-c flex-cc flex-rc">
+       		<div class="qrcode flex-r flex-rc flex-cc">
+       			<img ng-if="ticket" ng-src="{{weixinQrcodeUrl+ticket}}" alt="">
+       			<i ng-if="!ticket" class="icon icon-erweima gray"></i>
+       			<ion-spinner ng-if="isLoading" icon="bubbles"></ion-spinner>
+       		</div>
+       		<a class="button button-calm" ng-click="refreshQRcode()">刷新二维码</a>
+       </div>
+    </ion-content>
+</ion-view>

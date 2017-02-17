@@ -1,0 +1,286 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>IconFont</title>
+    <link rel="stylesheet" href="demo.css">
+    <link rel="stylesheet" href="iconfont.css">
+</head>
+<body>
+    <div class="main markdown">
+        <h1>IconFont 图标</h1>
+        <ul class="icon_lists clear">
+            
+                <li>
+                <i class="icon iconfont icon-jiankang"></i>
+                    <div class="name">健康</div>
+                    <div class="fontclass">.icon-jiankang</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-sao2"></i>
+                    <div class="name">血氧</div>
+                    <div class="fontclass">.icon-sao2</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-glu"></i>
+                    <div class="name">血糖</div>
+                    <div class="fontclass">.icon-glu</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-shebei3"></i>
+                    <div class="name">设备 </div>
+                    <div class="fontclass">.icon-shebei3</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-jiaolv"></i>
+                    <div class="name">焦虑</div>
+                    <div class="fontclass">.icon-jiaolv</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-biaoqing04"></i>
+                    <div class="name">郁闷</div>
+                    <div class="fontclass">.icon-biaoqing04</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-rengongyichang"></i>
+                    <div class="name">人工异常</div>
+                    <div class="fontclass">.icon-rengongyichang</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-wancan"></i>
+                    <div class="name">晚餐</div>
+                    <div class="fontclass">.icon-wancan</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-xinlifudao"></i>
+                    <div class="name">心理辅导</div>
+                    <div class="fontclass">.icon-xinlifudao</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-xiaoxi"></i>
+                    <div class="name">消息</div>
+                    <div class="fontclass">.icon-xiaoxi</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-yybj"></i>
+                    <div class="name">营养保健</div>
+                    <div class="fontclass">.icon-yybj</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-ganyu"></i>
+                    <div class="name">干预</div>
+                    <div class="fontclass">.icon-ganyu</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-yundong"></i>
+                    <div class="name">运动</div>
+                    <div class="fontclass">.icon-yundong</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-wanchengqianyue"></i>
+                    <div class="name">完成签约</div>
+                    <div class="fontclass">.icon-wanchengqianyue</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-tubiaofuben72"></i>
+                    <div class="name">试用期到期</div>
+                    <div class="fontclass">.icon-tubiaofuben72</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-11guanxi"></i>
+                    <div class="name">11 关系</div>
+                    <div class="fontclass">.icon-11guanxi</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-zanfuwutubiao0202"></i>
+                    <div class="name">赞服务_心理咨询</div>
+                    <div class="fontclass">.icon-zanfuwutubiao0202</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-erweima"></i>
+                    <div class="name">二维码</div>
+                    <div class="fontclass">.icon-erweima</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-icontw"></i>
+                    <div class="name">体温</div>
+                    <div class="fontclass">.icon-icontw</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-dongtaijiance"></i>
+                    <div class="name">动态检测</div>
+                    <div class="fontclass">.icon-dongtaijiance</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-xiazai2"></i>
+                    <div class="name">语音</div>
+                    <div class="fontclass">.icon-xiazai2</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-souzhengzhuang"></i>
+                    <div class="name">搜症状</div>
+                    <div class="fontclass">.icon-souzhengzhuang</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-shenhe"></i>
+                    <div class="name">审核</div>
+                    <div class="fontclass">.icon-shenhe</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-kanbing"></i>
+                    <div class="name">看病</div>
+                    <div class="fontclass">.icon-kanbing</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-zhongyaoyinpiana5"></i>
+                    <div class="name">中药饮片a (5)</div>
+                    <div class="fontclass">.icon-zhongyaoyinpiana5</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-darentichengfen"></i>
+                    <div class="name">da-人体成分</div>
+                    <div class="fontclass">.icon-darentichengfen</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-tjda"></i>
+                    <div class="name">体检档案</div>
+                    <div class="fontclass">.icon-tjda</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-zaocanweixuanze"></i>
+                    <div class="name">早餐－未选择</div>
+                    <div class="fontclass">.icon-zaocanweixuanze</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-fuwujihua"></i>
+                    <div class="name">服务计划</div>
+                    <div class="fontclass">.icon-fuwujihua</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-paobu"></i>
+                    <div class="name">跑步</div>
+                    <div class="fontclass">.icon-paobu</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-nianling"></i>
+                    <div class="name">年龄</div>
+                    <div class="fontclass">.icon-nianling</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-weibiaoti101"></i>
+                    <div class="name">医药</div>
+                    <div class="fontclass">.icon-weibiaoti101</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-xieyajiance64x64"></i>
+                    <div class="name">血压监测_64x64</div>
+                    <div class="fontclass">.icon-xieyajiance64x64</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-calendar"></i>
+                    <div class="name">日历</div>
+                    <div class="fontclass">.icon-calendar</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-pingce"></i>
+                    <div class="name">评测</div>
+                    <div class="fontclass">.icon-pingce</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-zhishi"></i>
+                    <div class="name">知识</div>
+                    <div class="fontclass">.icon-zhishi</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-jiance1"></i>
+                    <div class="name">监测</div>
+                    <div class="fontclass">.icon-jiance1</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-yongyaotixing"></i>
+                    <div class="name">用药提醒</div>
+                    <div class="fontclass">.icon-yongyaotixing</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-iconwucan1"></i>
+                    <div class="name">icon-午餐</div>
+                    <div class="fontclass">.icon-iconwucan1</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-examine"></i>
+                    <div class="name">审核</div>
+                    <div class="fontclass">.icon-examine</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-icon0"></i>
+                    <div class="name">大脑</div>
+                    <div class="fontclass">.icon-icon0</div>
+                </li>
+            
+        </ul>
+
+        <h2 id="font-class-">font-class引用</h2>
+        <hr>
+
+        <p>font-class是unicode使用方式的一种变种，主要是解决unicode书写不直观，语意不明确的问题。</p>
+        <p>与unicode使用方式相比，具有如下特点：</p>
+        <ul>
+        <li>兼容性良好，支持ie8+，及所有现代浏览器。</li>
+        <li>相比于unicode语意明确，书写更直观。可以很容易分辨这个icon是什么。</li>
+        <li>因为使用class来定义图标，所以当要替换图标时，只需要修改class里面的unicode引用。</li>
+        <li>不过因为本质上还是使用的字体，所以多色图标还是不支持的。</li>
+        </ul>
+        <p>使用步骤如下：</p>
+        <h3 id="-fontclass-">第一步：引入项目下面生成的fontclass代码：</h3>
+
+
+        <pre><code class="lang-js hljs javascript"><span class="hljs-comment">&lt;link rel="stylesheet" type="text/css" href="./iconfont.css"&gt;</span></code></pre>
+        <h3 id="-">第二步：挑选相应图标并获取类名，应用于页面：</h3>
+        <pre><code class="lang-css hljs">&lt;<span class="hljs-selector-tag">i</span> <span class="hljs-selector-tag">class</span>="<span class="hljs-selector-tag">iconfont</span> <span class="hljs-selector-tag">icon-xxx</span>"&gt;&lt;/<span class="hljs-selector-tag">i</span>&gt;</code></pre>
+        <blockquote>
+        <p>"iconfont"是你项目下的font-family。可以通过编辑项目查看，默认是"iconfont"。</p>
+        </blockquote>
+    </div>
+</body>
+</html>

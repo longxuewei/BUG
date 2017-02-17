@@ -1,0 +1,65 @@
+<div class="popup-head flex-r">
+	<h3 class="popup-title flex-03 text-left">检测项目：</h3>
+	<div class="flex-07 flex-r inputs">
+		<div class="flex1 flex-r flex-rr flex-cc">
+			<span>指定：</span>
+       		<label class="item item-input">
+			    <input type="date">
+			</label>
+       		<span class="text">至</span>
+       		<label class="item item-input">
+			    <input type="date">
+			</label>
+       </div>
+	</div>
+</div>
+<div class="flex-c">
+	<div class="flex1 flex-r graphmodel-box">
+		<div class="flex-02 flex-r flex-rc indexs-list">
+			<ion-scroll class="flex1">
+				<ul class="list">
+					<li class="item">身高</li>
+					<li class="item">体重</li>
+					<li class="item">耳温</li>
+					<li class="item">收缩压</li>
+					<li class="item">舒张压</li>
+					<li class="item">脉膊</li>
+					<li class="item">血糖</li>
+					<li class="item">血尿酸</li>
+					<li class="item">总胆固醇</li>
+					<li class="item">血氧饱和度</li>
+					<li class="item">皮肤水份</li>
+					<li class="item">皮肤油脂</li>
+					<li class="item">水分含量</li>
+					<li class="item">脂肪含量</li>
+					<li class="item">肌肉含量</li>
+					<li class="item">骨骼含量</li>
+					<li class="item">腰围</li>
+				</ul>
+			</ion-scroll>
+		</div>
+		<div class="flex-08 content desc flex-c">
+			<div class="flex1 graphcontent">
+				<div class="showGraph-box flex1" ng-class="{'loadding':graphDataLoading}">
+                    <div graph-model="monitordata" style="width: 580px; height:365px;"></div>
+                    <div class="graph-shade"></div>
+                    <div class="box-tip left-tip">
+                        <ion-spinner ng-if="!leftover" icon="crescent"></ion-spinner>
+                        <span ng-if="leftover">没有了</span>
+                    </div>
+                </div>
+			</div>
+			<div class="flex-r padding-top padding-bottom">
+				<span style="min-width: 65px;">提示：</span>
+				<span class="line-clamp-2">共检测20次，正常16次，偏高1次，偏低2次；最高值98次/分，最低值79次/分</span>
+			</div>
+			<div class="flex-c padding-top">
+				<div class="button-bar">
+					<a class="button">刷新</a>
+				  	<a class="button main-btn" ng-click="closeGraphView()">关闭</a>
+				</div>		
+			</div>
+		</div>
+		<!--  -->
+	</div>
+</div>

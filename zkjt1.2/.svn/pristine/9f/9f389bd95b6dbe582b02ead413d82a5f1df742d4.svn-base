@@ -1,0 +1,66 @@
+<div class="flex-c">
+    <div style="flex: 1;">
+        <!--问卷答题列表-->
+        <div class="z-item-content survey-item-label" ng-if="!lastGrade">
+            <div class="flex1 flex-r flex-rsb title">
+                问题（{{questionIndex+1}}）
+                <span class="right">
+                    <span ng-class="{'opacity-2':question.qaOptions==null}">已答</span>
+                </span>
+            </div>
+            <div>
+                <div class="throng question-title">
+                    <span>{{question.content}}</span>
+                </div>
+                <div class="throng answer-list" ng-repeat="answer in question.evaQaOptions">
+                    <label class="item item-radio">
+                        <input type="radio" name="answer-option" ng-click="changeAnswer(answer,$index)" ng-checked="answer.seqNo==question.qaOptions.seqNo">
+                        <div class="radio-content">
+                            <div class="item-content disable-pointer-events">
+                                <span>{{$index+1}}．{{answer.title}}</span>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <!--答题后评分-->
+        <div class="z-item-content survey-item-label" ng-if="lastGrade">
+            <div class="row title">
+            评测评分
+            </div>
+             <div>
+                <div class="throng answer-list evaluating-grade">
+                     <li ng-repeat="factor in factors">
+                        <ul>
+                            <i class="ion ion-record"></i>
+                             <span class="grade-list">{{factor.factorName}}：<span class="grade" ng-class="{'grade-other':factor.positive==1}">{{factor.convertScore}}</span><span class="grade-unit">分</span><span class="grade-hint">{{factor.meaning}}</span></span>
+                         </ul>
+                    </li>
+                </div>
+                <!--<div class="summing-up">-->
+                <!--综合结论：-->
+                <!--</div>-->
+                 <!--<div class="throng question-title">-->
+                    <!--<span class="conclusion" ng-if="doctorEnding==1">-->
+                    <!--*&nbsp;请填写综合结论-->
+                    <!--</span>-->
+                    <!--<textarea rows="4" ng-model="conclusion.value">-->
+
+                    <!--</textarea>-->
+                 <!--</div>-->
+             </div>
+        </div>
+        <div class="flex-c padding-top">
+
+            <div class="button-bar">
+                <a class="button" ng-click="closeevaluationAlert()" ng-if="questionIndex==0 || surveyQuestions.length-1">关闭</a>
+                <a class="button" ng-click="backQuestion()" ng-if="questionIndex!=0 && !lastGrade">上一题</a>
+                <a class="button" ng-click="nextQuestion()" ng-if="questionIndex!=surveyQuestions.length-1">下一题</a>
+                <a class="button" ng-click="gradeSurvey()" ng-if="questionIndex==surveyQuestions.length-1 && !lastGrade">评分</a>
+                <a class="button" ng-click="submitSurvey()" ng-if="lastGrade">提交</a>
+                <!--<a class="button main-btn" ng-click="closeevaluationAlert()">关闭</a>-->
+            </div>
+        </div>
+    </div>
+</div>

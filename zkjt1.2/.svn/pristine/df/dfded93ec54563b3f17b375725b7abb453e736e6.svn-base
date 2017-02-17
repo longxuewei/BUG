@@ -1,0 +1,52 @@
+<div class="flex-r device-desc">
+	<div class="flex-03 picture">
+		<img ng-if="!isHandimport" ng-src="{{monitorData.modeinfo.diagram?monitorData.modeinfo.diagram:('img/device/'+(monitorData.rsdtMonitorList.meterCode)+'.jpg')}}" alt="">
+		<img ng-if="isHandimport" ng-src="{{handInDevice.modeinfo.diagram?handInDevice.modeinfo.diagram:('img/device/'+(handInDevice.suiteId)+'.jpg')}}" alt="">
+	</div>
+	<div class="flex-07 flex-c content">
+		<div class="desc flex-c">
+			<ion-content>
+				<h1>{{isHandimport? '输入检测值':'检测结果'}}：</h1>
+				<div class="button-bar monitor-parts" ng-if="monitorData.parts && monitorData.parts.length && !isHandimport">
+					<a class="button" ng-class="{'main-btn': item==monitorData.currentParts}" ng-click="selectTimes(item)" ng-repeat="item in monitorData.parts">
+						<span class="line-clamp-2">{{item}}</span>
+					</a>
+				</div>
+				<div class="testresult flex-c" ng-if="!isHandimport">
+					<div class="r-item" ng-repeat="item in monitorData.values">
+					{{item.name}}：{{item.value}}{{item.unit}}&nbsp;
+					<i ng-if="item.arrow==1 || item.arrow==2" class="icon ion-ios-arrow-thin-{{item.arrow==1?'up':'down'}}"></i>
+					</div>
+				</div>
+				<div class="hint" ng-if="!isHandimport">
+					{{monitorData.hint}}<br/>
+				</div>
+				<form class="flex-c handimport-box" ng-if="isHandimport">
+					<div class="flex-r flex-cc" ng-repeat="item in handInDevice.items|orderBy:'seq_no'">
+						<div class="text">
+							{{item.name}}
+						</div>
+						<div class="item-input">
+							<input ng-model="handInDeviceModel[item.seq_no]" type="number">
+						</div>
+					    <div class="text">
+							{{item.unit}}
+						</div>
+					</div>
+				</form>
+			</ion-content>
+		</div>
+		<div class="comment" ng-if="!isHandimport">
+			备注：系统将在{{count}}秒后自动保存本次检测结果。
+		</div>
+		<div class="button-bar" ng-if="!isHandimport">
+			<a class="button" ng-click="text2voice(handInDevice)" ng-if="false">朗读</a>
+		  	<a class="button" ng-click="closeMonitorModel()">放弃</a>
+		  	<a class="button main-btn" ng-disabled="!isSaveBtnDisabled" ng-click="saveMonitorData()">保存</a>
+		</div>
+		<div class="button-bar" ng-if="isHandimport">
+		  	<a class="button" ng-click="handimportBtn()">取消</a>
+			<a class="button main-btn" ng-click="handimportBtn(true)">确认输入</a>
+		</div>
+	</div>
+</div>

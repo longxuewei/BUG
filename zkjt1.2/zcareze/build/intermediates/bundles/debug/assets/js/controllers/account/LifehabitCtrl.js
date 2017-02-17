@@ -1,0 +1,21 @@
+define([], function(){
+	'use strict';
+
+	function controller($scope, $rootScope, $state, $ionicSlideBoxDelegate, $initModelView, $timeout, $API) {
+
+		$scope.$model=$initModelView.init($scope,{
+            class: "mini"
+        });
+		
+		$scope.$on('$ionicView.enter', function(){
+			
+		});
+
+		$scope.$on("$ionicView.beforeLeave", function(event, data){
+
+		});
+	}
+	controller.$inject = ['$scope', '$rootScope', '$state', '$ionicSlideBoxDelegate', '$initModelView', '$timeout', '$API'];
+
+	ZcarezeApp.registerController('LifehabitCtrl', controller);
+})

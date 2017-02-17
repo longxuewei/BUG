@@ -1,0 +1,57 @@
+<ion-view view-title="众康云">
+    <ion-content scroll="false">
+        <div class="row flex-r flex-rc" style="margin-top:120px;">
+            <div class="col center" style=" max-width: 500px;">
+                <form>
+                    <div class="list list-inset">
+                        <label class="item item-input">
+                            <i class="icon ion-android-person positive"></i>
+                            <input id="username" tabindex='1' ng-disabled="user.disabled" type="text" ng-model="user.username" placeholder="请输入您的手机号码">
+                        </label>
+                        <label ng-if="!user.clerkactivate" class="item item-input">
+                            <i class="icon ion-ios-unlocked-outline positive"></i>
+                            <input id="password" tabindex='2' type="password" ng-model="user.password" placeholder="请输入您的密码">
+                        </label>
+                        <div ng-show="!isactivate" class="item item-input verification-code">
+                            <input id="username" tabindex="1" type="text" ng-model="user.verification" placeholder="短信验证码" class="ng-pristine ng-valid ng-not-empty ng-touched">
+                            <button class="button button-positive" count-down="countdowntimer" handler="countdowncall" ng-click="getVerification()" ng-disabled="!user.username || remaining || getVeriLoadding">
+                                {{!remaining?'获取验证码':'验证码（'+remaining+'）'}}
+                                <ion-spinner ng-if="getVeriLoadding" icon="ios-small"></ion-spinner>
+                            </button>
+                        </div>
+                        <div ng-if="!user.clerkactivate" class="list" style="margin-bottom: 0;">
+                            <label class="item item-input item-select">
+                                <div class="input-label">服务器</div>
+                                <select ng-model="app.serviceAddr" ng-change="selectorService()" style="direction: ltr;">
+                                    <option value="http://api.test.zcareze.com">线上测试</option>
+                                    <option value="http://192.168.0.124:8080">本地8080</option>
+                                    <option value="http://192.168.0.124:82">本地82</option>
+                                </select>
+                            </label>
+                        </div>
+                        <ion-list ng-if="!user.clerkactivate" class="mini-checkbox left-icon" style="margin-top: 15px; display: block;">
+                            <div class="flex-r">
+                                <label ng-click="tabindexFocus($event)" for="remember">
+                                    <ion-item class="item-checkbox" style="border:none;">
+                                        <div class="line-clamp-2 disable-pointer-events">
+                                            <span>记住密码</span>
+                                        </div>
+                                        <div ng-click="rememberFn()" class="checkbox checkbox-input-hidden disable-pointer-events">
+                                            <input type="checkbox" name="remember" ng-checked="remember" value="on">
+                                            <i class="checkbox-icon"></i>
+                                        </div>
+                                    </ion-item>
+                                </label>
+                            </div>
+                        </ion-list>
+                    </div>
+                    <div class="loginButton row flex-r flex-rsb">
+                        <button ng-class="{' button-balanced':!isactivate}" class="flex-{{isactivate?'03':'07'}} button button-block" ng-click="!isactivate ? activateAccount() : switchbtn(false)">{{activateText || '激活账号'}}</button>
+                        <button ng-class="{' button-balanced':isactivate}" class="flex-{{isactivate?'07':'03'}} button ion-person button-block" ng-click="isactivate ? login(user) : switchbtn(true)">登录</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
+

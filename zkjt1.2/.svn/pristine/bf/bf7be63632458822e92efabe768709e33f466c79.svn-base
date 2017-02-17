@@ -1,0 +1,36 @@
+package com.zcareze.zkyandroidweb;
+
+import android.app.Application;
+import android.content.Context;
+import android.test.mock.MockContext;
+
+import com.zcareze.domain.core.dictionary.AgeDivisions;
+import com.zcareze.zkyandroidweb.db.AgeDivisionsDao;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+
+import java.util.List;
+
+import static junit.framework.Assert.assertEquals;
+
+/**
+ * 源代码: Lxw
+ * 伊妹儿: China2021@126.com
+ * 时间轴: 2016 年 12 月 28 日 09 : 41
+ */
+@RunWith(RobolectricGradleTestRunner.class)
+@Config(constants = BuildConfig.class, sdk = 21)
+public class DataBaseTest {
+
+    @Test
+    public void testDB() {
+        Application application = RuntimeEnvironment.application;
+        AgeDivisionsDao instance = AgeDivisionsDao.getInstance(application);
+        List<AgeDivisions> ageDivisionses = instance.queryAll();
+        assertEquals(ageDivisionses.size(),4);
+    }
+}

@@ -1,0 +1,64 @@
+<ion-view view-title="众康云-设置">
+	<!--  class="bar-positive" -->
+	<ion-header-bar align-title="left">
+		<div class="title"><span ng-click="EasterEgg()">设置</span></div>
+		<div class="buttons">
+			<!-- ion-ios-arrow-back  -->
+		    <button class="button button-icon ion-android-close" ng-click="modelView.back()"></button>
+		</div>
+	</ion-header-bar>
+    <ion-content>
+		<div class="setting">
+			<div class="separate">已绑定设备：<small>（共{{bindDevices.length}}种设备）</small></div>
+			<div class="device-list row flex-r flex-rw">
+				<div class="device-item col-25 flex-c flex-cc" ng-repeat="item in bindDevices">
+					<div class="flex1 device-img flex-c flex-cc flex-rc">
+						<img src="img/device/small/{{item.code+'.jpg'}}" alt="">
+					</div>
+					<span class="name text-center">{{item.name}}</span>
+				</div>
+				<div class="device-item add-device col-25 flex-c flex-cc" ng-click="bindNewDevice()">
+					<div class="flex1 device-img text-center">
+						<i class="icon ion-ios-plus-empty"></i>
+					</div>
+					<small class="name text-center">绑定新设备</small>
+				</div>
+			</div>	
+		</div>
+		<div class="residentlist row flex-r flex-rw">
+			<div class="resident-tint flex1 flex-r flex-cc">
+				<i class="icon ion-ios-information-outline"></i>
+				<small>
+					注意：在新绑定仪器时选择设备传输类型（蓝牙、2.4G设备）。
+				</small>
+			</div>
+		</div>
+		<div class="separate"></div>
+		<ul class="list">
+		    <a class="item z-item item-icon-right" ng-disabled="true">
+		       天气设置
+		       <i class="icon ion-ios-arrow-right"></i>
+		    </a>
+		    <a class="item z-item item-icon-right" ng-disabled="true">
+		       意见反馈
+		       <i class="icon ion-ios-arrow-right"></i>
+		    </a>
+		    <a class="item z-item item-icon-right" ng-disabled="true">
+		       关于
+		       <i class="icon ion-ios-arrow-right"></i>
+		    </a>
+		    <a class="item z-item flex-rsb item-icon-right" ng-disabled="true">
+		       版本
+		       <span class="item-note">
+		            v{{version||'1.0.0'}}
+		        </span>
+		       <i class="icon ion-ios-arrow-right"></i>
+		    </a>
+		</ul>
+		<ul class="list">
+		    <a class="item z-item flex-r flex-rc red" ng-click="logout()">
+		       注销登录
+		    </a>
+		</ul>
+    </ion-content>
+</ion-view>

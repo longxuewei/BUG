@@ -1,0 +1,36 @@
+<ion-view view-title="众康云">
+	<!--顶部工具条-->
+	<div class="home-bar flex-r flex-rsb flex-cc">
+		<div class="buttons">
+		    <button class="button back-button header-item maincolor" ng-click="$ionicGoBack()">
+		    	<i class="icon ion-ios-arrow-back"></i>
+		    </button>
+		</div>
+		<div class="title flex1 padding-left">
+			心理测评
+		</div>
+		<div class="home-bar flex-r flex-rr flex-cc">
+			<div class="date">
+				{{toDay}}，多云后2天
+			</div>
+			<div class="weather flex-r flex-cc flex-rr">
+				<i class="icon ion-ios-partlysunny-outline calm"></i>12℃
+			</div>
+		</div>
+	</div>
+	<div class="con_pr">
+		<ion-content scroll="false" class="nut_guid">
+			
+			<div class="knowledge-content flex-r flex-cw" style="height: 100%;border: none;">
+				<div class="psy_info flex-c" ng-click="homeMenu('app.home-PsychologicalEval-ask',data,$index)" ng-repeat="data in askTableList">
+					<div class="flex-r mid_fz default_padding psy_title"> <span class="psy_ionic_img icon icon-jiankang"><img src=""/></span> <span class="flex-07 line-clamp-2">{{data.name}}</span> </div>
+					<div class="flex-c flex-09 default_padding psy_dec"> <span class="line-clamp">{{data.comment}}</span> </div>
+					<div class="flex-r flex-rc flex-01 bd_blue default_smargin button m_fz blue">
+						立即测试
+					</div>
+				</div>
+				
+			</div>
+		</ion-content>
+	</div>
+</ion-view>

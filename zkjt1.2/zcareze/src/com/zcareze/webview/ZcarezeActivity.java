@@ -1,0 +1,153 @@
+package com.zcareze.webview;
+
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.os.Bundle;
+import android.os.Handler;
+
+import com.zcareze.R;
+import com.zcareze.core.Zcareze;
+
+import org.xwalk.core.XWalkPreferences;
+import org.xwalk.core.XWalkResourceClient;
+import org.xwalk.core.XWalkUIClient;
+import org.xwalk.core.XWalkView;
+
+
+/**
+ * 使用到的权限
+ * 混合开发基本权限
+ * <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+ * <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+ * <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+ * <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+ * <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+ * <uses-permission android:name="android.permission.INTERNET" />
+ * <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+ * <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+ * <uses-permission android:name="android.permission.RECORD_AUDIO" />
+ * <uses-permission android:name="android.permission.CAMERA" />
+ * <uses-permission android:name="android.permission.WAKE_LOCK" />
+ * <p>
+ * 开启xwalk的share模式，将xwalk作为服务安装到设备后，其它依赖xwalk的应用程序在打包的时候就不需要加入xwalk核心库了，只需要应用share包即可
+ * <meta-data android:name="xwalk_apk_url" android:value="http://host/XWalkRuntimeLib.apk" />
+ */
+
+public class ZcarezeActivity extends Activity {
+
+    private static final String JAVASCRIPT = "javascript";
+    // 声明xwalkview
+    private static XWalkView mXWalkView;
+
+    // 声明jsAPI
+    public static BaseInterface baseInterface;
+
+    public String version;
+
+    @SuppressLint("HandlerLeak")
+    private Handler handler = new Handler() {
+        public void handleMessage(android.os.Message msg) {
+            Bundle data = msg.getData();
+            String javascript = (String) data.get(JAVASCRIPT);
+            mXWalkView.load(javascript, null);
+        }
+    };
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // 安卓原生写法，设置当前页面布局
+        setContentView(R.layout.activity_xwalkview);
+
+        onXWalkReady();
+    }
+
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//    }
+
+    protected void onXWalkReady() {
+        // 把远程调试，开启，开启后可以在谷歌浏览器50+上面使用"chrome://inspect"进行js和CSS的远程调试
+//         XWalkPreferences.setValue(XWalkPreferences.REMOTE_DEBUGGING, true);
+        XWalkPreferences.setValue(XWalkPreferences.ALLOW_UNIVERSAL_ACCESS_FROM_FILE, true);
+
+        // 获取当前页面中的 webview对象
+        mXWalkView = (XWalkView) findViewById(R.id.xwalkview);
+
+        // 对xwalkview设置client对象，这里可以使用自定义的client对象便于控制，一般情况下使用默认实现
+        mXWalkView.setUIClient(new XWalkUIClient(mXWalkView));
+        mXWalkView.setResourceClient(new XWalkResourceClient(mXWalkView));
+
+        // 实例化 js 自定接口
+        baseInterface = new BaseInterface();
+
+        baseInterface.init(this.getApplication(), handler, this);
+
+        // 这句代码很关键，如果需要JavaScript能够使用我们自己的jsAPI就必须将我们api的实例添加到webview中去
+        mXWalkView.addJavascriptInterface(baseInterface, "ZcarezeBase");
+
+        mXWalkView.load("javascript:window.ZcarezeApp = {}", null);
+
+        version = Zcareze.getVersion();
+
+        if (version == null) {
+            mXWalkView.loadAppFromManifest("file:///android_asset/manifest.json", null);
+        } else {
+            mXWalkView.load("file://" + Zcareze.ROOT_DIR +
+                    getResources().getString(R.string.start_url) + "?v=" + version.trim(), null);
+        }
+    }
+
+    public void setJSInterface(Javascript javascript) {
+        mXWalkView.addJavascriptInterface(javascript, "ZcarezeNative");
+    }
+
+    public void setJSInterface(Javascript javascript, String className) {
+        mXWalkView.addJavascriptInterface(javascript, className);
+    }
+
+//	@Override
+//	protected void onStop() {
+//		// TODO Auto-generated method stub
+//		super.onStop();
+//	}
+
+
+//	/**
+//     * 菜单、返回键响应
+//     */
+//	@Override
+//	public boolean onKeyDown(int keyCode, KeyEvent event) {
+//		// TODO Auto-generated method stub
+//		if (keyCode == KeyEvent.KEYCODE_BACK) {
+//			exitBy2Click(); // 调用双击退出函数
+//		}
+//		return false;
+//	}
+//
+//	/**
+//	 * 双击退出函数
+//	 */
+//	private static Boolean isExit = false;
+//
+//	private void exitBy2Click() {
+//		Timer tExit = null;
+//		if (isExit == false) {
+//			isExit = true; // 准备退出
+//			Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+//			tExit = new Timer();
+//			tExit.schedule(new TimerTask() {
+//				@Override
+//				public void run() {
+//					isExit = false; // 取消退出
+//				}
+//			}, 2000); // 如果2秒钟内没有按下返回键，则启动定时器取消掉刚才执行的任务
+//
+//		} else {
+//			finish();
+//			System.exit(0);
+//		}
+//	}
+}

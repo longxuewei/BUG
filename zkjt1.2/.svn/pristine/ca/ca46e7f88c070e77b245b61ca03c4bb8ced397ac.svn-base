@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4\\ic_search.png",
+        "source": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\exploded-aar\\Zky-AndroidWeb\\zcarezelibrary\\unspecified\\res\\drawable-xxxhdpi-v4\\ic_search.png"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4\\ic_warning.png",
+        "source": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\exploded-aar\\Zky-AndroidWeb\\zcarezelibrary\\unspecified\\res\\drawable-xxxhdpi-v4\\ic_warning.png"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4\\verify_checkmark.png",
+        "source": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\exploded-aar\\Zky-AndroidWeb\\zcarezelibrary\\unspecified\\res\\drawable-xxxhdpi-v4\\verify_checkmark.png"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4\\ic_menu_share_holo_light.png",
+        "source": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\exploded-aar\\Zky-AndroidWeb\\zcarezelibrary\\unspecified\\res\\drawable-xxxhdpi-v4\\ic_menu_share_holo_light.png"
+    }
+]

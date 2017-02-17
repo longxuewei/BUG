@@ -1,0 +1,53 @@
+package com.zcareze.zkyandroidweb;
+
+import android.content.Context;
+
+import com.zcareze.core.Zcareze;
+import com.zcareze.zkyandroidweb.bean.MonitorEngine;
+import com.zcareze.zkyandroidweb.bean.NewMonitorResult;
+import com.zcareze.zkyandroidweb.utils.TimeUtil;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowApplication;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * 源代码: Lxw
+ * 伊妹儿: China2021@126.com
+ * 时间轴: 2016 年 12 月 27 日 17 : 17
+ */
+@RunWith(RobolectricGradleTestRunner.class)
+@Config(constants = BuildConfig.class, sdk = 21)
+public class NioaSuanTest {
+
+
+    @Test
+    public void test() {
+
+        Context applicationContext = ShadowApplication.getInstance().getApplicationContext();
+        String suiteId ="683edfb67a6311e69f52d017c2939671";
+        String id = "e9b43534a7b747b79788086e34416d20";
+        String gender = "1";
+        String birthday = "1992-08-07 00:00:00";
+        Date date = TimeUtil.paresDateByStr(birthday);
+        Map<Integer, String> param = new HashMap<>();
+        param.put(1, "5.5");
+
+        MonitorEngine engine = new MonitorEngine(applicationContext);
+        NewMonitorResult monitorResult = engine.monitorProcessByManualdrive(suiteId, param, id, Integer.parseInt(gender), date, null);
+        if (monitorResult != null) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("data", monitorResult);
+            Zcareze.javascript("DeviceMonitor", params);
+        } else {
+            Zcareze.javascript("DeviceMonitor", null);
+        }
+    }
+
+}

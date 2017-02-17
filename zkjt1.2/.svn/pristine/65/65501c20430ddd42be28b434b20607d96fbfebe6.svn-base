@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=2, user-scalable=no">
+  <!--@@start-version-->
+<meta version="1.1.1">
+<!--@@end-version-->
+  <!--@@start-service-->
+<meta service="http://api.test.zcareze.com">
+<!--@@end-service-->
+  <meta name="format-detection" content="telephone=no" />
+  <!-- home screen app 全屏 -->
+  <meta name="apple-touch-fullscreen" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <!-- 状态栏 -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+  <!-- home screen app iPhone icon -->
+  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="startup/apple-touch-icon-57x57-precomposed.png" />
+  <!-- home screen app iPad icon -->
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="startup/apple-touch-icon-72x72-precomposed.png" />
+  <!-- home screen app iPhone Retinas icon -->
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="startup/apple-touch-icon-114x114-precomposed.png" />
+  <link rel="icon" href="favicon.ico">
+  <title>众康云-居民端</title>
+  <!--include "./view/testview/index.html"-->
+  <!--@@start-css-->
+  <link href="css/zcareze.min.css" rel="stylesheet">
+  
+  <link rel="stylesheet" type="text/css" href=""/>
+  <!--@@end-css-->
+
+  <script type="text/javascript">if(window.top!== window.self){top.location=self.location;}</script>
+  <script type="text/javascript">
+    var dwidth = 375, mwidth = 540,ua = navigator.userAgent.toLowerCase(), rootdom = document.querySelector('html'),
+        setViewPort = function(){
+          var viewport = document.querySelector('meta[name="viewport"]'), pr = (function(width, height){
+            if(width > dwidth){
+              if(width > mwidth && width < height){
+                return (mwidth/dwidth).toFixed(4);
+              }else{
+                return 1;
+              }
+            }else{
+              return (width/dwidth).toFixed(4);
+            }
+          })(document.querySelector('html').offsetWidth, document.querySelector('html').offsetHeight),
+          vps = viewport.content.split(','),temp = [];
+          for (var i = 0; i < vps.length; i++) {
+            var k = vps[i].split('=')[0].trim();
+            if(k != 'initial-scale' && k != 'width')
+              temp.push(vps[i]);
+          }
+          temp.push('initial-scale='+pr);
+          viewport.content = temp.join(',');
+        }
+    if(/ipad/i.test(ua)){
+      rootdom.classList.add('ipad');
+    }else if(/iphone/i.test(ua)){
+      rootdom.classList.add('iphone');
+    }else if(/android/i.test(ua)){
+      rootdom.classList.add('android');
+    }else {
+      rootdom.classList.add('pc');
+    }
+    setViewPort();
+  </script>
+  <script src="libs/ionic.bundle.min.js"></script>
+  <!-- 加载页面依赖资源用的 标识 -->
+
+  <!--@@start-WSDK-->
+  <!-- <script src="https://g.alicdn.com/aliww/h5.openim.sdk/1.0.6/scripts/wsdk.js"></script> -->
+  <!--@@end-WSDK-->
+  <link id="ng_load_plugins_before"/>
+</head>
+<!--  nav-view-transition="none" nav-transition="none" transition="none" -->
+<body class="loaded" ng-app="zcarezeApp" ng-controller="MainControler" nav-transition="none">
+
+  <!-- 主视图  -->
+  <ion-nav-view id="main-view"></ion-nav-view>
+  <!-- #主视图 -->
+
+  <!--@@start-tmpl-->
+  <!--@@end-tmpl-->  
+
+  <script src="libs/require.js" charset="UTF8"></script>
+
+  <!--@@start-scriptBase-->
+  <script src="libs/moment.min.js" charset="UTF8"></script>
+  <script src="libs/cookies.js" charset="UTF8"></script>
+  <script src="libs/md5.js" charset="UTF8"></script>
+
+  <!-- <script src="js/modules/modules.js"></script> -->
+  <script src="js/App.js"></script>
+  <script src="js/config/BaseConfig.js"></script>
+  <script src="js/service/request.js"></script>
+  <script src="js/service/BaseService.js"></script>
+  <script src="js/service/wbsdatabase.js"></script>
+  <script src="js/service/graph.js"></script>
+  <!--@@end-scriptBase-->
+
+  <!--@@start-scriptCtrl-->
+  <script src="js/controllers/HomeCtrl.js"></script>
+  <script src="js/controllers/AccountCtrl.js"></script>
+  <script src="js/controllers/CommonCtrl.js"></script>
+  <script src="js/controllers/KnowledgelCtrl.js"></script>
+  <script src="js/controllers/SettingCtrl.js"></script>
+  <script src="js/controllers/ModelViewCtrl.js"></script>
+  <!--@@end-scriptCtrl-->
+
+  </body>
+</html>
+

@@ -1,0 +1,45 @@
+<div class="popup-head flex-r">
+	<h3 class="popup-title flex-03 text-left">设备链接：</h3>
+	<div class="flex-07 popup-title flex-r inputs">
+		<div class="flex1 flex-r flex-rr flex-cc">
+			<ion-spinner class="search-icon" icon="ripple"></ion-spinner>
+			&nbsp;
+			<span>{{wantBindDevice.name}}</span>
+       </div>
+	</div>
+</div>
+<div class="flex-r device-search">
+	<div class="flex1 flex-c content">
+		<div class="desc flex-r">
+			<div class="course flex-r flex-rc">
+				<img ng-src="{{'img/device/binddoc/'+wantBindDevice.code+'.jpg'}}" alt="">
+			</div>
+			<div class="monitor-result flex1 flex-c">
+				<ion-content>
+					<div class="row">
+						检测结果：
+					</div>
+					<div ng-if="monitorData" class="recently">
+						<div class="mon-index flex-r flex-cc flex-rsb" ng-repeat="item in monitorData.values">
+					  		{{item.name}}
+					  		<span class="value">{{item.value}}{{item.unit}}</span>
+					  	</div>
+						<div class="hint">
+							{{monitorData.hint}}
+						</div>
+					</div>
+				</ion-content>
+				<div ng-if="!monitorData" class="will-connect result flex-r flex-rc flex-cc">
+					等待设备上传数据...
+				</div>
+			</div>
+		</div>
+		<div class="comment">
+			提示：请使用您所选择绑定的仪器按上面的动画教程操作，以便完成设备的绑定。
+		</div>
+		<div class="button-bar">
+			<a class="button" ng-click="CloseBindDeviceModel()">取消绑定</a>
+		  	<a class="button main-btn" ng-click="affirmBind()" ng-disabled="!isMonitorDataCallDone">确认绑定</a>
+		</div>
+	</div>
+</div>

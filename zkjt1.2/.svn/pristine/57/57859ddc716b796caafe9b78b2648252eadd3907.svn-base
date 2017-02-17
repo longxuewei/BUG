@@ -1,0 +1,9 @@
+org.gradle.jvmargs=-Xmx1536m
+STORE_FILE=C:\\Users\\sa\\Desktop\\zkjt.jks
+STORE_PASSWORD=zcareze
+KEYALIAS=zkjt
+KEYPASSWORD=zcareze
+TEST_VERSION=1.2.2
+RELEASE_VERSION=1.2.2
+TEST_APPLICATIONID=com.zcareze.aphone.zhongkangjiating_beta
+RELEASE_APPLICATIONID=com.zcareze.aphone.zhongkangjiating

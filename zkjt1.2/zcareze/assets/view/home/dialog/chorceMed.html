@@ -1,0 +1,22 @@
+<div class="date-box item_data_box">
+	<div class="flex1 content">
+		<div class="list flex-rw default_padding" style="position: relative;min-height:350px;">
+			<div class="flex-r flex-rc">
+				<input type="text" placeholder="请输入药品关键字" ng-model="seacher.value" value="" ng-change="onchangeList()" class="m_input s_fz flex-09" style="margin-bottom: 10px;"/>
+				<button ng-click="serchSql(seacher.value)" class="flex-01 s_fz med_btn">搜索</button>
+			</div>
+			<div class="con_pr" style="min-height: 350px;">
+				<ion-content delegate-handle="mainScroll">
+					<ul class="list">
+						<li class="item" ng-repeat="data in medNameList | filter:seacher.value" ng-click="chorcedMedName(data)" ng-class="{'activeList':activeMed.id==data.id}">{{data.name}} <span ng-if="data.spec||ata.producer">({{data.producer}}&nbsp;{{data.spec}})</span></li>
+					</ul>
+					
+			      </ion-content>
+			</div>
+		</div>
+		<div class="button-bar">
+			<a class="button" ng-click="closeItemChangeModel('closeChorceMed')">取消</a>
+			<a class="button main-btn" ng-click="closeItemChangeModel('closeChorceMed',true)">确定</a>
+		</div>
+	</div>
+</div>

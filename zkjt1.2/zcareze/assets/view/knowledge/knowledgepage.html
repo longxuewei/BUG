@@ -1,0 +1,78 @@
+<ion-view view-title="众康云">
+	<!--顶部工具条-->
+	<ion-header-bar align-title="center" class="bar-positive"  style="background: #fff;border-color: #ddd;" ng-click="alertClose()">
+		<div class="buttons">
+			<button class="button button-icon ion-ios-arrow-back" ng-click="$ionicGoBack()" style="color: #101010;"></button>
+		</div>
+		<div class="title title-left" style="color: #101010;">{{dataAritcle.title}}</div>
+	</ion-header-bar>
+	<ion-content scroll="false" class="k_page_title">
+		<div class="resident_title">
+			<div class="default_padding z-item  flex-r flex-rsb">
+				
+				<div class="time_info" style="margin-left: 25%;">
+					<div ng-show="dataAritcle.sourceLab">
+						<font>{{dataAritcle.sourceLab}}</font>&nbsp;&nbsp;<span id="time">2016-03-02 </span>
+					</div>
+					
+				</div>
+				<div class="smart_icon">
+					<ul class="flex-r flex-rsb">
+						<li class="ion-eye">
+							<font>{{dataAritcle.readCount}}</font>
+						</li>
+						<li class="ion-thumbsup"  ng-click="dianzhan()" ng-class="{active:dataAritcle.praiseFlag==1}">
+							<font id="zhan_num">{{dataAritcle.praiseCount}}</font>
+						</li>
+						<li class="ion-android-textsms" ng-click='alertContrl()'>
+							<font>评论</font>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</ion-content>
+	<!--
+	作者：offline
+	时间：2016-11-28
+	描述：内容区域
+	-->
+	<div class="cover_wrap">
+		<div class="cover_wrap">
+			<ion-content class="knowledge-page" ng-class="{'active':alertStatus==true}" id="k_page1" ng-click="alertClose()">
+			<iframe ng-src="{{address}}" width="100%" height="100%" id="myIframe" ng-click="onclik()"></iframe>
+			</ion-content>
+		</div>
+		<!--
+		作者：offline
+		时间：2016-11-28
+		描述：dialog
+		-->
+		<div class="cover_wrap">
+			<ion-content class="knowledge-page k_right" id="k_page2" ng-class="{'active':alertStatus==true}">
+				<ion-refresher on-refresh="doRefresh()"></ion-refresher>
+				<div class="knowledge-content">
+					<ion-list style="padding: 10px;" show-delete="false">
+						<ion-item class="" ng-repeat="data in getDiscussList.slice().reverse()" class="item-remove-animate flex-r" style="border:none">
+						<div class="flex-09">
+							<span class="user_head ion-person"> <font>{{data.nickname}}</font> </span>
+							<span>
+								{{data.content}}
+							</span>
+						</div>
+						
+						<ion-option-button class="button-assertive flex-01" ng-if="one.id==data.accountId" ng-click="delArticleDiscussLog(data)">
+						删除
+						</ion-option-button>
+						</ion-item>
+					
+						<ion-item class="price_last flex-r felx-rt" style="border:none">
+							<span class="ion-person user_head" style="display: inline-block;"></span>
+							<textarea class="k_price flex-09" ng-model="info.value"  multiple="multiple" placeholder="我:客观评价" ng-blur="addArticleDiscussLog(info.value)"></textarea>
+						</ion-item>
+					</ion-list>
+				</div>
+			</ion-content>
+		</div>
+	</div>
+</ion-view>

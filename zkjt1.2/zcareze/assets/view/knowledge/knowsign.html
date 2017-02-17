@@ -1,0 +1,29 @@
+<div class="flex-r device-desc">
+	<div class="flex-03 picture">
+	</div>
+	<div class="flex-07 flex-c content">
+		<div class="desc flex-c">
+			<h1>{{monitorData.title}}：</h1>
+			<div class="button-bar" ng-if="monitorData.deviceType == 17 || monitorData.deviceType == 13">
+				<a class="button" ng-class="{'main-btn': item==monitorData.monitorParams}" ng-click="selectTimes(item)" ng-repeat="item in monitorData.partAndTimes">{{item}}</a>
+			</div>
+			<div class="testresult flex-c">
+				<div class="r-item" ng-repeat="(key, val) in monitorData.values">
+				{{key}}：{{val}}&nbsp;
+				<!-- <i class="icon ion-arrow-graph-up-right"></i> -->
+				</div>
+			</div>
+			<div class="hint">
+				{{monitorData.hint}}<br/>
+			</div>
+		</div>
+		<div class="comment">
+			备注：系统将在20秒后自动保存本次检测结果。
+		</div>
+		<div class="button-bar">
+			<a class="button">朗读</a>
+		  	<a class="button">放弃</a>
+		  	<a class="button main-btn" ng-click="closeMonitorModel()">保存</a>
+		</div>
+	</div>
+</div>

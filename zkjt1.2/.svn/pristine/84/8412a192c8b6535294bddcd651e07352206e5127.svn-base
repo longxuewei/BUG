@@ -1,0 +1,54 @@
+define([], function(){
+	'use strict';
+
+	function controller($scope, $rootScope, $state, $ionicSlideBoxDelegate, $initModelView, $timeout, $API) {
+        
+        
+        
+         //数据操作
+        $scope.accoutdetail={};
+        $scope.opendetail = function(type, task){
+
+			//获取居民详情
+			$API.ResidentService.getResidentDetails({
+				id:$rootScope.user.id
+			}).then(function (reslut) {
+				if(reslut.code==1){
+					$scope.accoutdetail=reslut;
+				}
+	
+			}).fail(function (error) {
+				console.log(error.message);
+			})
+		}
+        
+        //
+
+          var isAccoutdetail=false;
+        
+		$scope.$model=$initModelView.init($scope,{
+            class: "mini"
+        });
+		
+		$scope.$on('$ionicView.enter', function(){
+			
+			
+			
+			if (isAccoutdetail) {
+				return;
+			} else{
+				$scope.opendetail();;
+				isAccoutdetail=true;
+			}
+			
+			
+		});
+
+		$scope.$on("$ionicView.beforeLeave", function(event, data){
+
+		});
+	}
+	controller.$inject = ['$scope', '$rootScope', '$state', '$ionicSlideBoxDelegate', '$initModelView', '$timeout', '$API'];
+
+	ZcarezeApp.registerController('ResidentinfoCtrl', controller);
+})

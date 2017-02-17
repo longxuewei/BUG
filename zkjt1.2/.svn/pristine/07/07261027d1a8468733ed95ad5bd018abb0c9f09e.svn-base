@@ -1,0 +1,6 @@
+org.gradle.jvmargs=-Xmx1536m
+STORE_FILE=C:\\Users\\sa\\Desktop\\jkjt.jks
+STORE_PASSWORD=zcareze
+KEYALIAS=zkjt
+KEYPASSWORD=zcareze
+VERSION=1.3.0

@@ -1,0 +1,58 @@
+<ion-view view-title="众康云">
+	<!--  class="bar-positive" -->
+	<ion-header-bar align-title="left">
+		<div class="title"> 切换家庭成员<small class="orange" ng-if="!network">（离线状态）</small></div>
+		<div class="buttons">
+			<!-- ion-ios-arrow-back  -->
+		    <button class="button button-icon ion-android-close" ng-click="modelView.back()"></button>
+		</div>
+	</ion-header-bar>
+    <ion-content class="">
+    	<ion-refresher on-refresh="doRefresh()"></ion-refresher>
+		<div class="residentlist row flex-r flex-rw">
+			<div class="resident-item col-25 flex-c" ng-repeat="data in accoutfamily.lists" ng-click="changeResident(data)">
+				<div class="account-head flex-c flex-cc flex-rc">
+					<img ng-if="data.gender==1" ng-class="{'stealth':!data.head}" src="img/man.jpg" alt="">
+					<img ng-if="data.gender==2" ng-class="{'stealth':!data.head}" src="img/woman.jpg" alt="">
+				</div>
+				<span class="open" ng-if="data.openGrade"><i class="icon ion-ios-people calm"></i></span>
+				<span class="residentname">{{data.name}}</span>
+			</div>
+		</div>
+		<div class="residentlist row flex-r flex-rw">
+			<div class="resident-tint flex1 flex-r flex-cc">
+				<i class="icon ion-ios-information-outline"></i>
+				仅可切换为在家庭中共享健康信息的其他成员
+			</div>
+		</div>
+		<div class="separate"></div>
+		<ul class="list">
+		    <a class="item z-item item-icon-right" online-able ng-click="stateUrl('app.model-account-myaccountinfo')">
+		       我的帐户信息
+		       <i class="icon ion-ios-arrow-right"></i>
+		    </a>
+		    <a class="item z-item item-icon-right" online-able ng-click="stateUrl('app.model-account-residentinfo')">
+		       我的健康档案
+		       <i class="icon ion-ios-arrow-right"></i>
+		    </a>
+		    <a class="item z-item item-icon-right" online-able ng-click="stateUrl('app.model-account-signing')">
+		       我的签约信息
+		       <i class="icon ion-ios-arrow-right"></i>
+		    </a>
+		    <a class="item z-item item-icon-right" online-able ng-click="stateUrl('app.model-account-qrcode')">
+		       我的二维码
+		       <i class="icon icon-erweima"></i>
+		    </a>
+		</ul>
+		<ul class="list">
+		    <li class="item z-item item-icon-right" ng-disabled="true" ng-click="stateUrl('app.model-account-lifehabit')">
+		    	生活习惯登记
+		    	<i class="icon ion-ios-arrow-right"></i>
+		    </li>
+		    <li class="item z-item item-icon-right" ng-disabled="true" ng-click="stateUrl('app.model-account-basic')">
+		    	基础指标登记
+		    	<i class="icon ion-ios-arrow-right"></i>
+		    </li>
+		</ul>
+    </ion-content>
+</ion-view>

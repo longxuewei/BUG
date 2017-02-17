@@ -1,0 +1,57 @@
+<ion-view view-title="众康云">
+	<!--顶部工具条-->
+	<div class="home-bar flex-r flex-rsb flex-cc">
+		<div class="buttons">
+		    <button class="button back-button header-item maincolor" ng-click="$ionicGoBack()">
+		    	<i class="icon ion-ios-arrow-back"></i>
+		    </button>
+		</div>
+		<div class="title flex1 padding-left">
+			监测详细记录
+		</div>
+		<div class="home-bar flex-r flex-rr flex-cc">
+			<div class="monitor-btn flex-r flex-cc" ng-click="dateChange()">
+				日期: (自动)&nbsp;<i class="icon ion-arrow-down-b"></i>
+			</div>
+			<div class="monitor-btn flex-r flex-cc" ng-click="itemChange()">
+				项目: 不限&nbsp;<i class="icon ion-arrow-down-b"></i>
+			</div>
+			<div class="monitor-btn flex-r flex-cc" ng-click="graphView()">
+				<i class="icon ion-stats-bars"></i>&nbsp;图形
+			</div>
+		</div>
+	</div>
+    <div class="home-content flex-r">
+    	<ion-content class="monitor-record">
+    		<ion-refresher on-refresh="doRefresh()"></ion-refresher>
+    		<div class="flex-r record-title">
+    			<span class="fr-cc-rc td" style="width: 130px;">日期</span>
+    			<span class="fr-cc-rc td" style="width: 60px;">时间</span>
+    			<span class="fr-cc-rc td" style="width: 110px;">项目</span>
+    			<span class="fr-cc-rc td" style="width: 150px;">结果值</span>
+    			<span class="fr-cc-rc td" style="width: 30px;"></span>
+    			<span class="fr-cc-rc td" style="width: 150px;">参考值</span>
+    			<span class="fr-cc-rc td flex-03">备注</span>
+    			<span class="fr-cc-rc td flex1">提示语</span>
+    			<span class="fr-cc-rc td" style="width: 60px;">来源</span>
+    		</div>
+    		<div class="flex-r" ng-repeat="item in monitorDatas">
+    			<div class="fr-cc-rc td" style="width: 130px;">{{item.acceptTime|date:'YYYY-MM-DD'}}</div>
+    			<div class="fr-cc-rc td" style="width: 60px;">{{item.acceptTime|date:'HH:mm'}}</div>
+    			<div class="flex-r flex-cc td" style="width: 110px;"><span>{{item.name}}</span></div>
+    			<div class="flex-r flex-cc flex-rr td" style="width: 150px;">{{item.value}}{{item.unit}}</div>
+    			<div class="fr-cc-rc td" style="width: 30px;">
+                    <i ng-if="item.arrow==1 || item.arrow==2" class="icon ion-ios-arrow-thin-{{item.arrow==1?'up':'down'}}"></i>
+    			</div>
+    			<div class="flex-r flex-cc td" style="width: 150px;">{{item.reference||''}}</div>
+    			<div class="fr-cc-rc td flex-03">{{item.remark}}</div>
+    			<div class="flex-r flex-cc td flex1">
+                    <small class="line-clamp-3 gray">{{item.hint}}</small>
+                </div>
+    			<div class="fr-cc-rc td" style="width: 60px;">{{item.source==1?"设备":"手输"}}</div>
+    		</div>
+            <ion-infinite-scroll ng-if="ismore" on-infinite="loadMore()" distance="1%"></ion-infinite-scroll>
+		</ion-content>
+    </div>
+</ion-view>
+

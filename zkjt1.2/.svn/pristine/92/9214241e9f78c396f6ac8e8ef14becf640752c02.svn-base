@@ -1,0 +1,21 @@
+<div class="flex-r">
+	<div class="flex1 flex-c content voicedialog">
+		<div class="desc flex-c flex-cc"><!-- seconds 是否大于0 判断语音时候加载 -->
+			<a id="play-btn" class="button button-icon flex-r flex-rc" ng-class="{'ion-ios-play':!voiced.play && voiced.seconds}" ng-disabled="!voiced.seconds" on-record="voiced">
+			  <ion-spinner ng-if="voiced.play" icon="ripple" class="spinner-assertive"></ion-spinner>
+			  <ion-spinner ng-if="!voiced.seconds" class="spiral-load" icon="spiral">
+ 				正在加载....
+			  </ion-spinner>
+			</a>
+			<div class="r-item" >
+				点击播放医生语音指导
+			</div>
+			<div class="r-item">
+				医生：{{detailTask.orderListAudioGuidance.giverName}}
+			</div>
+		</div>
+		<div class="button-bar">
+		  	<a class="button main-btn" ng-click="closeCalendarModel()">关闭</a>
+		</div>
+	</div>
+</div>

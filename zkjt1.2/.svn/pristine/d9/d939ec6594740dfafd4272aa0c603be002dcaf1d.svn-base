@@ -1,0 +1,98 @@
+[
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\res\\merged\\release\\layout\\multi_field_time_picker_dialog.xml",
+        "source": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\exploded-aar\\Zky-AndroidWeb\\zcarezelibrary\\unspecified\\res\\layout\\multi_field_time_picker_dialog.xml"
+    },
+    {
+        "merged": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\res\\merged\\release\\layout\\activity_xwalkview.xml",
+        "source": "G:\\zkjt1.2\\zcareze\\res\\layout\\activity_xwalkview.xml"
+    },
+    {
+        "merged": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\res\\merged\\release\\layout\\validation_message_bubble.xml",
+        "source": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\exploded-aar\\zkjt1.2\\zcarezelibrary\\unspecified\\res\\layout\\validation_message_bubble.xml"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\res\\merged\\release\\layout\\validation_message_bubble.xml",
+        "source": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\exploded-aar\\Zky-AndroidWeb\\zcarezelibrary\\unspecified\\res\\layout\\validation_message_bubble.xml"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\res\\merged\\release\\layout\\activity_xwalkview.xml",
+        "source": "D:\\Zky-AndroidWeb\\zcareze\\res\\layout\\activity_xwalkview.xml"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\res\\merged\\release\\layout\\color_picker_dialog_content.xml",
+        "source": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\exploded-aar\\Zky-AndroidWeb\\zcarezelibrary\\unspecified\\res\\layout\\color_picker_dialog_content.xml"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\res\\merged\\release\\layout\\date_time_picker_dialog.xml",
+        "source": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\exploded-aar\\Zky-AndroidWeb\\zcarezelibrary\\unspecified\\res\\layout\\date_time_picker_dialog.xml"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\res\\merged\\release\\layout\\dropdown_item.xml",
+        "source": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\exploded-aar\\Zky-AndroidWeb\\zcarezelibrary\\unspecified\\res\\layout\\dropdown_item.xml"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\res\\merged\\release\\layout\\color_picker_advanced_component.xml",
+        "source": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\exploded-aar\\Zky-AndroidWeb\\zcarezelibrary\\unspecified\\res\\layout\\color_picker_advanced_component.xml"
+    },
+    {
+        "merged": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\res\\merged\\release\\layout\\date_time_picker_dialog.xml",
+        "source": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\exploded-aar\\zkjt1.2\\zcarezelibrary\\unspecified\\res\\layout\\date_time_picker_dialog.xml"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\res\\merged\\release\\layout\\autofill_keyboard_accessory_icon.xml",
+        "source": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\exploded-aar\\Zky-AndroidWeb\\zcarezelibrary\\unspecified\\res\\layout\\autofill_keyboard_accessory_icon.xml"
+    },
+    {
+        "merged": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\res\\merged\\release\\layout\\autofill_keyboard_accessory_icon.xml",
+        "source": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\exploded-aar\\zkjt1.2\\zcarezelibrary\\unspecified\\res\\layout\\autofill_keyboard_accessory_icon.xml"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\res\\merged\\release\\layout\\date_time_suggestion.xml",
+        "source": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\exploded-aar\\Zky-AndroidWeb\\zcarezelibrary\\unspecified\\res\\layout\\date_time_suggestion.xml"
+    },
+    {
+        "merged": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\res\\merged\\release\\layout\\dropdown_item.xml",
+        "source": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\exploded-aar\\zkjt1.2\\zcarezelibrary\\unspecified\\res\\layout\\dropdown_item.xml"
+    },
+    {
+        "merged": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\res\\merged\\release\\layout\\color_picker_advanced_component.xml",
+        "source": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\exploded-aar\\zkjt1.2\\zcarezelibrary\\unspecified\\res\\layout\\color_picker_advanced_component.xml"
+    },
+    {
+        "merged": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\res\\merged\\release\\layout\\two_field_date_picker.xml",
+        "source": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\exploded-aar\\zkjt1.2\\zcarezelibrary\\unspecified\\res\\layout\\two_field_date_picker.xml"
+    },
+    {
+        "merged": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\res\\merged\\release\\layout\\multi_field_time_picker_dialog.xml",
+        "source": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\exploded-aar\\zkjt1.2\\zcarezelibrary\\unspecified\\res\\layout\\multi_field_time_picker_dialog.xml"
+    },
+    {
+        "merged": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\res\\merged\\release\\layout\\date_time_suggestion.xml",
+        "source": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\exploded-aar\\zkjt1.2\\zcarezelibrary\\unspecified\\res\\layout\\date_time_suggestion.xml"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\res\\merged\\release\\layout\\autofill_keyboard_accessory_item.xml",
+        "source": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\exploded-aar\\Zky-AndroidWeb\\zcarezelibrary\\unspecified\\res\\layout\\autofill_keyboard_accessory_item.xml"
+    },
+    {
+        "merged": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\res\\merged\\release\\layout\\color_picker_dialog_title.xml",
+        "source": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\exploded-aar\\zkjt1.2\\zcarezelibrary\\unspecified\\res\\layout\\color_picker_dialog_title.xml"
+    },
+    {
+        "merged": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\res\\merged\\release\\layout\\color_picker_dialog_content.xml",
+        "source": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\exploded-aar\\zkjt1.2\\zcarezelibrary\\unspecified\\res\\layout\\color_picker_dialog_content.xml"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\res\\merged\\release\\layout\\two_field_date_picker.xml",
+        "source": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\exploded-aar\\Zky-AndroidWeb\\zcarezelibrary\\unspecified\\res\\layout\\two_field_date_picker.xml"
+    },
+    {
+        "merged": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\res\\merged\\release\\layout\\autofill_keyboard_accessory_item.xml",
+        "source": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\exploded-aar\\zkjt1.2\\zcarezelibrary\\unspecified\\res\\layout\\autofill_keyboard_accessory_item.xml"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\res\\merged\\release\\layout\\color_picker_dialog_title.xml",
+        "source": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\exploded-aar\\Zky-AndroidWeb\\zcarezelibrary\\unspecified\\res\\layout\\color_picker_dialog_title.xml"
+    }
+]

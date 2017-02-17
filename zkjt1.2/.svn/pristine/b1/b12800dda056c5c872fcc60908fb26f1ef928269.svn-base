@@ -1,0 +1,104 @@
+<ion-view view-title="众康云">
+	<!--顶部工具条-->
+	<div class="home-bar flex-r flex-rsb flex-cc">
+		<div class="buttons">
+			<button class="button back-button header-item maincolor" ng-click="$ionicGoBack()">
+			<i class="icon ion-ios-arrow-back"></i>
+			</button>
+		</div>
+		<div class="title flex1 padding-left">
+			用药管理
+		</div>
+		<div class="home-bar flex-r flex-rr flex-cc">
+			<div class="date">
+				{{toDay}}，多云后2天
+			</div>
+			<div class="weather flex-r flex-cc flex-rr">
+				<i class="icon ion-ios-partlysunny-outline calm"></i>12℃
+			</div>
+		</div>
+	</div>
+	<!-- #header -->
+	<div class="home-content flex-r">
+		<div class="indexs-content flex1 med_left">
+			<div class="calendar-header flex-r">
+				<div class="flex1 flex-cc flex-r med_jianbian">
+					<span class="default_padding m_fz white">用药日记</span>
+				</div>
+			</div>
+			<ion-content scrollbar-y="false" delegate-handle="taskListScroll" style="top:60px">
+				<ion-refresher on-refresh="doRefresh()"></ion-refresher>
+				<div class="flex-c" ng-repeat="RsdtMedicateList in arrLazy">
+					<div class="flex-r s_fz flex-ct med_box_titleBg" ng-repeat="coulm in RsdtMedicateList">
+						<span class="pd_autot  flex-01 med_book_color med_title_bg">{{(coulm.planTime | date:'YYYY-MM-DD')==toDayString?('今天'):(coulm.planTime | date:'MM-DD')}}</span>
+						<div class="flex-c flex-09 med_daybook">
+							<div class="flex-r pd_autot tal flex-rsb med_title_bg">
+								<span class="mid_fz flex-04 med_book_color spd_auto" style="text-indent: 15px;">完成&nbsp;{{coulm.completeCount}}/{{coulm.planCount}}</span>
+								<span class="flex-02 m_fz med_yello_color" ng-click="userMedBook(coulm)">
+									<font ng-if="coulm.reactionCount">不适：{{coulm.reactionCount}}</font>
+								</span>
+								<span class="m_fz flexr med_mark" ng-click="userMedBook(coulm)">
+									<font class="med_record flex1">记录</font>
+								</span>
+								<span class="m_fz med_book_color spd_auto" ng-click="medToggle(coulm)">
+									详情<i class="icon spd_auto" ng-class="{'ion-chevron-up':coulm.checked,'ion-chevron-down':!coulm.checked}"></i>
+								</span>
+							</div>
+							<div class="spd_autot flex-r flex-cc tal" ng-show="coulm.checked" ng-repeat="data in coulm.rsdtMedicateList">
+								<span class="flex-03 line-clamp-2">{{data.taskTopic}}{{data.perCount}}{{data.unit}}</span>
+								<span class="flex-02 gray line-clamp-2 tac">{{data.planPoint}}</span>
+								<span class="flex-02 gray line-clamp-2 tac">{{data.useMedicate==1?'已服用':'未服用'}}</span >
+								<span class="flex-03 flex-r" ng-if="data.reactions">
+									<span class="gray line-clamp-1">不适反应：</span>
+									<span class="line-clamp-2 gray">{{data.reactions}}</span>
+								</span>
+							</div>
+						</div>
+					</div>
+				<!-- #den grid body -->
+				</div>
+				<ion-infinite-scroll ng-if="hasmore" on-infinite="loadMore()" distance="1%" ></ion-infinite-scroll>
+			</ion-content>
+		</div>
+		<!-- #left -->
+
+		<div class="calendar-content med_left flex-07 m_ml m_mr0">
+			<div class="calendar-header flex-r" style="border: none;">
+				<div class="flex1 flex-cc flex-rsb flex-r med_jianbian_yello">
+					<span class="default_padding m_fz white">我的药箱</span>
+					<div class="flex-r flex-cc pd_autot spd_auto" ng-click="addSigngleMed()">
+						<span class="add_btn">+</span>
+					</div>
+				</div>
+			</div>
+			<ion-content scrollbar-y="false" delegate-handle="taskListScroll">
+				<ion-refresher on-refresh="doRefreshMedBook()"></ion-refresher>
+				<div class="flex-c spd_auto pd_autot med_item">
+					<ion-list show-delete="false">
+						<ion-item class="bb_base flex-r med_box_item" ng-repeat="data in RsdtMedicineChestList.slice().reverse()">
+							<div class="item-remove-animate">
+								<div class="flex-r">
+									<span class="spd_autot spd_auto med_switch flex-01" ng-class="{'med_sw_fff':data.rsdtOrder!=1}"></span>
+									<div class="flex-c flex-09">
+										<div class="flex-r flex-rsb spd_autot">
+											<span class="mid_fz line-clamp-2 flex-09">{{data.taskTopic}}{{data.spec}}{{data.producer}}</span>
+											<span class="med_icon_med" ng-if="data.rsdtOrder==1">{{data.rsdtOrder==1?'医':''}}</span>
+										</div>
+										<span class="spd_autot flex1 line-clamp-2">{{data.wayName}},{{data.freqName}}({{data.timePoints}})每次{{data.perCount}}{{data.unit}}</span>
+										<span class="spd_autot flex1 line-clamp-2">日期:{{data.beginTime | date:'YYYY-MM-DD'}}～{{data.beginTime | date:'YYYY-MM-DD'}}</span>
+									</div>
+								</div>
+								<ion-option-button ng-if="data.rsdtOrder!=1" class="button-assertive flex-01 med_pages" ng-click="delResidentPersonalMedication(data)">
+								删除
+								</ion-option-button>
+							</div>
+						</ion-item>
+					</ion-list>
+					<!-- #den grid body -->
+				</div>
+			</ion-content>
+		</div>
+		<!-- #right -->
+	</div>
+	<!-- #content -->
+</ion-view>

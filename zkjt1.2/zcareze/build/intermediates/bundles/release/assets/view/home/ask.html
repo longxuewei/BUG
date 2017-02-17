@@ -1,0 +1,50 @@
+
+<div class="flex-c">
+	<!--顶部工具条-->
+	<div class="home-bar flex-r flex-rsb flex-cc">
+		<div class="buttons"> <button class="button back-button header-item maincolor" ng-click="showConfirm()"> <i class="icon ion-ios-arrow-back"></i> </button> </div>
+		<div class="title"> <span class="big_fz">{{psyToAskData.name}}</span> </div>
+		<div class="home-bar flex-r flex-rr flex-cc">
+			<div class="date"> </div>
+			<div class="weather flex-r flex-cc flex-rr"> </div>
+		</div>
+	</div>
+    <div style="flex: 1;"class="pd_auto pd_autot">
+        <!--问卷答题列表-->
+        <div class="z-item-content survey-item-label">
+            <div class="flex1 flex-r flex-rr title">
+                
+                <span class="right">
+                	<span class="">第{{questionIndex+1}}题&nbsp;&nbsp;共:{{questionLen}}&nbsp;题</span>
+                </span>
+            </div>
+            <div>
+                <div class="throng question-title m_fz pd_autot">
+                   <span class="big_fz">第{{questionIndex+1}}题:</span> <span class="big_fz">{{question.content}}</span>
+                </div>
+                <div class="throng answer-list" ng-repeat="answer in question.evaQaOptions">
+                    <label class="item item-radio">
+                        <input type="radio" name="answer-option" ng-click="changeAnswer(answer,$index)" ng-checked="answer.seqNo==question.qaOptions.seqNo">
+                        <div class="radio-content">
+                            <div class="item-content disable-pointer-events">
+                                <span class="mid_fz">{{$index+1}}．{{answer.title}}</span>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <!--答题后评分-->
+        
+        <div class="flex-c padding-top">
+            <div class="button-bar">
+                
+                <a class="button bg_blue m_ml" ng-click="backQuestion()" >上一题</a>
+                <a class="button bg_blue m_ml" ng-click="nextQuestion()" >下一题</a>
+                <a class="button bg_blue m_ml" ng-click="gradeSurvey(psyToAskData)" ng-if="questionIndex==surveyQuestions.length-1">评分</a>
+               
+          
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "G:\\zkjt1.2\\zcarezelibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-v21\\button_borderless_compat.xml",
+        "source": "G:\\zkjt1.2\\zcarezelibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-v21\\button_borderless_compat.xml"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-v21\\button_compat.xml",
+        "source": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-v21\\button_compat.xml"
+    },
+    {
+        "merged": "G:\\zkjt1.2\\zcarezelibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-v21\\button_compat.xml",
+        "source": "G:\\zkjt1.2\\zcarezelibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-v21\\button_compat.xml"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-v21\\button_borderless_compat.xml",
+        "source": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-v21\\button_borderless_compat.xml"
+    }
+]

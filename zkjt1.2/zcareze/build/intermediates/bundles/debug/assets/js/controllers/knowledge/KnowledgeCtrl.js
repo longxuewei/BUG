@@ -1,0 +1,265 @@
+define([], function() {
+	'use strict';
+
+	function controller($scope, $rootScope, $state, $ionicSlideBoxDelegate,$timeout,$dictionary,$API,$http,$sce) {
+		$scope.cheackAll=false;
+		$scope.isInit = false;
+		$scope.initDevice = function(){
+			$dictionary.querySQL(
+				('SELECT '+
+				['code', 'rowid','name'].join(',')+
+				' FROM article_boards order by code'),
+				function (data) {
+	                $scope.$apply(function () {
+	                	$scope.articleBoardsList=data;
+	                	$scope.index = $scope.articleBoardsList[0].code;//关于版面码问题
+						$scope.getKnthings($scope.index);
+	                	console.log(data)
+	                });
+	            });
+			
+		}
+		/*
+		 * 对中间的渐变线是否显示 
+		 * 未完成
+		 */
+		$scope.tabs = function(index) {
+			$scope.index = index;
+			$scope.getKnthings(index);
+		}
+		
+		/*切换的时候需要做进一步处理  减少请求次数*/
+
+		$scope.list = {};
+		//获取健康知识数据列表
+        $scope.getKnthings = function(index, handler, doRefresh){
+			if($scope.list[index]&& !doRefresh){
+				return;
+			}
+			$API.CoreService.getArticleListByBoardCode({
+				boardCode:index,
+				pageNow:0,
+				pageSize:10
+			}).then(function (result) {
+				if(result.code==1){					
+						$scope.list[index] = {
+							knThingsList:[],
+							knThingsList2:[],
+							top1:false,
+							top2:false// /* 背景条改变的条件
+						};
+					
+					for (var data in result.lists) {
+						
+						if (result.lists[data].top=='1') {
+							$scope.list[index].top1=true;
+							$scope.list[index].knThingsList.push(result.lists[data]);
+						} else{
+							$scope.list[index].top2=true;
+							$scope.list[index].knThingsList2.push(result.lists[data]);
+						}
+						
+					}
+					handler && handler();
+					$scope.getThemTopic(index);
+				}
+	
+
+			
+			}).fail(function (error) {
+				handler && handler();
+				console.log(error.message);
+			})	
+		}
+        
+        var sendId=[];
+		$scope.check = function(data,index,first,arr) {
+			
+            if (first==true&&data.checked==false) {
+            	for(var ele in arr) {
+            	arr[ele].checked=false;
+               }
+               arr[0].checked=true;
+               
+            }else{
+               data.checked=!data.checked;
+               arr[0].checked=false;
+            }
+			//$scope.flag=!$scope.flag;
+		}
+		
+		
+		/*
+		 * 主题订阅数据
+		 */
+		var isNull;
+	    $scope.checkStatus=[];
+	    var selectId=[];
+	    $scope.getThemTopic = function(index){
+   			$rootScope.loading.show = false;
+			$API.CoreService.getAccountTopicByAccountIdAndBoardCode({
+				accountId:'',
+                boardCode:index
+			}).then(function (result) {
+				if(result.code==1){
+					$scope.getAccoutTopicList=result;
+					for (var i=0;i<$scope.getAccoutTopicList.lists.length;i++) {
+						  if($scope.getAccoutTopicList.lists[i].accountId){
+						  	 $scope.getAccoutTopicList.lists[i].checked=true;
+						  	 isNull=true;
+						  }else{
+						  	 $scope.getAccoutTopicList.lists[i].checked=false;
+						  }
+					}
+					if(!isNull){
+						if(!$scope.checkStatus[index]){
+							$scope.checkStatus[index]={
+								status:true
+							}
+						}
+						$scope.checkStatus[index].status=true;
+					}
+					
+				}
+			
+			}).fail(function (error) {
+				console.log(error.message);
+			})	
+		}
+	    $scope.saveTopic=function(index){
+	    	
+			$API.CoreService.saveAccountTopicByAccountId({
+				topicIds:selectId,
+                boardCode:index
+			}).then(function (result) {
+				if(result.code==1){
+					$scope.saveAccoutTopicList=result;
+			 		$scope.getKnthings($scope.index);
+				}
+			
+			}).fail(function (error) {
+				console.log(error.message);
+			})	
+	    	
+	   }
+	   
+       $scope.selectItemInfo=function(item,index){
+       			item.checked=!item.checked;
+       				$scope.checkStatus[index]={
+       				   status:false
+       			    }
+       	$scope.cheackAll=false;		
+       			
+
+       	if(selectId.indexOf(item.id) > -1){
+       		selectId.splice(selectId.indexOf(item.id), 1);
+       	}else{
+       		selectId.push(item.id)
+       	}
+       	   
+       }
+
+       $scope.checkToggleAll=function(index){
+	       	$scope.cheackAll=!$scope.cheackAll;
+       		for (var i=0;i<$scope.getAccoutTopicList.lists.length;i++) {
+       			
+       				$scope.getAccoutTopicList.lists[i].checked=false;
+       	 	  		selectId=[];
+       			
+       		  
+		    }
+       	}
+
+		$scope.itemChange = function() {
+			$scope.itemChangeModel = $rootScope.confirm({
+				title: "主题订阅",
+				template: (
+					'<div class="date-box item_data_box">' +
+					'<div class="flex1 content">' +
+					'<div class="list flex-rw">' +
+					'<li class="box item flex-r inputs" ng-click="checkToggleAll(index)">' +
+					'<ion-checkbox class="flex1" ng-checked="checkStatus[index].status||cheackAll">订阅全部</ion-checkbox>' +
+					'</li>' +
+					'<li class="box item flex-r inputs" ng-repeat="data in getAccoutTopicList.lists"  ng-click="selectItemInfo(data,index)">' +
+					'<ion-checkbox class="flex1" ng-checked="data.checked">{{data.name}}</ion-checkbox>' +
+					'</li>' +
+					'</div>' +
+					'<div class="button-bar">' +
+					'<a class="button" ng-click="closeItemChangeModel()">取消</a>' +
+					'<a class="button main-btn" ng-click="closeItemChangeModel(true)">确定</a>' +
+					'</div>' +
+					'</div>' +
+					'</div>'
+				),
+				cssClass: "modelview right mini",
+				scope: $scope
+			}, "custom");
+			 $scope.getThemTopic($scope.index);
+		}
+		$scope.closeItemChangeModel = function(isConfirm) {
+			if(isConfirm) {
+              
+              $scope.saveTopic($scope.index);
+            
+			}
+			
+			$scope.itemChangeModel.close();
+		}
+		$scope.selectIndexs = [];
+		$scope.selectItem = function(item) {
+			var i = $scope.selectIndexs.indexOf(item.id);
+			if(i > -1) {
+				$scope.selectIndexs.splice(i, 1);
+			} else {
+				$scope.selectIndexs.push(item.id);
+			}
+		}
+		$scope.isSelectView = function(item) {
+			return $scope.selectIndexs[item.id] ? true : false;
+		}
+          
+        var getTimes=[];
+		$scope.knowlegeinfo = function(data) {
+			$rootScope.dataAritcle=data;
+			$state.go('app.knowledge-info',{
+				dataInfo:null
+			});
+			//跳转到指定页面
+		}
+
+		//下拉刷新
+		$scope.doRefresh = function(type) {
+			$rootScope.loading.show = false;
+			$scope.getKnthings($scope.index, function(){
+				$scope.$broadcast('scroll.refreshComplete');
+			}, true);
+		};
+		var nowId=$rootScope.user.id;
+		$scope.$on('$ionicView.enter', function() {
+			//$scope.user=$rootScope.user;
+			
+			
+			if(!$scope.isInit || $rootScope.user.id!=nowId){
+				nowId=$rootScope.user.id;
+				$scope.isInit = true;
+				$timeout(function(){
+					$scope.initDevice();
+				},100);
+				
+			}
+			if($scope.isBack) {
+				$scope.isBack = false;
+				return;
+			}
+			
+		});
+
+		$scope.$on("$ionicView.beforeLeave", function(event, data) {
+
+		});
+
+	}
+	controller.$inject = ['$scope', '$rootScope', '$state', '$ionicSlideBoxDelegate','$timeout','$dictionary','$API','$http','$sce'];
+
+	ZcarezeApp.registerController('KnowledgeCtrl', controller);
+})

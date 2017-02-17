@@ -1,0 +1,79 @@
+<div class="flex-c">
+	<div class="flex1 flex-r" ng-if="chooesItem.orderType!=-2">
+		<div class="flex-02 flex-r flex-rc content-picture">
+			<i class="icon ion-ios-information-outline"></i>
+		</div>
+		<div class="flex-08 content desc flex-c">
+			<div class="flex-r">
+				题目：{{detailTask.one.objectName}}
+			</div>
+			<div class="flex-r">
+				方式：<span ng-if="detailTask.one.actRoleFlag==1">自评</span>
+			</div>
+			<div class="flex-r">
+				时间：{{detailTask.one.beginTime|date:'yyyy-MM-dd HH:MM'}}
+			</div>
+			<div class="flex-r padding-top padding-bottom">
+				医生：{{detailTask.one.giverName}}
+			</div>
+		</div>
+	</div>
+	<div class="flex1 flex-r" ng-if="chooesItem.orderType==-2">
+		<div class="flex-02 flex-r flex-rc content-picture">
+			<i class="icon ion-ios-information-outline"></i>
+		</div>
+		<div class="flex-08 content desc flex-c">
+			<div class="flex-r">
+				题目：{{detailTask.interveneOrderVO.content}}
+			</div>
+			<div class="flex-r">
+				方式：<span ng-if="detailTask.ordEvaluation.actRoleFlag==1">自评</span>
+			</div>
+			<div class="flex-r">
+				时间：{{detailTask.interveneOrderVO.planTime|date:'yyyy-MM-dd HH:MM'}}
+			</div>
+			<div class="flex-r padding-top padding-bottom">
+				医生：{{detailTask.interveneOrderVO.giverName}}
+			</div>
+		</div>
+	</div>
+	<div class="flex-c padding-top">
+		<div class="flex-r flex-rsb hint-setting">
+			<!-- ion-android-notifications-off -->
+			<!--<label class="item-select flex-r flex-cc flex-04">-->
+				<!--<i class="icon ion-android-notifications-off"></i>-->
+				<!--<select>-->
+					<!--<option selected>不提醒</option>-->
+					<!--<option>提前5分钟</option>-->
+					<!--<option>提前10分钟</option>-->
+					<!--<option>提前20分钟</option>-->
+					<!--<option>提前30分钟</option>-->
+					<!--<option>提前1小时</option>-->
+					<!--<option>提前2小时</option>-->
+					<!--<option>提前3小时</option>-->
+					<!--<option>提前6小时</option>-->
+					<!--<option>提前12小时</option>-->
+					<!--<option>提前24小时</option>-->
+				<!--</select>-->
+			<!--</label>-->
+			<!--<a class="setting-btn button button-outline button-small">设置···</a>-->
+			<div class="list flex1 flex-r flex-rsb flex-rw item-list mini-checkbox left-icon" ng-click="accredit()" >
+				<label class="item flex1 item-checkbox one-checkbox" style="padding-left: 0;">
+					<ion-item item="item" class="item-checkbox">
+						<div class="checkbox checkbox-input-hidden disable-pointer-events">
+							<input type="checkbox" ng-checked="auto">
+							<i class="checkbox-icon"></i>
+						</div>
+						<div class="item-content line-clamp-2 disable-pointer-events">
+							<span class="ng-binding">回答后自动进入下一问题</span>
+						</div>
+					</ion-item>
+				</label>
+			</div>
+		</div>
+		<div class="button-bar">
+		  	<a class="button" ng-click="startTest()">开始测评</a>
+		  	<a class="button main-btn" ng-click="closeCalendarModel()">关闭</a>
+		</div>		
+	</div>
+</div>

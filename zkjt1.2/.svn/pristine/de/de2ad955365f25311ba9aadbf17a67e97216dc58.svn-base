@@ -1,0 +1,70 @@
+<div class="date-box item_data_box">
+	<div class="flex1 content">
+		<div class="list flex-rw default_padding med_alert_content">
+			<div class="flex-r flex-cc flex-rsa spd_autot">
+				<div class="flex-08 flex-r"><span class="mid_fz">将你的个人用药添加进来,以便统一管理</span> </div>
+			</div>
+			<div class="flex-r flex-cc flex-rsa spd_autot">
+				<div class="flex-08 flex-r" style="position:relative">
+					<span class="mid_fz" style="width: 65px;">药品</span>
+					<input type="text" ng-change="onchangeList()" ng-model="seacher.value" placeholder="钙尔奇" class="flex-06 s_fz m_input" /> 
+				</div>
+			</div>
+			<div class="flex-r flex-cc flex-rsa spd_autot">
+				<div class="flex-08 flex-r">
+					<span class="mid_fz" style="width: 65px;"></span>
+					<input type="button" value="从系统中选择" class="flex-03 m_input tac m_br" ng-click="chorceMed()"/> 
+				</div>
+			</div>
+			<div class="flex-r flex-cc flex-rsa spd_autot">
+				<div class="flex-08 flex-r">
+					<span class="mid_fz" style="width: 65px;">用法</span>
+					<div class="sanjiao flex-04 flex-r">
+						<select class="m_input spd_auto flex1 s_fz" ng-model="med.wayCode" ng-change="changeWayCode()">
+							<option value="" disabled="true">请选择</option>
+							<option ng-repeat="data in eadData" value="{{data.code}}">
+								{{data.name}}
+							</option>
+						</select>
+					</div>
+					<div class="sanjiao m_ml flex-04 flex-r">
+						<select class="m_input spd_auto flex1 s_fz" ng-model="med.freqCode" ng-change="changeFreqcode()">
+							<option value="" disabled="true">请选择</option>
+							<option ng-repeat="data in useWayList" value="{{data.code}}">
+								{{data.cName}}
+							</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="flex-r flex-cc flex-rsa spd_autot">
+				<div class="flex-08 flex-r">
+					<span class="mid_fz" style="width: 65px;">每次</span>
+					<div class="flex-02 flex-r">
+						<input class="flex1 pd_auto m_input" type="text" ng-model="med.perCount"/>
+					</div>
+					<div class="m_ml flex-02 flex-r">
+						 <input type="text" name="" id="" placeholder="颗"  class="flex1 spd_auto m_input" value="{{medNameList[0].usage}}"/>
+					</div>
+					<!--<div class="sanjiao flex-03 flex-r">
+						<select class="m_ml m_input spd_auto flex1">
+						<option ng-repeat="data in medNameList2" ng-selected="data.usage">
+							{{data.usage}}
+							<option/>
+					</select>
+					</div>-->
+				</div>
+			</div>
+			<div class="flex-r flex-cc flex-rsa spd_autot">
+				<div class="flex-08 flex-r">
+					<span class="mid_fz" style="width: 65px;">日期</span>
+					<label class="flex-04 flexr"><input type="date" ng-model="med.beginTime" class="flex1 m_input" /></label> 
+				</div>
+			</div>
+		</div>
+		<div class="button-bar">
+			<a class="button" ng-click="closeItemChangeModel('closeAddSigngleMed')">取消</a>
+			<a class="button main-btn" ng-click="addResidentPersonalMedication(closeItemChangeModel('closeAddSigngleMed'))">确定</a>
+		</div>
+	</div>
+</div>

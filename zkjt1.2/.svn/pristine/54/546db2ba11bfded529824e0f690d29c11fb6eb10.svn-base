@@ -1,0 +1,21 @@
+<resources>
+
+    <string name="login_title">智慧化家庭健康综合管理系统</string>
+    <string name="input_account_hint">请输入您的账户</string>
+    <string name="input_password_hint">请输入您的用户密码</string>
+    <string name="login">登录</string>
+    <string name="accountOrpassord_Error_hint">帐号或密码输入错误!</string>
+
+    <string name="unKnow_device">检测错误,未知的设备!</string>
+    <string name="exceed_monitor">您的测量值,超出了检测范围!</string>
+    <string name="unKnow_device1">检测错误,未知的设备仪器!</string>
+    <string name="app_name">众康家庭</string>
+    <string name="app_name_debug">众康家庭beta</string>
+
+    <!--三合一没办法确定SuiteId只能写死-->
+    <string name="BeneCheck_XueTang_SuiteID">eb6ae993521b11e6bbd8d017c2939671</string>
+    <string name="BeneCheck_NiaoSuan_SuiteID">683edfb67a6311e69f52d017c2939671</string>
+    <string name="BeneCheck_DanGuChun_SuiteID">8d206b5c7a6311e69f52d017c2939671</string>
+
+
+</resources>

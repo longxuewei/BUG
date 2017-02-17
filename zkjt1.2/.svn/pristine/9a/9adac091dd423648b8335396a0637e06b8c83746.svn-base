@@ -1,0 +1,685 @@
+window.ZcarezeApp = (function(angular){
+
+  function Native(){};
+
+  function ZcarezeException(message, name, error) {
+     this.message = message;
+     this.name = name;
+     if(error){
+       this.error = error; 
+     }
+  }
+
+  Native.prototype = window.ZcarezeBase || {};
+  Native.prototype.base = function(handlerName, params){
+    return this.java(handlerName, params, 'ZcarezeBase');
+  }
+  Native.prototype.java = function(handler, params, className){
+    var error = null, reuslt;
+    if(!window[className||'ZcarezeNative']){
+      error = new ZcarezeException("未注册javascript接口类", className||'ZcarezeNative');
+    }else if(!window[className||'ZcarezeNative'][handler]){
+      error = new ZcarezeException("Java接口未注册该方法", handler);
+    }
+    try{
+      if(params != null && params != undefined ){
+        if(params instanceof Object && !(params instanceof Array)){
+          params = [JSON.stringify(params)];
+        }else if(typeof params == 'string'){
+          params = [params];
+        }else if(params instanceof Array){
+          params = params;
+        }else if(typeof params == "number"){
+          params = [String(params)];
+        }else{
+          throw new ZcarezeException("参数错误，必须要求为字符串String，或者是Array及其子类", params);
+        }
+      }else{
+        params = [];
+      }
+      for (var i = 0; i < params.length; i++) {
+        params[i] = params[i].replace(/\"/gi,'\\\"');
+      }
+      params = params.length ? params.join('","') : null;
+      reuslt = eval((className||'ZcarezeNative')+'.'+handler+'('+(params ? ('"' +params+ '"'):'')+')');
+      console.log((className||'ZcarezeNative')+':'+handler+':'+params);
+      try{
+        reuslt = reuslt ? JSON.parse(reuslt) : {};
+        return reuslt;
+      }catch(e){
+        try{
+          throw new ZcarezeException("返回参数有误，不是完整的json数据！", handler+':'+reuslt.toString());
+        }catch(e){
+          console.log(e);
+        }
+      }
+    }catch(e){
+      try{
+        throw new ZcarezeException("执行java代码出错，请检查\"参数\"是否正确或者\"native代码\"", handler, error);
+      }catch(e){
+        console.log(e);
+      }
+    }
+  };
+
+  var property = {
+      getMetaValue: function(attribute){ 
+        var attrValue = document.querySelector('meta['+attribute+']').attributes.getNamedItem(attribute).value;
+        return attrValue;
+      },
+      getWebVersion: function(){ 
+        var version = this.getMetaValue('version');
+        if(window.ZcarezeBase && window.ZcarezeBase.getVersion){
+          version = window.ZcarezeBase.getVersion() || version;
+        }
+        return version.replace(/\./g,'');
+      },
+      getAppVersion: function(){
+        var version = "";
+        if(window.ZcarezeBase && window.ZcarezeBase.getAppVersion){
+          version = window.ZcarezeBase.getAppVersion();
+        }
+        return version.replace(/\./g,'');
+      }
+  }
+
+  var getDevice = function (){
+      var deviceInformation = ionic.Platform.device();
+      if(ionic.Platform.isIPad()){
+          return 'ipad';
+      }
+      if(ionic.Platform.isIOS()){
+          return 'ios';
+      }
+      if(ionic.Platform.isAndroid()){
+          return 'android';
+      }
+      return "windows";
+  }
+
+  
+
+  var App = function(){
+
+    var JavascriptAPI = {};
+
+    var FUNCTION = 'function';
+
+    var newReleaseSize = 0;
+
+    this.baseServerAddr = property.getMetaValue('service');
+    this.ClientService = {
+      server_address: this.baseServerAddr,
+      client_address: this.baseServerAddr,
+      Dictionary: {
+        versions: '1.0',
+        dbName: 'Dictionary',
+        dbDesc: '基础字典库',
+        dbSize: 1024 * 1024
+      },
+      appinfo: {
+        cloudId: "",
+        appKey: "ZKY",
+        clientVersion: property.getWebVersion(),
+        clientOS: getDevice(),
+        identity: "resident"
+      }
+    };
+
+    this.rootScope = {
+      $apply: function(){}
+    }
+
+    this.Native = new Native();
+    this.Base = new Native();
+
+    this.MonitorDevice = function(data){
+        data = JSON.preas(data);
+        ZcarezeApp.rootScope.openMonitorModel = function(){
+
+        }
+    }
+
+    this.ReadyUpdateRelease = function(data){
+        ZcarezeApp.rootScope.installhint = "准备安装";
+        ZcarezeApp.status.status == 2 ?
+        ZcarezeApp.rootScope.$loading.show({
+            scope: ZcarezeApp.rootScope,
+            template: '<ion-spinner icon="spiral"></ion-spinner><div ng-bind-html="installhint"></div>'
+        }):
+        ZcarezeApp.rootScope.$minialert.show('有新版本程序，准备安装。');
+    }
+
+    this.UpdateReleaseProgress = function(result){
+        if(result.data.contentLength){
+          newReleaseSize = +result.data.contentLength;
+        }
+        ZcarezeApp.status.status == 2 ? 
+        ZcarezeApp.rootScope.installhint = '正在获取新版本程序<br/>'+Math.floor(result.data.progress/newReleaseSize*100) +'%':
+        ZcarezeApp.rootScope.$minialert.show('正在获取新版本程序'+ Math.floor(result.data.progress/newReleaseSize*100) +'%', true);
+    }
+
+    this.UnZipRelease = function(){
+    }
+
+    this.UnZipReleaseProgress = function(result){
+        if(result.data.contentLength){
+          newReleaseSize = +result.data.contentLength;
+        }
+        ZcarezeApp.status.status == 2 ? 
+        ZcarezeApp.rootScope.installhint = '正在安装新版本<br/>'+Math.floor(result.data.progress/newReleaseSize*100) +'%':
+        ZcarezeApp.rootScope.$minialert.show('正在安装新版本'+ Math.floor(result.data.progress/newReleaseSize*100)+'%', true);
+    }
+    this.SetupCompleteCallBack = function(){}
+    this.SetupComplete = function(version){
+        if(ZcarezeApp.status.status == 2){
+          ZcarezeApp.rootScope.$loading.hide();
+          ZcarezeApp.rootScope.alert({
+            title: '版本更新',
+            template: '已安装新版本 '+ ZcarezeApp.status.version +'，请重启程序!',
+            buttons: [
+              {
+                text: '关闭程序',
+                onTap: function(e) {
+                  window.close();
+                }
+              },
+              {
+                text: '重启程序',
+                onTap: function(e) {
+                  ZcarezeBase.restart();
+                }
+              }
+            ]
+          })
+        }else {
+          ZcarezeApp.rootScope.$minialert.show('版本已更新（v'+ZcarezeApp.status.version+'），将在下次启动程序使用。', false, true, 5000);
+        }
+    }
+
+    this.NetWorkOnline = function(){
+      ZcarezeApp.rootScope.NetWorkChange(true);
+    }
+    this.NetWorkOffline = function(){
+      ZcarezeApp.rootScope.NetWorkChange(false);
+    }
+
+    this.AddJsAPI = function(name, handler){
+       JavascriptAPI[name] = handler;
+    }
+
+    this.ExecuteJsAPI = function(name, params){
+      var self = this;
+      if((JavascriptAPI[name] && typeof  JavascriptAPI[name] == FUNCTION)){
+        ZcarezeApp.rootScope.$apply(function(){
+              JavascriptAPI[name](params);
+        });
+      }else if(self[name]){
+        ZcarezeApp.rootScope.$apply(function(){
+              self[name](params);
+        });
+      }
+    }
+  };
+
+  App.prototype = angular.module('zcarezeApp', ['ionic', 'Services', 'ngCookies', 'ngAnimate'])
+  .controller('MainControler', ['$rootScope', '$scope', '$state', '$timeout','$ionicPopup', '$filter', 'User',
+    function($rootScope ,$scope, $state, $timeout, $ionicPopup, $filter, User){
+
+      var deviceInfo = null
+
+      $rootScope.getDevicesInfo = function(){
+        deviceInfo = ZcarezeApp.Native.java("getDeviceInfo");
+        if(getDevice() == "windows"){
+        // if(true){
+          deviceInfo = {
+            "apiVersion": "v1_0",
+            "apiAddress": "http://192.168.0.124:82",
+            "cookie": "JSESSIONID=17mnf7po9wfhh5les0kh3puf3;Path=/",
+            "devices": [{
+                  "isBinded": 1,
+                  "deviceType": "11",
+                  "meterCode": "1",
+                  "name": "血压监测",
+                  "suiteId": "eb6ae904521b11e6bbd8d017c2939671"
+                }, {
+                  "isBinded": 0,
+                  "deviceType": "14",
+                  "meterCode": "5",
+                  "name": "血糖监测",
+                  "suiteId":"eb6ae993521b11e6bbd8d017c2939671"
+                }, {
+                  "isBinded": 1,
+                  "deviceType": "10",
+                  "meterCode": "2",
+                  "name": "血氧监测",
+                  "suiteId":"eb6aea1c521b11e6bbd8d017c2939671"
+                }, {
+                  "isBinded": 1,
+                  "deviceType": "17",
+                  "meterCode": "7",
+                  "name": "皮肤测试",
+                  "suiteId":"eb6aeaa7521b11e6bbd8d017c2939671"
+                }, {
+                  "isBinded": 0,
+                  "deviceType": "13",
+                  "meterCode": "4",
+                  "name": "体温监测",
+                  "suiteId":"eb6aeb33521b11e6bbd8d017c2939671"
+                }, {
+                  "isBinded": 0,
+                  "deviceType": "12",
+                  "meterCode": "3",
+                  "name": "人体成份",
+                  "suiteId":"eb6aebc5521b11e6bbd8d017c2939671"
+                }],
+            "residentInfo":sessionStorage.getItem('user')?angular.fromJson(sessionStorage.getItem('user')):{
+                  "abbr": "",
+                  "id":"1c7ec0bd0100486db921e42b37daea18",
+                  "aboBlood": "5",
+                  "address": "",
+                  "archiveAddress": "重庆市万州区",
+                  "archiveNo": "123456789101",
+                  "archiveStatus": 1,
+                  "birthday": 694800000000,
+                  "commitTime": 1452477476000,
+                  "communityId": "2016-11-01 09:57:56",
+                  "education": "6",
+                  "existAccount": false,
+                  "familyId": "e9b43534a7b747b79788086e34416d20",
+                  "gender": "1",
+                  "idCardNo": "500102199208078310",
+                  "isHead": true,
+                  "linkPhone": "",
+                  "linkman": "",
+                  "lockTime": 1452477476000,
+                  "maritalStatus": "9",
+                  "minority": "01",
+                  "name": "罗化林",
+                  "occupation": "Y",
+                  "openGrade": 0,
+                  "orgId": "ef325711521b11e6bbd8d017c2939671",
+                  "payModes": "",
+                  "phone": "1",
+                  "relationship": "",
+                  "rhBlood": "2",
+                  "stayKind": 1,
+                  "townAddress": "",
+                  "workUnit": "重庆市众康云责任有限公司"},
+            "accountList": angular.fromJson(sessionStorage.getItem('one'))||{},
+            "cloudId": ""
+          };
+          deviceInfo.cloudId = localStorage.getItem(deviceInfo.residentInfo.id + 'CloudId')||""
+        }
+        if(!deviceInfo) {
+            $ionicPopup.confirm({
+              title: '严重错误！',
+                template: '<div class="text-center">无法验证用户设备信息，请联系维护人员！</div>',
+                buttons: [
+                    {
+                      text: '关闭程序',
+                      onTap: function(e) {
+                        window.close();
+                      }
+                    },
+                    {
+                      text: '重启程序',
+                      type: 'button-energized',
+                      onTap: function(e) {
+                        User && User.exit(true);
+                      }
+                    }
+                ]
+            });
+        }
+
+        $scope.bgs = ["bg1","bg2","bg3","bg4"];
+        $scope.devicesIcon = [
+            {name: "血压",icon: "ion-heart"},
+            {name: "血糖",icon: "ion-waterdrop"},
+            {name: "体温",icon: "ion-thermometer"},
+            {name: "血氧",icon: "ion-ios-flask-outline"},
+            {name: "皮肤",icon: "ion-android-hand"},
+            {name: "人体",icon: "ion-ios-body-outline"}
+        ];
+
+        $scope.defultIcon = "ion-ios-infinite-outline";
+        $rootScope.deviceBaseInfo = {};
+        $rootScope.suiteIds = [];
+        try{
+          $rootScope.network = ZcarezeApp.Native.base("isNetworkConnected");
+        }catch(e){
+          $rootScope.network = false;
+        }
+
+        deviceInfo.accountList.ttsToken = "24.2c668b62f5829dc4036c698bcf2cb0af.2592000.1485411540.282335-8322273";
+
+        $rootScope.user = deviceInfo.residentInfo;
+        $rootScope.one = deviceInfo.accountList;
+        $rootScope.cloudId = deviceInfo.cloudId;
+
+        sessionStorage.setItem('user', angular.toJson($rootScope.user));
+        sessionStorage.setItem('one', angular.toJson($rootScope.one));
+
+        sessionStorage.setItem('ClientService', deviceInfo.apiAddress);
+        sessionStorage.setItem('ServiceVersions', deviceInfo.apiVersion);
+        localStorage.setItem($rootScope.user.id + 'CloudId', deviceInfo.cloudId);
+
+        $rootScope.devices = deviceInfo.devices;
+      }
+      
+      var ChangeCallBack = [];
+      $rootScope.ListenNetWork = function(handler){
+        ChangeCallBack.push(handler);
+      }
+      $rootScope.NetWorkChange = function(isOnline){
+        $rootScope.network = isOnline;
+        //**同步数据
+        for (var i = ChangeCallBack.length - 1; i >= 0; i--) {
+          ChangeCallBack[i](isOnline);
+        }
+        if(isOnline){
+          console.log('网络已连接');
+        }else{
+          console.log('网络已断开');
+        }
+      }
+
+      $rootScope.bindedDevices = [];
+      $rootScope.bindedMeterCodes = [];
+      $rootScope.getConnetedDevice = function(handler){
+        try{
+          $rootScope.bindedDevices = ZcarezeApp.Native.java('getAllConnectedDevice', null, "SettingPresenter");
+          $rootScope.bindedMeterCodes = [];
+          for (var i = 0; i < $rootScope.bindedDevices.length; i++) {
+            $rootScope.bindedMeterCodes.push($rootScope.bindedDevices[i].meterCode);
+          }
+          handler && handler($rootScope.bindedDevices);
+        }catch(e){
+          console.log("获取已绑定设备列表失败！");
+        }
+      }
+
+      $rootScope.initDevices = function(handler){
+
+        var bgNum = 0;
+
+        $rootScope.devices = $filter('orderBy')($rootScope.devices, '-isBinded');
+        
+        for (var i = 0, len = $rootScope.devices.length; i < len; i++) {
+          $rootScope.devices[i].color = $scope.bgs[bgNum];
+          $rootScope.devices[i].index = i;
+          $rootScope.devices[i].lastId = Math.MD5($rootScope.user.id + $rootScope.devices[i].suiteId).toString();
+          $rootScope.suiteIds.push($rootScope.devices[i].suiteId);
+          for (var j = 0, l = $scope.devicesIcon.length; j < l; j++) {
+            if($rootScope.devices[i].name.indexOf($scope.devicesIcon[j].name)>-1){
+              $rootScope.devices[i].icon = $scope.devicesIcon[j].icon;
+              break;
+            }
+          }
+
+          if(!$rootScope.devices[i].icon){
+            $rootScope.devices[i].icon = $scope.defultIcon;
+          }
+          var lastMoniterData = localStorage.getItem($rootScope.devices[i].lastId);
+          if(lastMoniterData){
+            try{
+              lastMoniterData = angular.fromJson(lastMoniterData);
+              $rootScope.devices[i].acceptTime = lastMoniterData.acceptTime
+              $rootScope.devices[i].values = lastMoniterData.monitorData.values;
+            }catch(e){
+              $rootScope.devices[i].values = null;
+            }
+          }
+          $rootScope.deviceBaseInfo[$rootScope.devices[i].suiteId] = $rootScope.devices[i];
+          bgNum = bgNum == 3 ? 0 : bgNum+1;
+        }
+        handler && handler();
+      }
+
+      $rootScope.getDevicesInfo();
+
+      $rootScope.initDevices(function(){
+        try{
+          ZcarezeApp.Native.base("setCookie", [
+            deviceInfo.apiAddress,
+            deviceInfo.cookie
+          ]);
+        }catch(e){}
+        $state.go('app.home');
+      });
+
+  }])
+  .controller('AppControler', ['$rootScope', '$scope', '$state', '$CLIENT','$ionicPopup', '$ionicLoading', 'rootModelView', '$modelView','$ionicTabsDelegate', '$dictionary', 'dictionaryTables' , 'SetClientService', '$ionicHistory', '$minialert', '$timeout',
+    function($rootScope ,$scope, $state, $CLIENT,$ionicPopup, $ionicLoading, rootModelView, $modelView, $ionicTabsDelegate, $dictionary, dictionaryTables, SetClientService, $ionicHistory, $minialert, $timeout){
+
+    var colors = {1: "red",2: "orange",3: "yellow",4: "green",5: "blue",6: "violet"};
+    var weekdays = ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];
+
+    $rootScope.activemenu = 1;
+    $rootScope.alertModel = null;
+    $rootScope.alert = function(opt) {
+        $rootScope.alertModelTitle = opt.title||"提示";
+        $rootScope.alertModelTmpl = opt.template||"";
+        if(!$rootScope.alertModel){
+          $rootScope.alertModel = $ionicPopup.alert({
+            title: $rootScope.alertModelTitle,
+            template: "<div>{{alertModelTmpl}}</div>",
+            cssClass: opt.cssClass||"",
+            buttons: (function(btns){
+              var buttons = [];
+              if(btns.length){
+                for (var i = 0; i < btns.length; i++) {
+                  var btnCallBack = btns[i].onTap;
+                  buttons.push({
+                    text:btns[i].text||'关闭',
+                    type:btns[i].type||'',
+                    onTap:function(e){
+                        btnCallBack && btnCallBack(e);
+                        $timeout(function(){
+                          $rootScope.alertModel = null;
+                        },100);
+                    }
+                  })
+                }
+              }else{
+                buttons.push({
+                  text:"关闭",
+                  type:"",
+                  onTap: function(e){
+                    $timeout(function(){
+                      $rootScope.alertModel = null;
+                    },100);
+                  }
+                })
+              }
+              return buttons;
+            })(opt.buttons||[])
+          });
+        }
+        return $rootScope.alertModel;
+    }
+
+    $rootScope.confirm = function(opt, type) {
+      if(type){
+        switch(type){
+          case "custom":
+            opt.buttons = [];
+          break;
+        }
+        opt.cssClass = (opt.cssClass || "") + ' '+ type;
+      }
+      return $ionicPopup.confirm(opt);
+    }
+
+    $rootScope.tabCut = function(sref){
+      $state.go(sref,{}, {
+        reload: true
+      });
+    }
+
+    $rootScope.colors = function(code, tint) {
+        return colors[code] || tint || 'gray';
+    }
+
+    $rootScope.$loading = $ionicLoading;
+    $rootScope.$minialert = $minialert;
+
+    $rootScope.allowMonitor = false;
+    
+    $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams){
+      if(toState.data && toState.data.allowMonitor){
+        $rootScope.allowMonitor = true;
+      }else{
+        $rootScope.allowMonitor = false;
+      }
+      ZcarezeApp.Native.java("changeCurrentPage", $rootScope.allowMonitor ? 1 : 0);
+    });
+
+    $rootScope.backParams = {};
+
+    SetClientService.initClientService();
+    rootModelView.init($rootScope, {
+      transition: false
+    });
+
+    $rootScope.$dictionary = function(handler){
+      $dictionary.init(dictionaryTables.data, function(){
+        $ionicLoading.hide();
+        handler && handler();
+      });
+    };
+
+    $rootScope.load = function(){
+      $CLIENT.load({
+        appKey: ZcarezeApp.ClientService.appinfo.identity,
+        version: property.getAppVersion()||103,
+        osType: (getDevice() == 'ios' || getDevice() == 'ipad') ? 1 : 0,
+        webVersion: property.getWebVersion(),
+        cloudId: localStorage.getItem($rootScope.user.id + 'CloudId')
+      }).success(function(result, status, headers, config){
+        $rootScope.network = true;
+        $ionicLoading.hide();
+        ZcarezeApp.status = result.data || {};
+        if(result.data && result.data.status != 0 && window.ZcarezeBase && window.ZcarezeBase.doDownLoadRelease){
+          if(+result.data.type == 0){
+            ZcarezeApp.rootScope.alert({
+                title: '版本过期提醒！',
+                template: '请下载最新版本程序，或者联系销售人员！',
+                buttons: [
+                  {
+                    text: '退出',
+                    type: 'button-energized',
+                    onTap: function(e) {
+                      window.close();                      
+                    }
+                  }
+                ]
+            });
+            return;
+          }
+          if(result.data.status == 2){
+            ZcarezeApp.rootScope.alert({
+                title: '更新提示！',
+                template: '当前有重要更新，请立即更新程序！',
+                buttons: [
+                  {
+                    text: '立即更新',
+                    type: 'button-energized',
+                    onTap: function(e) {
+                      ZcarezeApp.SetupCompleteCallBack = function(){
+                        ZcarezeApp.rootScope.$dictionary();
+                      }
+                      $timeout(function(){
+                        ZcarezeBase.doDownLoadRelease(result.data.url, result.data.version);
+                      },300);
+                    }
+                  }
+                ]
+            });
+          }else if(result.data.status == 1){
+            $rootScope.$minialert.show('<div>有新版本，正在准备更新...</div>');
+            $timeout(function(){
+              ZcarezeApp.rootScope.$dictionary(function(){
+                ZcarezeBase.doDownLoadRelease(result.data.url, result.data.version);
+              });
+            },300);
+          }else{
+            $dictionary.init(dictionaryTables.data, function(){
+              ZcarezeApp.Native.java("changeCurrentPage", 1);
+            });
+          }
+        }else{
+          if(result.code != 9){
+            $dictionary.init(dictionaryTables.data, function(){
+              ZcarezeApp.Native.java("changeCurrentPage", 1);
+            });
+          }
+        }
+      }).error(function(data, status){
+        $rootScope.network = false;
+        $ionicLoading.hide();
+        $dictionary.init(dictionaryTables.data, function(){
+          $ionicLoading.hide();
+          ZcarezeApp.Native.java("changeCurrentPage", 1);
+        });
+      });
+    }
+
+    $rootScope.back = function(state, params, options, backView, backnum){
+      angular.extend($rootScope.backParams, params);
+      if($ionicHistory.backView().stateName == state){
+        $ionicHistory.goBack();
+      }else{
+        backnum = backnum ? (backnum-1) : -1;
+        if(backView && backView.stateName == state){
+          $ionicHistory.goBack(backnum);
+        }else{
+          $rootScope.backParams = {};
+          $rootScope.back(state, params, options, 
+            $ionicHistory.getViewById(backView ? backView.backViewId : $ionicHistory.backView().backViewId ), backnum);
+        }
+      }
+    };
+
+    $rootScope.account = function(){
+      $modelView.go("app.model-account").
+      callback(function(data){
+        $scope.isBack = true;
+      }, $scope);
+    }
+
+    $rootScope.menuhandle = function(menu,url){
+      $rootScope.activemenu = menu;
+      $state.go(url);
+    }
+
+    $rootScope.setting = function(){
+      $modelView.go("app.model-setting").
+      callback(function(data){
+        $scope.isBack = true;
+      }, $scope);
+    }
+
+    $rootScope.toDayString="";
+    $rootScope.toDaySetting = function(){
+    	$rootScope.toDayString = moment().format('YYYY-MM-DD');
+      $rootScope.toDay = moment().format('YYYY年MM月DD日，')+weekdays[moment().format('e')];
+    }
+    $rootScope.toDaySetting();
+
+    $rootScope.load();
+
+    $dictionary.createConnect();
+    $scope.$on('$ionicView.enter', function(){
+      $rootScope.backParams = {};
+      SetClientService.initClientService();
+      $rootScope.toDaySetting();
+    });
+
+    window.ZcarezeApp.rootScope = $rootScope;
+  }]);
+  // window.ZcarezeNative = window.ZcarezeNative || property;
+
+  return new App();
+})(angular);

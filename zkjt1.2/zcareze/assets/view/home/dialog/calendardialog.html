@@ -1,0 +1,40 @@
+<div class="flex-c">
+	<div class="flex1 flex-r">
+		<div class="flex-02 flex-r flex-rc content-picture">
+			<i class="icon ion-ios-information-outline"></i>
+		</div>
+		<div class="flex-08 content desc flex-c">
+			<div class="flex-r">
+				<div class="flex-off r-item">
+					药品：
+				</div>
+				<div class="flex1 flex-c padding-bottom">
+					<span>{{detailTask.one.objectName}}</span>
+					<span>{{detailTask.one.spec}}</span>
+					<span>{{detailTask.one.producer}}</span>
+				</div>
+			</div>
+			<div class="flex-r">
+				用法：{{detailTask.one.feqName}}，{{detailTask.one.timePoints}}
+			</div>
+			<div class="flex-r">
+				用量：每次{{detailTask.one.perCount}}{{detailTask.one.usageUnit}}
+			</div>
+			<div class="flex-r">
+				说明：<span ng-if="detailTask.one.advice!=''">{{detailTask.one.advice}}</span><span ng-if="detailTask.one.advice==''">暂无说明</span>
+			</div>
+			<div class="flex-r padding-top padding-bottom">
+				日期：{{detailTask.one.beginTime|date:'yyyy年MM月dd日'}}~{{detailTask.one.endTime|date:'yyyy年MM月dd日'}}
+			</div>
+		</div>
+	</div>
+	<div class="flex-c padding-top">
+		<!--<div class="flex-r flex-rsb hint-setting">-->
+			<!--<a class="hint-btn button button-icon icon ion-android-notifications-off">不提醒</a>-->
+			<!--<a class="setting-btn button button-outline button-small">设置···</a>-->
+		<!--</div>-->
+		<div class="button-bar">
+		  	<a class="button main-btn" ng-click="closeCalendarModel()">关闭</a>
+		</div>		
+	</div>
+</div>

@@ -1,0 +1,143 @@
+{
+	"gender" : {
+		"tableCode": "gender",
+		"name": "性别",
+		"version": -1
+	}, 
+	"abo_blood" : {
+		"tableCode": "abo_blood",
+		"name": "ABO血型",
+		"version": -1
+	}, 
+	"rh_blood" : {
+		"tableCode": "rh_blood",
+		"name": "RH血型",
+		"version": -1
+	}, 
+	"minority" : {
+		"tableCode": "minority",
+		"name": "名族",
+		"version": -1
+	}, 
+	"education" : {
+		"tableCode": "education",
+		"name": "学历",
+		"version": -1
+	}, 
+	"occupation" : {
+		"tableCode": "occupation",
+		"name": "职业",
+		"version": -1
+	}, 
+	"marital_status" : {
+		"tableCode": "marital_status",
+		"name": "婚姻状况",
+		"version": -1
+	}, 
+	"relationship" : {
+		"tableCode": "relationship",
+		"name": "社会关系",
+		"version": -1
+	}, 
+	"pay_mode" : {
+		"tableCode": "pay_mode",
+		"name": "费用支付方式",
+		"version": -1
+	},
+	"allergen":{
+		"tableCode": "allergen",
+		"name": "过敏源",
+		"version": -1
+	},
+	"expose_history":{
+		"tableCode": "expose_history",
+		"name": "暴露史分类",
+		"version": -1
+	},
+	"handicap_history":{
+		"tableCode": "handicap_history",
+		"name": "残疾记录项",
+		"version": -1
+	},
+	"pmh_kind":{
+		"tableCode": "pmh_kind",
+		"name": "既往史分类",
+		"version": -1
+	},
+	"disease_history":{
+		"tableCode": "disease_history",
+		"name": "既往疾史项",
+		"version": -1
+	},
+	"family_history":{
+		"tableCode": "family_history",
+		"name": "家族疾史项",
+		"version": -1
+	},
+	"eva_tab_form":{
+		"tableCode": "eva_tab_form",
+		"name": "测评表格构造",
+		"version": -1
+	},
+	"meter_list":{
+		"tableCode":"meter_list",
+		"name":"监测仪器",
+		"version": -1
+	},
+	"monitor_suites":{
+		"tableCode": "monitor_suites",
+		"name": "监测执行组",
+		"version": -1
+	},
+	"monitor_suite_items":{
+		"tableCode": "monitor_suite_items",
+		"name": "监测组指标",
+		"version": -1
+	},
+	"monitor_items":{
+		"tableCode": "monitor_items",
+		"name": "监测指标项目",
+		"version": -1
+	},
+	"meter_modes":{
+		"tableCode": "meter_modes",
+		"name": "仪器运行模式",
+		"version": -1
+	},
+	"medicine_list":{
+		"tableCode": "medicine_list",
+		"name": "药品目录",
+		"version": -1
+	},
+	"medicine_usages":{
+		"tableCode": "medicine_usages",
+		"name": "用法用量",
+		"version": -1
+	},
+	"frequency_list":{
+		"tableCode": "frequency_list",
+		"name": "给药频率",
+		"version": -1
+	},
+	"med_recipe_list":{
+		"tableCode": "med_recipe_list",
+		"name": "中药配方列表",
+		"version": -1
+	},
+	"med_way":{
+		"tableCode": "med_way",
+		"name": "给药途径",
+		"version": -1
+	},
+	"evaluation_list":{
+		"tableCode": "evaluation_list",
+		"name": "健康测评目录",
+		"version": -1
+	},
+	"article_boards":{
+		"tableCode": "article_boards",
+		"name": "健康测评目录",
+		"version": -1
+	}	
+}
+

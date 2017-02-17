@@ -1,0 +1,27 @@
+<div class="flex-r device-desc">
+	<div class="flex-03 picture">
+		<img ng-src="{{currentDevice.modeinfo.diagram?currentDevice.modeinfo.diagram:('img/device/'+currentDevice.modeinfo.meterCode+'.jpg')}}" alt="">
+	</div>
+	<div class="flex-07 flex-c content">
+		<div class="desc flex-c">
+			<ion-content>
+				<h1 ng-if="currentDevice.modeinfo.operation">操作说明：</h1>
+				<ul ng-if="currentDevice.modeinfo.operation" class="explain">
+					<li ng-repeat="item in getSent(currentDevice.modeinfo.operation)">{{item}}</li>
+				</ul>
+				<h1 ng-if="currentDevice.modeinfo.attention">注意事项：</h1>
+				<ul ng-if="currentDevice.modeinfo.attention" class="explain">
+					<li ng-repeat="item in getSent(currentDevice.modeinfo.attention)">{{item}}</li>
+				</ul>
+			</ion-content>
+		</div>
+		<div class="button-bar">
+		  <a class="button" ng-click="!voice ? text2voice(currentDevice.modeinfo) : voiceClose()" ng-if="false">
+		  <ion-spinner ng-if="voice && !loadingVoice" icon="ripple"></ion-spinner>
+		  <ion-spinner ng-if="loadingVoice" icon="ios-small"></ion-spinner>
+		  {{!voice?'朗读':'关闭朗读'}}
+		  </a>
+		  <a class="button main-btn" ng-click="closeDeviceModel()">关闭</a>
+		</div>
+	</div>
+</div>

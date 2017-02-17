@@ -1,0 +1,26 @@
+<div class="flex-r device-desc">
+	<div class="flex1 flex-c content">
+		<div class="desc flex-c">
+			<div class="flex-off">
+				<h1>处方：</h1>
+			</div>
+			<div class="flex1">
+				<div class="item flex-c">
+					<div class="padding-bottom" ng-repeat="ordMed in detailTask.ordMedRecipeBodyList">
+						<div class="r-item">{{ordMed.name}} {{ordMed.spec}} {{ordMed.producer}}   {{ordMed.packages}}{{ordMed.dispenseUnit}}</div>
+						<div class="hint r-item gray">{{ordMed.wayName}}, {{ordMed.feqName}}, 每次{{ordMed.doses}}{{ordMed.doseUnit}}</div>
+					</div>
+				</div>
+				<div class="item">
+					说明：{{detailTask.interveneOrderVO.giveTime|date:'yyyy年MM月dd日'}}开始服用
+				</div>
+				<div class="item">
+					医生：{{detailTask.interveneOrderVO.giverName}}
+				</div>
+			</div>
+		</div>
+		<div class="button-bar">
+		  	<a class="button main-btn" ng-click="closeCalendarModel()">关闭</a>
+		</div>
+	</div>
+</div>

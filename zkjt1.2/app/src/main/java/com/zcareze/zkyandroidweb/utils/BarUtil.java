@@ -1,0 +1,60 @@
+package com.zcareze.zkyandroidweb.utils;
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.Build;
+import android.view.View;
+
+import com.zcareze.zkyandroidweb.R;
+
+/**
+ * 源代码: Lxw
+ * 伊妹儿: China2021@126.com
+ * 时间轴: 2017 年 01 月 16 日 18 : 32
+ */
+
+public class BarUtil {
+    private static final int SYSTEM_UI_FLAG_IMMERSIVE_GESTURE_ISOLATED = 0x00002000;
+
+    public static void closeBar( ) {
+        try {
+            // 需要root 权限
+            Build.VERSION_CODES vc = new Build.VERSION_CODES();
+            Build.VERSION vr = new Build.VERSION();
+            String ProcID = "79";
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+                ProcID = "42"; // ICS AND NEWER
+            }
+
+            // 需要root 权限
+            Process proc = Runtime.getRuntime().exec(
+                    new String[]{
+                            "su",
+                            "-c",
+                            "service call activity " + ProcID
+                                    + " s16 com.android.systemui"}); // WAS
+            // 79
+            proc.waitFor();
+
+        } catch (Exception ex) {
+        }
+
+    }
+
+    public static void openBar() {
+        Process proc;
+        try {
+            proc = Runtime.getRuntime().exec("am startservice --user 0 -n com.android.systemui/.SystemUIService");
+            proc.waitFor();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void closeBarByCode(Activity activity) {
+        activity.getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+    }
+}

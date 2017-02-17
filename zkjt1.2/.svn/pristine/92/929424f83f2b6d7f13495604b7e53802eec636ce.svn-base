@@ -1,0 +1,45 @@
+<ion-view view-title="众康云">
+	<!--顶部工具条-->
+	<div class="home-bar flex-r flex-rsb flex-cc">
+		<div class="buttons">
+		    <button class="button back-button header-item maincolor" ng-click="$ionicGoBack()">
+		    	<i class="icon ion-ios-arrow-back"></i>
+		    </button>
+		</div>
+		<div class="title flex1 padding-left">
+			测评结果
+		</div>
+		<div class="home-bar flex-r flex-rr flex-cc">
+			<div class="date">
+				{{toDay}}，多云后2天
+			</div>
+			<div class="weather flex-r flex-cc flex-rr">
+				<i class="icon ion-ios-partlysunny-outline calm"></i>12℃
+			</div>
+		</div>
+	</div>
+	<div class="con_pr">
+		<ion-content scroll="false" class="nut_guid">
+			<div class="ask_items flex-r flex-rsb">
+				<div class="walm_title mid_fz">温馨提示<i></i></div>
+				<div class="pd_auto"> </div>
+			</div>
+			<div class="mid_fz bold default_padding">根据您的答题信息,您的测评结果如下:</div>
+			<div class="knowledge-content con_pr" style="margin: 15px;">
+				<ion-content>
+					
+				
+				<div class="flex-c">
+					<div class="default_padding m_fz" ng-repeat="data in AskFactors">
+						<div class="spd_autot"><span>得分:</span><span class="red">{{data.convertScore}}</span>分</div>
+						<div class="spd_autot green">{{data.factorName}}&nbsp;&nbsp;&nbsp;{{data.meaning}}</div>
+					</div>
+					
+				</div>
+				
+				</ion-content>
+			</div>
+			<div class="buttons flex-r flex-rc ask_btns" style="position: absolute;bottom: 15px;">  <button class="button button-icon nut_change" ng-click="askCommitEvaluation()">提交测评</button> </div>
+		</ion-content>
+	</div>
+</ion-view>

@@ -1,0 +1,33 @@
+<div class="flex-c">
+	<div class="flex1 flex-r">
+		<div class="flex-02 flex-r flex-rc content-picture">
+			<i class="icon ion-ios-information-outline"></i>
+		</div>
+		<div class="flex-08 content desc flex-c">
+			<div class="flex-r">
+				项目：{{detailTask.one.objectName}}
+			</div>
+			<div class="flex-r">
+				频次：每{{detailTask.one.cycleLength}}{{detailTask.one.cycleUnit}}{{detailTask.one.freqTimes}}次<span ng-if="detailTask.one.datePoints!=''">，第{{detailTask.one.datePoints}}天</span>
+			</div>
+			<div class="flex-r">
+				时间：{{detailTask.one.timePoints}}
+			</div>
+			<div class="flex-r padding-top padding-bottom">
+				日期：{{detailTask.one.beginTime|date:'yyyy年MM月dd日'}}起
+			</div>
+		</div>
+	</div>
+	<div class="flex-c padding-top">
+		<!--<div class="flex-r flex-rsb hint-setting">-->
+			<!--&lt;!&ndash; ion-android-notifications-off &ndash;&gt;-->
+			<!--<a class="hint-btn button button-icon icon ion-android-notifications">提前十分钟提醒</a>-->
+			<!--<a class="setting-btn button button-outline button-small">设置···</a>-->
+		<!--</div>-->
+		<div class="button-bar">
+		  	<a class="button" disabled="disabled">检测方法</a>
+		  	<a class="button" disabled="disabled">手工录入</a>
+		  	<a class="button main-btn" ng-click="closeCalendarModel()">关闭</a>
+		</div>		
+	</div>
+</div>

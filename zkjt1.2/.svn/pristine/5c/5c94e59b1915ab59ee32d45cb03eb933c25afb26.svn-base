@@ -1,0 +1,61 @@
+<ion-view view-title="众康云">
+	<!--顶部工具条-->
+	<div class="home-bar flex-r flex-rsb flex-cc">
+		<div class="buttons">
+		    <button class="button back-button header-item maincolor" ng-click="$ionicGoBack()">
+		    	<i class="icon ion-ios-arrow-back"></i>
+		    </button>
+		</div>
+		<div class="title flex1 padding-left">
+			营养指导
+		</div>
+		<div class="home-bar flex-r flex-rr flex-cc">
+			<div class="date">
+				{{toDay}}，多云后2天
+			</div>
+			<div class="weather flex-r flex-cc flex-rr">
+				<i class="icon ion-ios-partlysunny-outline calm"></i>12℃
+			</div>
+		</div>
+	</div>
+	<div class="con_pr">
+		<ion-content scroll="false" class="nut_guid">
+			<div class="ask_items flex-r flex-rsb">
+				<div class="walm_title mid_fz">温馨提示<i></i></div>
+				<div class="pd_auto"> </div>
+			</div>
+			<div class="big_fz bold nut_title">根据您的健康档案,您的身高是171cm,体重71.5kg,综合您的身体指标和天气情况为您提出今日营养建议如下:</div>
+			<div class="knowledge-content nut_con_info" style="margin: 15px;">
+				<div class="flex-c">
+					<div class="item z-item nut_zaocan flex-r flex-rsb"> <span class="yellow">基础指标登记</span><button class="nut_change" ng-click="changebtn(2,2,2)"> 换一换</button> </div>
+					<div class="flex-r nut_food">
+						<div class="flex-c pf default_padding">
+							<div class="flex-r nut_zaocan flex-cc"> <span class="icon icon-zaocanweixuanze three_status bg_yello"></span> <span class="green">早餐</span> </div>
+							<ion-content style="position: relative;">
+								<div class="flex-r mid_fz flex-cc"> <span class="spd_autot pd_auto rice_title_width">主食</span><span class="flex-08  spd_autot">{{morning.main[index].name}}</span> <button class="bg_blue pd_auto spd_autot" ng-show="isClick" ng-click="changeFood(4)">换一换</button></div>
+								<div class="flex-r mid_fz flex-cc"> <span class="spd_autot pd_auto rice_title_width">肉食</span><span class="flex-08  spd_autot">{{morning.mit[index1].name}}</span> <button class="bg_blue pd_auto spd_autot" ng-show="isClick" ng-click="changeFood1(4)">换一换</button></div>
+								<div class="flex-r mid_fz flex-cc"> <span class="spd_autot pd_auto rice_title_width">凉菜</span><span class="flex-08  spd_autot">{{morning.cool[index2].name}}</span> <button class="bg_blue pd_auto spd_autot" ng-show="isClick" ng-click="changeFood2(4)">换一换</button></div>
+							</ion-content>
+						</div>
+						<div class="flex-c pf default_padding psy_con_center">
+							<div class="flex-r nut_zaocan flex-cc"> <span class="icon icon-iconwucan1 three_status bg_yello"></span> <span class="green">午餐</span> </div>
+							<ion-content style="position: relative;">
+								<div class="flex-r mid_fz flex-cc"> <span class="spd_autot pd_auto rice_title_width">主食</span><span class="flex-08  spd_autot">{{afternoon.main[index3].name}}</span> <button class="bg_blue pd_auto spd_autot" ng-show="isClick" ng-click="changeFood3(4)">换一换</button></div>
+								<div class="flex-r mid_fz flex-cc"> <span class="spd_autot pd_auto rice_title_width">肉食</span><span class="flex-08  spd_autot">{{afternoon.mit[index4].name}}</span> <button class="bg_blue pd_auto spd_autot" ng-show="isClick" ng-click="changeFood4(4)">换一换</button></div>
+								<div class="flex-r mid_fz flex-cc"> <span class="spd_autot pd_auto rice_title_width">凉菜</span><span class="flex-08  spd_autot">{{afternoon.cool[index5].name}}</span> <button class="bg_blue pd_auto spd_autot" ng-show="isClick" ng-click="changeFood5(4)">换一换</button></div>
+							</ion-content>
+						</div>
+						<div class="flex-c pf default_padding">
+							<div class="flex-r nut_zaocan flex-cc"> <span class="icon icon-wancan three_status bg_yello"></span> <span class="green">晚餐</span> </div>
+							<ion-content style="position: relative;">
+								<div class="flex-r mid_fz flex-cc"> <span class="spd_autot pd_auto rice_title_width">主食</span><span class="flex-08  spd_autot">{{night.main[index6].name}}</span> <button class="bg_blue pd_auto spd_autot" ng-show="isClick" ng-click="changeFood6(4)">换一换</button></div>
+								<div class="flex-r mid_fz flex-cc"> <span class="spd_autot pd_auto rice_title_width">肉食</span><span class="flex-08  spd_autot">{{night.mit[index7].name}}</span> <button class="bg_blue pd_auto spd_autot" ng-show="isClick" ng-click="changeFood7(4)">换一换</button></div>
+								<div class="flex-r mid_fz flex-cc"> <span class="spd_autot pd_auto rice_title_width">凉菜</span><span class="flex-08  spd_autot">{{night.cool[index8].name}}</span> <button class="bg_blue pd_auto spd_autot" ng-show="isClick" ng-click="changeFood8(4)">换一换</button></div>
+							</ion-content>
+						</div>
+					</div>
+				</div>
+			</div>
+		</ion-content>
+	</div>
+</ion-view>

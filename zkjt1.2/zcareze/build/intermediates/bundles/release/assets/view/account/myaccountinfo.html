@@ -1,0 +1,82 @@
+<ion-view view-title="众康云">
+	<ion-header-bar align-title="center" class="bar-positive" >
+		<div class="buttons">
+		    <button class="button button-icon ion-ios-arrow-back" ng-click="modelView.back()"></button>
+		</div>
+		<div class="title">我的账户信息</div>
+		<div class="buttons">
+		    <button class="button button-icon ion-android-close" ng-click="modelView.close()"></button>
+		</div>
+	</ion-header-bar>
+    <ion-content class="personage">
+        <div class="separate"></div>
+        <div class="list">
+            <div class="z-item item flex-r">
+                <i class="head head-personage flex-r flex-cc flex-rc">
+                    <img ng-if="user.gender==1" ng-class="{'stealth':!user.head}" src="img/man.jpg" alt="">
+                    <img ng-if="user.gender==2" ng-class="{'stealth':!user.head}" src="img/woman.jpg" alt="">
+                </i>
+                <div class="flex1 z-list">
+                    <div class="z-item item-icon-right" ng-disabled="true">
+                        <div class="flex1 flex-r flex-cc flex-rsb">
+                            <span class="p">{{one.nickname||user.name}}</span>
+                            <small>编辑昵称</small>
+                        </div>
+                        <i class="icon ion-ios-arrow-right"></i>
+                    </div>
+                    <div class="z-item item-icon-right">
+                        <div class="flex1 flex-r flex-cc flex-rsb">
+                            <span class="p">账号:{{one.mobile}}</span>
+                            <small ng-click="openPasswordModel()">更改密码</small>
+                        </div>
+                        <i class="icon ion-ios-arrow-right"></i>
+                    </div>
+                    <div class="z-item">
+                        <small>注册于{{one.regTime|date:'YYYY-MM-DD HH:ss'}}（{{one.regMode==0?'用户自注册':one.regMode==1?'雇员登记':'居民登记'}}）</small>
+                    </div>
+                </div>
+            </div>
+            <div class="z-item item flex-r item-icon-right" ng-disabled="true">
+                <div class="flex1 flex-r flex-rsb">
+                    <span class="p">连接到：北部居家健康云</span>
+                    <small class="gray">切换云</small>
+                </div>
+                <i class="icon ion-ios-arrow-right"></i>
+            </div>
+        </div>
+        <div class="list">
+            <div class="z-item item item-toggle">
+                与家庭成员共享信息
+                <label class="toggle toggle-balanced" ng-click="openGrade(user.openGrade)">
+                    <input type="checkbox" ng-checked="user.openGrade">
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
+            </div>
+            <div class="flex-r z-item item item-icon-right" ng-disabled="true">
+                <div class="flex-r">
+                    <span class="p">医生团队：</span>
+                    <span class="p">{{sign.doctorTeamName}}</span>
+                </div>
+                <i class="icon ion-ios-arrow-right"></i>
+            </div>
+        </div>
+        <div class="list">
+            <div class="z-item item flex-r item-icon-right" ng-disabled="true">
+                <div class="flex1 flex-r flex-rsb">
+                    <span class="p">我的微信关注人</span>
+                    <small class="gray">呆呆、尚美等5人</small>
+                </div>
+                <i class="icon ion-ios-arrow-right"></i>
+            </div>
+            <div class="z-item item flex-r item-icon-right" ng-disabled="true">
+                <div class="flex1 flex-r flex-rsb">
+                    <span class="p">收藏的文章</span>
+                    <small class="gray">《食物血糖生成指数》等10篇</small>
+                </div>
+                <i class="icon ion-ios-arrow-right"></i>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

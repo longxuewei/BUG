@@ -1,0 +1,291 @@
+package com.zcareze.zkyandroidweb.presenter;
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.SystemClock;
+import android.util.DisplayMetrics;
+
+import com.tencent.bugly.crashreport.CrashReport;
+import com.zcareze.core.Zcareze;
+import com.zcareze.core.service.result.AccountResult;
+import com.zcareze.domain.core.AccountList;
+import com.zcareze.domain.regional.dictionary.BaseDictionaryDomain;
+import com.zcareze.domain.regional.dictionary.Dictionary;
+import com.zcareze.domain.regional.resident.ResidentList;
+import com.zcareze.regional.service.param.BaseDictionaryParam;
+import com.zcareze.regional.service.result.BaseDictionaryDataResult;
+import com.zcareze.result.Result;
+import com.zcareze.rpc.util.HttpClientUtil;
+import com.zcareze.zkyandroidweb.base.BaseApplication;
+import com.zcareze.zkyandroidweb.constant.AccountListInfo;
+import com.zcareze.zkyandroidweb.constant.ResidentInfo;
+import com.zcareze.zkyandroidweb.constant.ServiceCommon;
+import com.zcareze.zkyandroidweb.db.BaseDictionaryDataHelper;
+import com.zcareze.zkyandroidweb.db.DataBaseHelper;
+import com.zcareze.zkyandroidweb.db.DictionaryDao;
+import com.zcareze.zkyandroidweb.proxy.ProxyFactoryManager;
+import com.zcareze.zkyandroidweb.utils.L;
+import com.zcareze.zkyandroidweb.utils.SPUtil;
+import com.zcareze.zkyandroidweb.viewinterface.LoginViewImpl;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+
+/**
+ * 源代码: Lxw
+ * 伊妹儿: China2021@126.com
+ * 时间轴: 2016 年 11 月 10 日 17 : 28
+ * <p>
+ * 本类用于处理登陆界面逻辑
+ */
+
+public class LoginPresenter {
+
+    private static LoginPresenter instance;
+    private static LoginViewImpl loginViewImpl;
+
+    private LoginPresenter() {
+    }
+
+    public static LoginPresenter getInstance(LoginViewImpl loginViewImpl) {
+        if (instance == null) {
+            synchronized (LoginPresenter.class) {
+                if (instance == null) {
+                    instance = new LoginPresenter();
+                    LoginPresenter.loginViewImpl = loginViewImpl;
+                }
+            }
+
+        }
+        return instance;
+    }
+
+
+    /**
+     * 登陆
+     *
+     * @param account
+     * @param password
+     */
+    public void login(final String account, final String password, Subscriber<Result> subscriber) {
+        Observable.create(new Observable.OnSubscribe<Result>() {
+            @Override
+            public void call(Subscriber<? super Result> subscriber) {
+                AccountResult result = ProxyFactoryManager.getCoreServiceInstance().login(account, password,
+                        "", "", "", "", ServiceCommon.IDENTITY);
+                checkLoginResult(subscriber, result);
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(subscriber);
+    }
+
+
+    /**
+     * 重新登陆
+     */
+    public void reLogin() {
+        Observable.create(new Observable.OnSubscribe<Result>() {
+            @Override
+            public void call(Subscriber<? super Result> subscriber) {
+                AccountResult result = ProxyFactoryManager.getCoreServiceInstance().reLogin(
+                        BaseApplication.account,
+                        BaseApplication.passWord,
+                        (String) SPUtil.get(loginViewImpl.getContext(), AccountListInfo.CLOUDID, ""),
+                        ServiceCommon.IDENTITY,
+                        (String) SPUtil.get(loginViewImpl.getContext(), ResidentInfo.ID, ""));
+                checkLoginResult(subscriber, result);
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<Result>() {
+            @Override
+            public void onCompleted() {
+                this.unsubscribe();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Zcareze.javascript("onLoginFail", null);
+            }
+
+            @Override
+            public void onNext(Result result) {
+                if (result.getCode() == 1) {
+                    Zcareze.javascript("onLoginSuccess", null);
+                    L.d("静默登陆成功");
+                } else {
+                    Zcareze.javascript("onLoginFail", null);
+                    loginViewImpl.showMessage(result.getMessage());
+                    CrashReport.postCatchedException(new Throwable("静默登陆失败: " + result.getMessage()));
+                    L.d("静默登陆失败");
+                }
+            }
+        });
+    }
+
+
+    /**
+     * 切换家庭成员
+     *
+     * @param residentId
+     */
+    public void changeFamily(final String residentId) {
+
+        Observable.create(new Observable.OnSubscribe<Result>() {
+            @Override
+            public void call(Subscriber<? super Result> subscriber) {
+                AccountResult accountResult = ProxyFactoryManager.getCoreServiceInstance().changeAccount(residentId);
+                checkLoginResult(subscriber, accountResult);
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<Result>() {
+            @Override
+            public void onCompleted() {
+                this.unsubscribe();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Zcareze.javascript("onChangeFail", null);
+            }
+
+            @Override
+            public void onNext(Result result) {
+                if (result.getCode() == 1) {
+                    Zcareze.javascript("onChangeSuccess", null);
+                } else {
+                    Zcareze.javascript("onChangeFail", null);
+                }
+            }
+        });
+    }
+
+
+    /**
+     * 登陆出现多个区域云.
+     *
+     * @param clouldId
+     * @param subscriber
+     */
+    public void loginVerifyCloud(final String clouldId, Subscriber<Result> subscriber) {
+        Observable.create(new Observable.OnSubscribe<Result>() {
+            @Override
+            public void call(Subscriber<? super Result> subscriber) {
+                AccountResult accountResult = ProxyFactoryManager.getCoreServiceInstance().loginVerifyCloud(clouldId);
+                checkLoginResult(subscriber, accountResult);
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(subscriber);
+    }
+
+
+    /**
+     * 检查登陆结果 多个区域等问题.
+     *
+     * @param subscriber
+     * @param result
+     */
+    public void checkLoginResult(Subscriber<? super Result> subscriber, AccountResult result) {
+        L.e("登陆结果检查");
+        Integer code = result.getCode();
+        if (code == 1) {//登陆成功
+
+            //设置系统时间
+            setSystemDate(result.getServerTime());
+
+
+            SPUtil.put(loginViewImpl.getContext(), ResidentInfo.COOKVALUE, HttpClientUtil.cookieValue);
+            L.d("保存cookie地址: " + HttpClientUtil.cookieValue);
+            saveResidentInfo(result.getResidentList());
+            saveAccountListInfo(result.one, result.getCloudId());
+            //1:预留是否调用保存电话号码的方法.
+            //2:预留是否调用保存
+            //初始业务数据库,并添加要更新的表
+            DataBaseHelper.getInstance(loginViewImpl.getContext());
+            //初始化基础字典表的数据
+            BaseDictionaryDataHelper.getInstance(loginViewImpl.getContext());
+            List<Dictionary> dictionaries = DictionaryDao.getInstance(loginViewImpl.getContext()).queryAll();
+            if (dictionaries != null && dictionaries.size() > 0) {
+                List<BaseDictionaryDomain> updateTables = new ArrayList<>();
+                for (Dictionary tables : dictionaries) {
+                    if (tables.getIsSync() == 1)
+                        updateTables.add(new BaseDictionaryDomain(tables.getTableCode(), tables.getVersion()));
+                }
+                BaseDictionaryParam updateParams = new BaseDictionaryParam();
+                updateParams.setLists(updateTables);
+                BaseDictionaryDataResult bd = ProxyFactoryManager.getBaseDictionaryServiceInstance().getDictionaryTableDataByTableCodeAndVersion(updateParams);
+                DataBaseHelper.getInstance(loginViewImpl.getContext()).updateTableData(bd);//服务器的数据更新到本地!
+            }
+            subscriber.onNext(result);
+            subscriber.onCompleted();
+        } else if (code == 2) { //存在多个区域.
+            subscriber.onNext(result);
+        } else {
+            CrashReport.postCatchedException(new Throwable("出现第三种登陆结果Code为: " + code));
+            subscriber.onError(new Throwable(result.getMessage()));
+        }
+    }
+
+
+    /**
+     * 设置系统时间
+     *
+     * @param serverTime
+     */
+    private void setSystemDate(Date serverTime) {
+        if (serverTime == null)
+            return;
+        L.i("服务器时间" + serverTime.getTime());
+        SystemClock.setCurrentTimeMillis(serverTime.getTime());
+    }
+
+
+    /**
+     * 保存账户信息
+     *
+     * @param one
+     */
+    private void saveAccountListInfo(AccountList one, String cloudId) {
+        SPUtil.saveAccountInfo(one, cloudId, loginViewImpl.getContext());
+    }
+
+
+    /**
+     * 保存居民信息
+     *
+     * @param residentList
+     */
+    private void saveResidentInfo(ResidentList residentList) {
+        SPUtil.saveResidentInfo(residentList, loginViewImpl.getContext());
+    }
+
+
+    /**
+     * 获取屏幕宽度
+     *
+     * @param context
+     * @return
+     */
+    public int getScreenWidth(Activity context) {
+        DisplayMetrics metrics = new DisplayMetrics();
+        context.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        return metrics.widthPixels;
+    }
+
+    /**
+     * 获取屏幕宽度
+     *
+     * @param context
+     * @return
+     */
+    public int getScreenHeight(Activity context) {
+        DisplayMetrics metrics = new DisplayMetrics();
+        context.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        return metrics.heightPixels;
+    }
+
+}

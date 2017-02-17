@@ -1,0 +1,31 @@
+<div class="flex-r">
+	<div class="flex1 flex-c content">
+		<div class="desc flex-c">
+			<ion-content  has-bouncing="true" style="top: 0;">
+				<div class="separate">支持2.4G的仪器：<small>（共{{meterListZGB.length}}种设备）</small></div>
+				<div class="device-list row flex-r flex-rw">
+					<div class="device-item col-25 flex-c flex-cc" ng-click="bindDevice(meter, 'ZGB')" ng-repeat="meter in meterListZGB">
+						<div class="flex1 device-img flex-c flex-cc flex-rc">
+							<img src="img/device/small/{{meter.code+'.jpg'}}" alt="">
+						</div>
+						<small class="sign line-clamp-1">{{meter.producer == "未知" ? '定制' : meter.producer}}</small>
+						<span class="name text-center line-clamp-2 ">{{meter.name}}</span>
+					</div>
+				</div>
+				<div class="separate">支持蓝牙的仪器：<small>（共{{meterListBL.length}}种设备）</small></div>
+				<div class="device-list row flex-r flex-rw">
+					<div class="device-item col-25 flex-c flex-cc" ng-click="bindDevice(meter, 'BLE')" ng-repeat="meter in meterListBL">
+						<div class="flex1 device-img">
+							<img src="" alt="">
+						</div>
+						<small class="sign line-clamp-1">{{meter.producer == "未知" ? '定制' : meter.producer}}</small>
+						<span class="name text-center line-clamp-2">{{meter.name}}</span>
+					</div>
+				</div>
+			</ion-content>
+		</div>
+		<div class="button-bar">
+		  	<a class="button main-btn" ng-click="CloseBindNewDevice()">关闭</a>
+		</div>
+	</div>
+</div>

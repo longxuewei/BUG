@@ -1,0 +1,22 @@
+<div class="flex-r">
+	<div class="flex1 flex-c content">
+		<div class="desc flex-c">
+			<h1>组成：</h1>
+			<div class="item flex-c">
+				<div class="r-item" ng-repeat="ordMoni in detailTask.ordMonitorSuiteList">{{ordMoni.suiteName}}，每{{ordMoni.cycleLength==1?'':(ordMoni.cycleLength||'')}}{{ordMoni.cycleUnit}}{{ordMoni.freqTimes}}
+					{{ordMoni.cycleLength==1&&ordMoni.cycleUnit=='天'?'次':'天'}}，
+					{{ordMoni.cycleLength==1&&ordMoni.cycleUnit=='天'?'当天':'第'+(ordMoni.datePoints||1)+'天'}}，
+					{{ordMoni.timePoints}}</div>
+			</div>
+			<div class="item">
+				说明：{{detailTask.interveneOrderVO.adscript}}
+			</div>
+			<div class="item">
+				医生：{{detailTask.interveneOrderVO.giverName}}
+			</div>
+		</div>
+		<div class="button-bar">
+		  	<a class="button main-btn" ng-click="closeCalendarModel()">关闭</a>
+		</div>
+	</div>
+</div>

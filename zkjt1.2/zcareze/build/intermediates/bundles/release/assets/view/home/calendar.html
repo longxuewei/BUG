@@ -1,0 +1,218 @@
+<ion-view view-title="众康云">
+	<!--顶部工具条-->
+	<div class="home-bar flex-r flex-rsb flex-cc">
+		<div class="buttons">
+		    <button class="button back-button header-item maincolor" ng-click="$ionicGoBack()">
+		    	<i class="icon ion-ios-arrow-back"></i>
+		    </button>
+		</div>
+		<div class="title flex1 padding-left">
+			健康日历
+		</div>
+		<div class="home-bar flex-r flex-rr flex-cc">
+			<div class="date">
+				{{toDay}}，多云后2天
+			</div>
+			<div class="weather flex-r flex-cc flex-rr">
+				<i class="icon ion-ios-partlysunny-outline calm"></i>12℃
+			</div>
+		</div>
+	</div>
+    <div class="home-content flex-r">
+    	<div class="calendar-content flex-06">
+    		<div class="calendar-header flex-r">
+    			<a class="button switch-btn" ng-click="datePrevious()">
+    				<i class="ion-ios-arrow-left"></i>
+    			</a>
+    			<div class="flex1 date-slider">
+    				<div class="slider-slides nowrap">
+    					<!-- 轴 -->
+    					<div ng-show="scheduleHandle.index == $index" class="slider-slide fade" ng-repeat="weekDays in residentSchedule">
+    						<!--  -->
+    						<div class="button-bar">
+								<a class="button" ng-class="{'active':day == scheduleHandle.toDay}" ng-click="chooesDate(day)" ng-repeat="day in weekDays">
+									<span ng-init = "cday = (day|date:'MM/DD')">
+										{{day == ctoday ? '今天' : cday}}
+									</span>
+									<span class="month-bg">
+										{{weekdays[(day|date:'e')]}}
+									</span>
+								</a>
+							</div>
+							<!--  -->
+    					</div>
+    					<!-- #周 -->
+    				</div>
+    			</div>
+				<a class="button switch-btn" ng-click="dateNext()">
+    				<i class="ion-ios-arrow-right"></i>
+    			</a>
+    		</div>
+    		<ion-content scrollbar-y="false" delegate-handle="taskListScroll">
+    			<ion-refresher on-refresh="doRefresh(1)"></ion-refresher>
+				<div class="scheme-tmpl">
+                    <div class=" top-all-weather">
+                        <div class="orsertask flex-r">
+                            <div class="task-time" >全天</div>
+                            <div class="task-content flex1">
+                                <!--全天-->
+                                <div class="task-detail flex-r" ng-repeat="taskdetail in allDayLongTask">
+                                    <div class="refresh-ion">
+                                        <i class="icon ion-ios-loop"></i>
+                                    </div>
+                                    <div class="task-detail-content all-day-detail flex1" ng-click="taskdetail.orderTaskId && getTaskDetail(taskdetail.orderType, taskdetail)">
+                                        <span>{{taskdetail.orderName}}</span>
+                                        <button ng-if="taskdetail.actRole==2" ng-click="executeRegister(taskdetail)">执行登记</button>
+                                        <i ng-if="taskdetail.actRole==2" class="icon ion-ios-arrow-right right-side right-side-all"></i>
+                                    </div>
+                                </div>
+                                <div class="task-detail tint flex-r" ng-if="!allDayLongTask.length">
+                                    <div class="refresh-ion">
+                                        <i class="icon ion-ios-loop"></i>
+                                    </div>
+                                    <div class="task-detail-content all-day-detail flex1">暂无全天任务</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="orsertask item-animate-top-slide" ng-repeat="(key,task) in orderTask">
+                        <div class="task-time">{{key}}</div>
+                        <div class="task-content" style="flex: 1">
+                            <!--不是全天任务并且有任务时-->
+                            <div class="task-detail flex-r" ng-repeat="taskdetail in task">
+                                <div class="refresh-ion" ng-click="refresh(taskdetail)" ng-disabled="!taskdetail.orderTaskId">
+                                    <i ng-if="taskdetail.orderTaskId" class="icon ion-ios-loop"></i>
+                                </div>
+								<!-- ng-click="taskdetail.isAlert && getTaskDetail(taskdetail.kind, taskdetail)" -->
+                                <div class="task-detail-content flex1" ng-click="taskdetail.orderType!=0 && getTaskDetail(taskdetail.orderType, taskdetail)">
+                                    <span ng-class="{'strong': !taskdetail.orderTaskId}">
+                                    	{{taskdetail.orderName}}&nbsp;{{!taskdetail.orderTaskId?key:''}}
+                                    </span>
+                                    <button ng-if="taskdetail.actRole==2" ng-click="">执行登记</button>
+                                    <i ng-if="taskdetail.actRole==2" class="icon ion-ios-arrow-right right-side"></i>
+                                </div>
+                                <!--<div class="task-remind" ng-disabled="!taskdetail.orderTaskId" ng-class="{'tint':!taskdetail.orderTaskId}" ng-click="getTaskDetail(8, taskdetail)">-->
+                                    <!--<i class="icon ion-ios-bell-outline" ng-class="{'remind-ion':taskdetail.isAlert==false}"></i>-->
+                                <!--</div>-->
+                            </div>
+
+                            <!--无任务时-->
+                            <div class="task-detail tint flex-r" ng-if="!task.length">
+                                <div class="refresh-ion">
+                                </div>
+                                <div class="task-detail-content flex1"></div>
+                                <!--<div class="task-remind">-->
+                                    <!--<i class="icon ion-ios-bell-outline"></i>-->
+                                <!--</div>-->
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- #den grid body -->
+                </div>
+                <!--  -->
+		    </ion-content>
+    	</div>
+    	<div class="indexs-content flex1">
+    		<ion-content scrollbar-y="false">
+				<ion-refresher on-refresh="doRefresh(2)"></ion-refresher>
+				<div class="flex-c">
+					<div class="box-head">健康目标范围</div>
+					<div class="box-content">
+						<div class="b-b-1-d flex-r flex-cc" ng-repeat="proble in problemRange">
+							<div class="flex-02" ng-class="{'flex-06':proble.special!=13 && proble.special!=11}">
+								<span ng-if="proble.special==13 || proble.special==11">{{proble.itemName}}</span>
+								<span ng-if="proble.special!=13 && proble.special!=11">{{proble.itemName}}({{proble.itemUnit}})</span>
+							</div>
+							<!-- 血糖 血压 等有多条数据样式-->
+							<div class="b-l-1-d flex-c" ng-class="{'flex-04':proble.special!=13 && proble.special!=11,'flex-08':proble.special==13 || proble.special==11}">
+								<div class="flex1 flex-r" ng-repeat="focus in proble.focusValueVOs">
+									<span class="b-b-1-d flex-05" ng-if="proble.special==13 || proble.special==11">{{focus.subtitle}}({{proble.itemUnit}})</span>
+									<span class="b-b-1-d b-l-1-d" ng-class="{'flex1':proble.special!=13 && proble.special!=11,'flex-05':proble.special==13 || proble.special==11}">
+										{{focus.validText}}
+										<span class="state" ng-if="focus.isDoctor">医</span>
+									</span>
+								</div>
+							</div>
+							<!-- 只有单条数据 样式 -->
+							<!--<div class="b-l-1-d flex-05" ng-if="proble.special!=13 && proble.special!=11" ng-repeat="">-->
+								<!--<span>60～100</span>-->
+							<!--</div>-->
+						</div>
+						<!--<div class="b-b-1-d flex-r flex-cc">-->
+							<!--<div class="flex-02">-->
+								<!--<span>血糖</span>-->
+							<!--</div>-->
+							<!--<div class="b-l-1-d flex-08 flex-c">-->
+								<!--<div class="flex1 flex-r">-->
+									<!--<span class="b-b-1-d flex-05">餐前(mmol/L)</span>-->
+									<!--<span class="b-b-1-d b-l-1-d flex-05">3.9～7.8</span>-->
+								<!--</div>-->
+								<!--<div class="b-l-1-d flex1 flex-r">-->
+									<!--<span class="flex-05">餐后(mmol/L)</span>-->
+									<!--<span class="b-l-1-d flex-05">3.9～10</span>-->
+								<!--</div>-->
+							<!--</div>-->
+						<!--</div>-->
+						<!--<div class="b-b-1-d flex-r flex-cc" ng-if="proble.special!=13 || proble.special!=11">-->
+							<!--<div class="flex-05">-->
+								<!--<span>心率(次/分)</span>-->
+							<!--</div>-->
+
+						<!--</div>-->
+						<!--<div class="flex-r flex-cc">-->
+							<!--<div class="flex-05">-->
+								<!--<span>体重(kg)</span>-->
+							<!--</div>-->
+							<!--<div class="b-l-1-d flex-05">-->
+								<!--<span>55～70</span>-->
+							<!--</div>-->
+						<!--</div>-->
+					</div>
+					<div class="hint-content flex-r flex-cc">
+						<span class="state">医</span>
+						<span>&nbsp;经医生调整设置的当前个人目标</span>
+					</div>
+				</div>
+				<!--  -->
+
+				<div class="flex-c health-questions">
+					<div class="box-head">主要健康问题</div>
+					<div class="box-content">
+
+						<div class="question flex-r" ng-repeat="health in healthAnswer">
+							<div class="q-icon">
+								<i class="icon dark ion-heart-broken" ng-if="health.dealGrade==1"></i>
+								<i class="icon dark ion-ios-time" ng-if="health.dealGrade==2"></i>
+								<i class="icon dark ion-android-clipboard" ng-if="health.dealGrade==3"></i>
+								<i class="icon dark ion-ios-pause" ng-if="health.dealGrade==4"></i>
+							</div>
+							<div class="flex1 flex-c">
+								<div class="flex1 flex-r flex-cc flex-rsb title">
+									<div class="flex1">{{health.problemName}}</div>
+									<div>
+										<span ng-if="health.dealGrade==1"><span class="assess-step">积极干预</span></span>
+										<span ng-if="health.dealGrade==2"><span class="assess-step">密切监测</span></span>
+										<span ng-if="health.dealGrade==3"><span class="assess-step">注意预防</span></span>
+										<span ng-if="health.dealGrade==4"><span class="assess-step">暂不干预</span></span>
+										<small class="gray">{{health.editTime|date:'yyyy-MM-dd'}}</small>
+									</div>
+								</div>
+								<div class="flex1 flex-r flex-cc flex-rsb gray">
+									<small class="flex1">说明: {{health.adscript}}</small>
+									<small>
+										医生: {{health.editorName}}
+									</small>
+								</div>
+							</div>
+						</div>
+						<p class="tint text-center" ng-if="!healthAnswer.length"><br/>未录入健康问题</p>
+						<!--  -->
+					</div>
+				</div>
+
+		    </ion-content>
+    	</div>
+    </div>
+</ion-view>
+

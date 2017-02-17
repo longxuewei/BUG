@@ -1,0 +1,37 @@
+<div class="flex-r">
+	<div class="flex1 flex-c content">
+		<div class="desc bluetooth-list flex-c">
+			<div class="separate">
+				搜索到设备：
+				<small ng-if="searched">（共{{bluetoothDevice.length}}个设备）</small>
+				<small ng-if="scanningDevice">搜索中...</small>
+			</div>
+			<ion-content  has-bouncing="true" class="flex-c" style="top: 30px;bottom: 50px;">
+				<div ng-if="!searched" class="bluetooth-search flex1 flex-r flex-rc flex-cc">
+					<ion-spinner icon="ripple"></ion-spinner>
+				</div>
+				<div ng-if="searched" class="list" ng-if="bluetoothDevice.length">
+					<li class="box item flex1" ng-repeat="device in bluetoothDevice|orderBy:'-issi'">
+						<label class="flex1 item item-checkbox" ng-disabled="device.binded">
+							<div class="checkbox checkbox-circle">
+								<input type="radio" name="bldevice" ng-checked="bluetooth.macAddress == device.macAddress" ng-click="selectBluetooth(device)">
+							</div>
+							<div class="item-content flex-r flex-cc flex-rsb">
+								<span ng-class="{'gray':device.binded}">{{device.bleName||device.macAddress}}<small class="orange" ng-if="device.binded">（已绑定）</small><small>{{device.macAddress}}</small></span>
+								<small>信号：{{device.rssi}}dBm&nbsp;</small>
+							</div>
+						</label>
+				    </li>
+				</div>
+			</ion-content>
+			<div class="comment">
+				注意：如果身边设备较多，请到空间较小或者关闭其它设备后再刷新列表。
+			</div>
+		</div>
+		<div class="button-bar">
+			<a class="button" ng-click="CloseBindDeviceModel(true)">取消</a>
+			<a class="button" ng-disabled="scanningDevice" ng-click="refreshBluetooth()">刷新</a>
+		  	<a class="button main-btn" ng-click="connectDevice()" ng-disabled="!bluetooth">连接改设备</a>
+		</div>
+	</div>
+</div>

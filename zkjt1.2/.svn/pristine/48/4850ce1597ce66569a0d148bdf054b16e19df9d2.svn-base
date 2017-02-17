@@ -1,0 +1,57 @@
+<ion-view view-title="众康云">
+<!--顶部工具条-->
+<div class="home-bar flex-r flex-rsb flex-cc">
+	<div class="title">
+		健康知识
+	</div>
+	<div class="home-bar flex-r flex-rr flex-cc">
+		<div class="date">
+			{{toDay}}，多云后2天
+		</div>
+		<div class="weather flex-r flex-cc flex-rr">
+			<i class="icon ion-ios-partlysunny-outline calm"></i>12℃
+		</div>
+	</div>
+</div>
+<div class="z-tab-btn-items z-tab-btn-top sign_tabs">
+	<span class="right-buttons z-tab-btn">
+		<button class="button button-light sign_btn" ng-class="{'active':index==data.code}" ng-click="tabs(data.code)" ng-repeat="data in articleBoardsList">{{data.code}}-{{data.name}}<i></i></button>
+		
+	</span>
+	<button class="shem_show" ng-click="itemChange()">主题订阅</button>
+</div>
+
+<div ng-repeat="data in articleBoardsList">
+	<ion-content class="knowledge-page">
+		<ion-refresher on-refresh="doRefresh()"></ion-refresher>
+		<div class="knowledge-content">
+			<div class="sign_detail_upbox oh default_padding flex-r flex-cw" ng-if="list[index].knThingsList && list[index].knThingsList.length">
+				<div class="sign_box sign_inner flex-c" ng-click="knowlegeinfo(data)" ng-repeat="data in list[index].knThingsList">
+					<div class="flex-cd flex-r sign_title">
+						<span class="flex-08 line-clamp-1 m_fz"><font class="ion-arrow-up-c sign_icon"></font>{{data.title}}</span><small class="gray nowrap flex-02 tar">{{data.giverName}}&nbsp;&nbsp;{{data.giveTime | date:'YYYY-MM-DD'}}</small>
+					</div>
+					<p class="gray flex-cd line-clamp-3">
+						{{data.summary}}
+					</p>
+				</div>
+			</div>
+			<div ng-if="list[index].top2 && list[index].top1" class="sign_center_line"></div>
+			<div class="sign_detail_upbox oh default_padding flex-r flex-cw" ng-if="list[index].knThingsList2 && list[index].knThingsList2.length">
+				<div class="sign_box sign_inner flex-c" ng-repeat="data in list[index].knThingsList2"  ng-click="knowlegeinfo(data)">
+					<div class="flex-cd flex-r sign_title">
+						<span class="flex-08 line-clamp-1 m_fz"><font class="sign_cicle"></font>{{data.title}}</span><small class="gray nowrap flex-02 tar">{{data.giverName}}&nbsp;&nbsp;{{data.giveTime | date:'YYYY-MM-DD'}}</small>
+					</div>
+					<p class="gray flex-cd line-clamp-3">
+						{{data.summary}}
+					</p>
+				</div>
+			</div>
+		</div>
+	</ion-content>
+</div>
+
+
+
+
+
+</ion-view>

@@ -1,0 +1,50 @@
+<ion-view view-title="众康云">
+	<ion-header-bar align-title="center" class="bar-positive" >
+		<div class="buttons">
+		    <button class="button button-icon ion-ios-arrow-back" ng-click="modelView.back()"></button>
+		</div>
+		<div class="title">我的账户信息</div>
+		<div class="buttons">
+		    <button class="button button-icon ion-android-close" ng-click="modelView.close()"></button>
+		</div>
+	</ion-header-bar>
+    <ion-content>
+		<div class="resident-box">
+            <div id="record-base-info" class="item-content resident-item active">
+                <!--  个人基本情况 -->
+                <div class="list row flex-c">
+                	
+                	<div class="z-item flex-r">
+                        <div class="flex-r flex-08 my_account_cover">
+	                		<span>昵称：</span>
+	                		<input type="text"  value="yan" disabled="disabled" id="nice_name"/>
+	                	</div>
+                        <div class="flex-r flex-02">
+	                		<span id="c_nice_name" ng-click="cNicename()">修改</span>
+	                	</div>
+                	</div>
+                	<div class="z-item flex-r">
+                        <div class="flex-r flex-10">
+	                		<span>账户：</span><span>123456789</span>
+	                	</div>
+                        
+                	</div>
+                	
+                	<div class="z-item flex-r">
+                        <div class="flex-r flex-10">
+	                		<button class="button" ng-click="changepassword()">修改密码</button>
+	                	</div>
+                        
+                	</div>
+                	
+                	
+                </div>
+                
+            </div>
+            <!--家庭成员-->
+            <div id="record-family-member" class="item-content resident-list-to">
+                
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

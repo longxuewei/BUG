@@ -1,0 +1,175 @@
+package com.zcareze.zkyandroidweb.sanheyi;
+
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
+import android.content.Context;
+import android.text.TextUtils;
+
+import com.tencent.bugly.crashreport.CrashReport;
+import com.zcareze.core.Zcareze;
+import com.zcareze.zkyandroidweb.bean.MonitorEngine;
+import com.zcareze.zkyandroidweb.bean.NewMonitorResult;
+import com.zcareze.zkyandroidweb.constant.Constants;
+import com.zcareze.zkyandroidweb.constant.ResidentInfo;
+import com.zcareze.zkyandroidweb.utils.CatchUtil;
+import com.zcareze.zkyandroidweb.utils.L;
+import com.zcareze.zkyandroidweb.utils.SPUtil;
+import com.zcareze.zkyandroidweb.utils.TimeUtil;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+/**
+ * 源代码: Lxw
+ * 伊妹儿: China2021@126.com
+ * 时间轴: 2017 年 01 月 13 日 16 : 31
+ */
+
+public class SanHeYi {
+    private static SanHeYi instance;
+    private BluetoothDevice device;
+    private boolean ISCOINNECTED = false;//是否连接上
+    private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+    private InputStream inputStream;
+    private static final String XUETANG_SUITEID = "eb6ae993521b11e6bbd8d017c2939671"; //血糖
+    private static final String NIAOSUAN_SUITEID = "683edfb67a6311e69f52d017c2939671";  //尿酸
+    private static final String ZONGDANGUCHUN_SUITEID = "8d206b5c7a6311e69f52d017c2939671";//总胆固醇
+    private Context context;
+
+    private SanHeYi(BluetoothDevice device, Context context) {
+        this.context = context;
+        this.device = device;
+    }
+
+    private BluetoothSocket socket;
+
+    public static SanHeYi getInstance(BluetoothDevice device, Context context) {
+        if (instance == null) {
+            synchronized (SanHeYi.class) {
+                if (instance == null) {
+                    instance = new SanHeYi(device, context);
+                }
+            }
+        }
+        return instance;
+    }
+
+    public void connect() {
+        if (device == null || ISCOINNECTED) {
+            L.d("三合一设备为空!~");
+            return;
+        }
+        try {
+            socket = device.createRfcommSocketToServiceRecord(MY_UUID);
+            socket.connect();
+            inputStream = socket.getInputStream();
+            parseData(GetData(inputStream));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private List<Byte> GetData(InputStream mmInStream) {
+        List<Byte> list = new ArrayList<>();
+        try {
+            while (list.size() < 31) {//三合一的数据包长度都是31
+                byte[] buffer = new byte[1024];
+                int bytes = mmInStream.read(buffer);
+                if (bytes > 0) {
+                    byte[] bytedata = new byte[bytes];
+                    for (int i = 0; i < bytes; i++) {
+                        bytedata[i] = buffer[i];
+                        list.add(buffer[i]);
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            CrashReport.postCatchedException(new Throwable("三合一读取数据时,发生异常!"));
+        }
+        return list;
+    }
+
+
+    private void parseData(List<Byte> list) {
+        String suiteID = getMonitorType(list);
+        if (!suiteID.equals("")) {
+            double result = parseDataBySanheyi(list, suiteID);
+            if (result <= 0)//数据过低.
+                return;
+            if (suiteID.equals(NIAOSUAN_SUITEID))//如果是尿酸. 乘以1000 .mmol单位.
+                result = result * 1000;
+            if (!TextUtils.isEmpty(suiteID)) {
+                Map<Integer, String> monitorData = new HashMap<>();
+                monitorData.put(1, result + "");
+                MonitorEngine engine = new MonitorEngine(context);
+                String residentId = (String) SPUtil.get(context, ResidentInfo.ID, "");
+                String gender = (String) SPUtil.get(context, ResidentInfo.GENDER, "1");
+                Date date = TimeUtil.paresDateByStr((String) SPUtil.get(context, ResidentInfo.BIRTHDAY, ""));
+                NewMonitorResult monitorResult = engine.monitorProcessByManualdrive(suiteID, monitorData, residentId, Integer.parseInt(gender), date, null, Constants.RsdtMonitorListEnum.METHOD_1.code());
+                if (monitorResult != null) {
+                    Map<String, Object> params = new HashMap<>();
+                    params.put("data", monitorResult);
+                    Zcareze.javascript("DeviceMonitor", params);
+                } else {
+                    Zcareze.javascript("DeviceMonitor", null);
+                }
+            } else {
+                CrashReport.postCatchedException(new Throwable("通讯数据包异常三合一"));
+            }
+        }
+    }
+
+    private static double parseDataBySanheyi(List<Byte> datas, String suiteId) {
+        double result = -1;
+        if (datas.size() == 31 && datas.get(0) == 0x24) {// 开始
+            int ivalue = (datas.get(28) & 0xff) + ((datas.get(29) & 0xff) << 8);
+            if (suiteId == XUETANG_SUITEID) {// 血糖处理;
+                double temp = ivalue / 18.0f;
+                result = (double) (Math.round(temp * 10)) / 10;
+            } else if (suiteId == NIAOSUAN_SUITEID) {// "尿酸"
+                double temp = ivalue / 168.1f;
+                String uaValue = "";
+                DecimalFormat df = new DecimalFormat("#.00");
+                if (temp < 1) {
+                    uaValue = "0" + df.format(temp);
+                } else {
+                    uaValue = df.format(temp);
+                }
+                result = Double.parseDouble(uaValue);
+            } else if (suiteId == ZONGDANGUCHUN_SUITEID) {// "胆固醇"
+                double temp = ivalue / 38.66f;
+                double cholValue = (double) (Math.round(temp * 10)) / 10;
+                result = cholValue;
+            }
+            return result;
+        }
+        return result;
+    }
+
+    private String getMonitorType(List<Byte> datas) {
+        String result = "";
+        if (datas.size() == 31 && datas.get(0) == 0x24) {// 开始
+            byte deviceID = datas.get(15);
+            if (deviceID == 0x41) {
+                // 血糖
+                result = XUETANG_SUITEID;
+            }
+            if (deviceID == 0x51) {
+                // 尿酸
+                result = NIAOSUAN_SUITEID;
+            }
+            if (deviceID == 0x61) {
+                // 胆固醇
+                result = ZONGDANGUCHUN_SUITEID;
+            }
+        }
+        return result;
+    }
+}

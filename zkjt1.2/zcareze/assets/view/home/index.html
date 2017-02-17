@@ -1,0 +1,121 @@
+<ion-view view-title="众康云">
+	<!--顶部工具条-->
+	<div class="home-bar flex-r flex-rsb flex-cc">
+		<div class="title">
+			健康管理
+		</div>
+		<div class="home-bar flex-r flex-rr flex-cc">
+			<div class="date">
+				{{toDay}}，多云后2天
+			</div>
+			<div class="weather flex-r flex-cc flex-rr">
+				<i class="icon ion-ios-partlysunny-outline calm"></i>12℃
+			</div>
+		</div>
+	</div>
+    <ion-content class="home-content has-home-footer" has-bouncing="true" direction="x" scrollbar-x="false" delegate-handle="monitoringScroll">
+		<div class="monitoring-list flex-r">
+			<div class="monitoring-list flex-r flex-cc">
+				<!-- 10  35 40 -->
+				<div class="monitor-item flex-c flex-rsb {{item.color}}" ng-class="{'unbidden':!item.isBinded}" ng-repeat="item in devices">
+					<div class="monitor-name text-center flex-r flex-cc flex-rc" ng-click="openDeviceModel(item)">
+						<i class="icon {{item.icon}}"></i>
+						<span ng-class="{'longtext':item.name.length > 5}">{{item.name}}</span>
+					</div>
+					<div class="prev flex-r flex-cc">
+						{{item.acceptTime?'上次：':'未检测过'}}
+						<span class="date">{{item.acceptTime|date:'YYYY-MM-DD HH:mm'}}</span>
+					</div>
+					<div class="recently" style="overflow-y: auto;">
+						<!-- scroll-y -->
+					  	<div>
+					  		<div ng-if="!item.values || !item.values.length" class="mon-index flex-r flex-cc flex-rsb goup" ng-repeat="index in item.items|orderBy:'seq_no'">
+						  		{{index.name}}({{index.unit}})
+						  		<span class="value">---</span>
+						  	</div>
+						  	<div ng-if="item.values && item.values.length" class="mon-index flex-r flex-cc flex-rsb goup" ng-repeat="index in item.values">
+						  		{{index.name}}({{index.unit}})
+						  		<span class="value">{{index.value||'---'}}</span>
+						  		<i ng-if="index.arrow==1 || index.arrow==2" class="icon ion-ios-arrow-thin-{{index.arrow==1?'up':'down'}}"></i>
+						  	</div>
+					  	</div>
+					</div>
+					<div class="other-info flex-r flex-rr">
+						<a class="details flex-r flex-cc" ng-click="monitorRecord(item, $event);">详细监测记录  >&gt;</a>
+					</div>
+					<div class="other-info flex-c">
+						<span ng-if="network && item.rsdtMonitorDetails && item.rsdtMonitorDetails.length && (rsdtItem.awayCount >= rsdtItem.awayLimit || rsdtItem.trendCount > rsdtItem.trendLimit)" ng-repeat="rsdtItem in item.rsdtMonitorDetails" class="danger-info flex-r flex-cc flex-rw">
+							<i class="icon ion-ios-information-outline"></i>
+							<span class="flex1 flex-r flex-rw">
+								<span>
+									{{rsdtItem.subtitle||''}}
+									{{rsdtItem.selPart||''}}
+									{{rsdtItem.itemName}}
+								</span>
+								<span ng-if="rsdtItem.awayCount >= rsdtItem.awayLimit && rsdtItem.awayArrow">
+									{{+rsdtItem.awayArrow > 0 ? '连续高于目标': rsdtItem.awayArrow < 0 ? '连续低于目标' : ''}}
+									{{rsdtItem.awayCount}}次
+								</span>
+								<span ng-if="rsdtItem.awayCount >= rsdtItem.awayLimit && rsdtItem.trendCount >= rsdtItem.trendLimit">
+									，
+								</span>
+								<span ng-if="rsdtItem.trendCount >= rsdtItem.trendLimit && rsdtItem.trendArrow">
+									{{+rsdtItem.trendArrow > 0 ? '连升': rsdtItem.trendArrow < 0 ? '连降' : ''}}
+									{{rsdtItem.trendCount}}次
+								</span>
+							</span>
+						</span>
+						<span ng-if="network && item.rsdtMonitorDetails && !item.rsdtMonitorDetails.length && item.values && item.values.length" class="danger-info stealth green flex-r flex-cc">
+							<i class="icon ion-happy-outline"></i>
+							暂无检测到异常数据
+						</span>
+						<span ng-if="network && item.rsdtMonitorDetails && !item.rsdtMonitorDetails.length && (!item.values || !item.values.length)" class="danger-info stealth gray flex-r flex-cc">
+							&lt;无检测数据&gt;
+						</span>
+						<small ng-if="!network" class="danger-info stealth gray flex-r flex-cc">
+							<i class="icon ion-ios-infinite-outline"></i>
+							离线状态无法获取近期评估
+						</small>
+					</div>
+					<div class="next flex-r flex-rsb">
+						<div class="date flex1 flex-r flex-cc">
+							<span ng-if="network && item.orderTaskSplit">下次：{{item.orderTaskSplit.planTime|date:'YYYY-MM-DD'}}</span>
+							<small ng-if="network && item.orderTaskSplit">&nbsp;{{item.orderTaskSplit.planPoint}}</small>
+							<span ng-if="!network" class="stealth">----/--/--<small class="">（离线）</small></span>
+							<span ng-if="network && !item.orderTaskSplit">----/--/--（自助检测）</span>
+						</div>
+						<div ng-if="item.metered != 2" class="handinput flex-r flex-cc flex-rc" ng-click="handimport(item)">
+							<i class="icon ion-android-hand"></i>&nbsp;手输
+						</div>
+					</div>
+				</div>
+				<!--  -->
+			</div>
+		</div>
+    </ion-content>
+    <div class="home-footer flex-r flex-cc flex-rc">
+    	<div class="health-button flex1 flex-r flex-rsb">
+    		<a class="button button-outline" online-able ng-click="homeMenu('app.home-calendar')">
+	    		<i class="calendar icon ion-ios-calendar-outline"></i>
+	    		健康日历
+	    	</a>
+	    	<a class="button button-outline" online-able ng-click="homeMenu('app.home-medicineManage')">
+	    		<i class="medicine icon ion-ios-medkit-outline"></i>
+	    		用药管理
+	    	</a>
+	    	<a class="button button-outline" online-able ng-click="homeMenu('app.home-NutritionalGuid')">
+	    		<i class="nutrition icon ion-ios-nutrition-outline"></i>
+	    		营养指导
+	    	</a>
+	    	<a class="button button-outline" online-able ng-click="homeMenu('app.home-ExerciseGuid')">
+	    		<i class="sports icon ion-ios-football-outline"></i>
+	    		运动指导
+	    	</a>
+	    	<a class="button button-outline" online-able ng-click="homeMenu('app.home-PsychologicalEval')">
+	    		<i class="mentality icon ion-heart-broken"></i>
+	    		心理测评
+    		</a>
+    	</div>
+    </div>
+</ion-view>
+

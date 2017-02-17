@@ -1,0 +1,62 @@
+<div class="flex-c">
+	<div class="flex1 flex-r" ng-if="chooesItem.orderType!=-2">
+		<div class="flex-02 flex-r flex-rc content-picture">
+			<i class="icon ion-ios-information-outline"></i>
+		</div>
+		<div class="flex-08 content desc flex-c">
+			<div class="flex-r">
+				项目：{{detailTask.one.objectName}}
+			</div>
+			<div class="flex-r">
+				角色：{{detailTask.one.actRoleFlag==1?"居民":detailTask.one.actRoleFlag==2?"助理":"家庭"}}
+			</div>
+			<div class="flex-r">
+				地点：{{detailTask.one.actPlaceFlag==1?"线上":detailTask.one.actPlaceFlag==2?"家庭":"服务机构"}}
+			</div>
+			<div class="flex-r">
+				频次：{{detailTask.one.feqName}}
+			</div>
+			<div class="flex-r">
+				日期：{{detailTask.one.beginTime|date:'yyyy年MM月dd日'}}
+			</div>
+			<div class="flex-r padding-top padding-bottom">
+				医生：{{detailTask.one.giverName}}
+			</div>
+		</div>
+	</div>
+	<div class="flex1 flex-r" ng-if="chooesItem.orderType==-2">
+		<div class="flex-02 flex-r flex-rc content-picture">
+			<i class="icon ion-ios-information-outline"></i>
+		</div>
+		<div class="flex-08 content desc flex-c">
+			<div class="flex-r">
+				项目：{{detailTask.interveneOrderVO.content}}
+			</div>
+			<div class="flex-r">
+				角色：{{detailTask.ordTreatment.actRoleFlag==1?"居民":detailTask.ordTreatment.actRoleFlag==2?"助理":"家庭"}}
+			</div>
+			<div class="flex-r">
+				地点：{{detailTask.ordTreatment.actPlaceFlag==1?"线上":detailTask.ordTreatment.actPlaceFlag==2?"家庭":"服务机构"}}
+			</div>
+			<div class="flex-r">
+				频次：{{detailTask.ordTreatment.feqName}}
+			</div>
+			<div class="flex-r">
+				日期：{{detailTask.interveneOrderVO.planTime}}起
+			</div>
+			<div class="flex-r padding-top padding-bottom">
+				医生：{{detailTask.interveneOrderVO.giverName}}
+			</div>
+		</div>
+	</div>
+	<div class="flex-c padding-top">
+		<!--<div class="flex-r flex-rsb hint-setting">-->
+			<!--<a class="hint-btn button button-icon icon ion-android-notifications-off">提前15分钟</a>-->
+			<!--<a class="setting-btn button button-outline button-small">设置···</a>-->
+		<!--</div>-->
+		<div class="button-bar">
+			<a class="button main-btn" ng-disabled="chooesItem.orderType==-2 || detailTask.one.actRoleFlag!=1 || chooesItem.doneId!=''" ng-click="execute()">执行登记</a>
+		  	<a class="button" ng-click="closeCalendarModel()">关闭</a>
+		</div>		
+	</div>
+</div>

@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\res\\merged\\release\\drawable-v21\\button_borderless_compat.xml",
+        "source": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\exploded-aar\\Zky-AndroidWeb\\zcarezelibrary\\unspecified\\res\\drawable-v21\\button_borderless_compat.xml"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\res\\merged\\release\\drawable-v21\\button_compat.xml",
+        "source": "D:\\Zky-AndroidWeb\\zcareze\\build\\intermediates\\exploded-aar\\Zky-AndroidWeb\\zcarezelibrary\\unspecified\\res\\drawable-v21\\button_compat.xml"
+    }
+]

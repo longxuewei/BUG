@@ -1,0 +1,66 @@
+[
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\ic_search.png",
+        "source": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\ic_search.png"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\bubble_arrow_up.png",
+        "source": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\bubble_arrow_up.png"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\dropdown_popup_background_down.9.png",
+        "source": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\dropdown_popup_background_down.9.png"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\ic_menu_share_holo_light.png",
+        "source": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\ic_menu_share_holo_light.png"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\bubble.9.png",
+        "source": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\bubble.9.png"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\ondemand_overlay.9.png",
+        "source": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\ondemand_overlay.9.png"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\dropdown_popup_background.xml",
+        "source": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\dropdown_popup_background.xml"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\autofill_chip_inset.xml",
+        "source": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\autofill_chip_inset.xml"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\button_compat_shape.xml",
+        "source": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\button_compat_shape.xml"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\color_picker_border.xml",
+        "source": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\color_picker_border.xml"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\dropdown_label_color.xml",
+        "source": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\dropdown_label_color.xml"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\color_picker_advanced_select_handle.png",
+        "source": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\color_picker_advanced_select_handle.png"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\ic_warning.png",
+        "source": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\ic_warning.png"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\dropdown_popup_background_up.9.png",
+        "source": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\dropdown_popup_background_up.9.png"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\verify_checkmark.png",
+        "source": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\verify_checkmark.png"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\color_button_background.xml",
+        "source": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\color_button_background.xml"
+    }
+]

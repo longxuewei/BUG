@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\ic_warning.png",
+        "source": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\ic_warning.png"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\ic_search.png",
+        "source": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\ic_search.png"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\ic_menu_share_holo_light.png",
+        "source": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\ic_menu_share_holo_light.png"
+    },
+    {
+        "merged": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\verify_checkmark.png",
+        "source": "D:\\Zky-AndroidWeb\\zcarezelibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\verify_checkmark.png"
+    }
+]

@@ -1,0 +1,33 @@
+package com.zcareze.zkyandroidweb.constant;
+
+/**
+ * ==================================
+ * 源代码: Lxw
+ * 伊妹儿: China2021@126.com
+ * 时间轴: 2017 年 02 月 16 日 10 : 10
+ * ==================================
+ * <p 百度声学模型文件的文件名常量>
+ */
+
+public class BaiDuTTSConstant {
+    /**
+     * 中文男女声音模型文件名!
+     */
+    public static final String CN_FEMALE_FILE_NAME = "bd_etts_speech_female.dat";
+    public static final String CN_MALE_FILE_NAME = "bd_etts_speech_male.dat";
+    public static final String CN_TEXT_FILE_NAME = "bd_etts_text.dat";
+
+
+    /**
+     * 英文男女声音模型文件名!
+     */
+    public static final String EN_FEMALE_FILE_NAME = "bd_etts_speech_female_en.dat";
+    public static final String EN_MALE_FILE_NAME = "bd_etts_speech_male_en.dat";
+    public static final String EN_TEXT_FILE_NAME = "bd_etts_text_en.dat";
+
+    public static final String APP_ID = "9250086";
+    public static final String API_KEY = "oDtDRyEtzIhuLyYDkVxXAKVf";
+    public static final String APP_SECRET_KEY = "fb6c29c5a3e542c80d5d1a09bdeb0563";
+
+
+}

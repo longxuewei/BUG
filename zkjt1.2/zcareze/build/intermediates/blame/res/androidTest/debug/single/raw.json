@@ -1,0 +1,34 @@
+[
+    {
+        "merged": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw\\launch_screen_api.js",
+        "source": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\exploded-aar\\zkjt1.2\\zcarezelibrary\\unspecified\\res\\raw\\launch_screen_api.js"
+    },
+    {
+        "merged": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw\\device_capabilities_api.js",
+        "source": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\exploded-aar\\zkjt1.2\\zcarezelibrary\\unspecified\\res\\raw\\device_capabilities_api.js"
+    },
+    {
+        "merged": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw\\wifidirect_api.js",
+        "source": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\exploded-aar\\zkjt1.2\\zcarezelibrary\\unspecified\\res\\raw\\wifidirect_api.js"
+    },
+    {
+        "merged": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw\\xwalk.pak",
+        "source": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\exploded-aar\\zkjt1.2\\zcarezelibrary\\unspecified\\res\\raw\\xwalk.pak"
+    },
+    {
+        "merged": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw\\messaging_api.js",
+        "source": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\exploded-aar\\zkjt1.2\\zcarezelibrary\\unspecified\\res\\raw\\messaging_api.js"
+    },
+    {
+        "merged": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw\\icudtl.dat",
+        "source": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\exploded-aar\\zkjt1.2\\zcarezelibrary\\unspecified\\res\\raw\\icudtl.dat"
+    },
+    {
+        "merged": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw\\empty.wav",
+        "source": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\exploded-aar\\zkjt1.2\\zcarezelibrary\\unspecified\\res\\raw\\empty.wav"
+    },
+    {
+        "merged": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw\\contacts_api.js",
+        "source": "G:\\zkjt1.2\\zcareze\\build\\intermediates\\exploded-aar\\zkjt1.2\\zcarezelibrary\\unspecified\\res\\raw\\contacts_api.js"
+    }
+]

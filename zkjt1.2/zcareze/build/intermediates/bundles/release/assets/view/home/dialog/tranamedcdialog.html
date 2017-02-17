@@ -1,0 +1,44 @@
+<div class="flex-r">
+	<div class="flex1 flex-c content">
+		<div class="desc flex-c">
+			<div class="flex-off">
+				<h1>处方：</h1>
+			</div>
+			<div class="flex1" ng-if="chooesItem.orderType!=-2">
+				<div class="item flex-c">
+					<div class="flex-r flex-rw padding-bottom">
+						<div class="r-item col-33" ng-repeat="traname in herbRecipeBody">{{traname}}</div>
+					</div>
+					<div class="r-item flex1">
+						{{detailTask.one.suites}}付，{{detailTask.one.feqName}}，{{detailTask.one.taskTopic}}，分{{detailTask.one.perDay}}次{{detailTask.one.wayName}}
+					</div>
+				</div>
+				<div class="item">
+					医生：{{detailTask.one.giverName}}
+				</div>
+				<div class="item">
+					日期：{{detailTask.one.beginTime|date:'yyyy年MM月dd日'}}~{{detailTask.one.endTime|date:'yyyy年MM月dd日'}}
+				</div>
+			</div>
+			<div class="flex1" ng-if="chooesItem.orderType==-2">
+				<div class="item flex-c">
+					<div class="flex-r flex-rw padding-bottom">
+						<div class="r-item col-33" ng-repeat="traname in detailTask.ordHerbRecipeBodyList">{{traname.name}}{{traname.doses}}{{traname.doseUnit}},{{traname.advice}}</div>
+					</div>
+					<div class="r-item flex1">
+						{{detailTask.ordHerbRecipeHead.suites}}付，{{detailTask.ordHerbRecipeHead.feqName}}，{{detailTask.ordHerbRecipeHead.decoctName}}{{detailTask.ordHerbRecipeHead.volumeValue}}{{detailTask.ordHerbRecipeHead.volumeUnit}}，分{{detailTask.ordHerbRecipeHead.perDay}}次{{detailTask.ordHerbRecipeHead.wayName}}
+					</div>
+				</div>
+				<div class="item">
+					医生：{{detailTask.interveneOrderVO.giverName}}
+				</div>
+				<div class="item">
+					日期：{{detailTask.interveneOrderVO.planTime|date:'yyyy年MM月dd日'}}
+				</div>
+			</div>
+		</div>
+		<div class="button-bar">
+		  	<a class="button main-btn" ng-click="closeCalendarModel()">关闭</a>
+		</div>
+	</div>
+</div>

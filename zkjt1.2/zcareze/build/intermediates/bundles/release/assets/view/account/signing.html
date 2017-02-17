@@ -1,0 +1,38 @@
+<ion-view view-title="众康云">
+	<ion-header-bar align-title="center" class="bar-positive">
+		<div class="buttons"> <button class="button button-icon ion-ios-arrow-back" ng-click="modelView.back()"></button> </div>
+		<div class="title">签约信息</div>
+		<div class="buttons"> <button class="button button-icon ion-android-close" ng-click="modelView.close()"></button> </div>
+	</ion-header-bar>
+	<ion-content>
+		<div class="resident-box">
+			<div id="record-base-info" class="item-content resident-item active">
+				<!--  个人基本情况 -->
+				<div class="list row flex-c">
+					<div class="z-item flex-r">
+						<div class="flex-r flex-08 my_account_cover">
+							<span>医生团队：</span>
+							<span>{{sign.doctorTeamName}}</span>
+						</div>
+					</div>
+					<div class="z-item flex-r" style="border-bottom: 2px solid #ccc;">
+						<div class="flex-r flex-08">
+							<span>授权健康岛：</span>
+							<span>{{sign.serviceNames}}</span>
+							<span ng-show="!sign.serviceNames"> 无 </span>
+						</div>
+					</div>
+					<div class="sin_service">
+						<h3 style="margin-top: 15px;">签约服务</h3>
+						<div class="flex-cw flex-r" ng-repeat="data in sign.rsdtContractServiceTermsList">
+							<span class="flex-06 line-clamp-2" style="font-weight: bold;font-size: 18px;">{{data.serviceName}}:</span>
+							<span class="flex-04 line-clamp-2">{{data.effectiveDate | date:'YYYY-MM-DD'}}～{{data.deadlineDate | date:'YYYY-MM-DD'}}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--家庭成员-->
+			<div id="record-family-member" class="item-content resident-list-to"> </div>
+		</div>
+	</ion-content>
+</ion-view>

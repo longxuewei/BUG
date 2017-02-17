@@ -1,0 +1,61 @@
+<ion-view view-title="众康云">
+	<!--顶部工具条-->
+	<div class="home-bar flex-r flex-rsb flex-cc">
+		<div class="buttons">
+		    <button class="button back-button header-item maincolor" ng-click="$ionicGoBack()">
+		    	<i class="icon ion-ios-arrow-back"></i>
+		    </button>
+		</div>
+		<div class="title flex1 padding-left">
+			运动指导
+		</div>
+		<div class="home-bar flex-r flex-rr flex-cc">
+			<div class="date">
+				{{toDay}}，多云后2天
+			</div>
+			<div class="weather flex-r flex-cc flex-rr">
+				<i class="icon ion-ios-partlysunny-outline calm"></i>12℃
+			</div>
+		</div>
+	</div>
+	<div class="con_pr">
+		<ion-content scroll="false" class="nut_guid">
+			<div class="ask_items flex-r flex-rsb">
+				<div class="walm_title m_fz">温馨提示 <i></i></div>
+				<div class="pd_auto"> </div>
+			</div>
+			<div class="big_fz bold nut_title"> 根据您的健康档案,您的身高是171cm,体重71.5kg,综合您的身体指标和天气情况为您提出今日运动建议如下: </div>
+			<div class="knowledge-content nut_con_info" style="margin: 15px;">
+				<div class="flex-c exe_info">
+					<div class="item z-item nut_zaocan flex-r flex-rsb"> <span>运动方案</span><button class="nut_change" ng-click="exertabs(2,2,2)"> 换一换</button> </div>
+					<div class="flex-r">
+						<div class="flex-c pf default_padding big_pdc">
+							<div class="flex-r nut_zaocan flex-cc"> <span class="icon icon-paobu three_status bg_blue"><img src=""/></span> <span class="line-clamp-2">{{nowLen.title}}</span> </div>
+							<div class="default_padding">
+								<div class="flex-r m_fz flex-rc spd_autot"> <span class="">运动时长</span> <span class="flex-08">{{nowLen.time}}分</span> </div>
+								<div class="flex-r m_fz flex-rc spd_autot"> <span class="">消耗卡路里</span> <span class="flex-08">{{nowLen.fat}}</span> </div>
+							</div>
+							<div class="flex-r m_fz flex-rc"> <button class="nut_change"> 采纳</button> </div>
+						</div>
+						<div class="flex-c pf default_padding big_pdc psy_con_center">
+							<div class="flex-r nut_zaocan flex-cc"> <span class="icon icon-yybj three_status bg_blue"><img src=""/></span> <span class="line-clamp-2">{{nowLen2.title}}</span> </div>
+							<div class="default_padding">
+								<div class="flex-r m_fz flex-rc spd_autot"> <span class="">运动时长</span> <span class="flex-08">{{nowLen2.time}}分</span> </div>
+								<div class="flex-r m_fz flex-rc spd_autot"> <span class="">消耗卡路里</span> <span class="flex-08">{{nowLen2.fat}}</span> </div>
+							</div>
+							<div class="flex-r m_fz flex-rc"> <button class="nut_change"> 采纳</button> </div>
+						</div>
+						<div class="flex-c pf default_padding big_pdc">
+							<div class="flex-r nut_zaocan flex-cc"> <span class="icon icon-yundong three_status bg_blue"><img src=""/></span> <span class="line-clamp-2">{{nowLen3.title}}</span> </div>
+							<div class="default_padding">
+								<div class="flex-r m_fz flex-rc spd_autot"> <span class="">运动时长</span> <span class="flex-08">{{nowLen3.time}}分</span> </div>
+								<div class="flex-r m_fz flex-rc spd_autot"> <span class="">消耗卡路里</span> <span class="flex-08">{{nowLen3.fat}}</span> </div>
+							</div>
+							<div class="flex-r m_fz flex-rc"> <button class="nut_change"> 采纳</button> </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</ion-content>
+	</div>
+</ion-view>
